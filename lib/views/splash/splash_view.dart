@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+import 'package:carcassonne/views/widgets/loading_widget.dart';
+
+
 class SplashView extends StatefulWidget {
   @override
   _SplashViewState createState() => _SplashViewState();
@@ -21,12 +24,7 @@ class _SplashViewState extends State<SplashView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(30),
-        child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Color(0xffEA178C))),
-      ),
+      body: LoadingAnnimation()
     );
   }
 }

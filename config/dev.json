@@ -3,6 +3,6 @@
   "apiUrl": "http://192.168.1.12:8081/",
   "apiVersion": "0.0.1",
   "sentry": {
-    "dns": "No to add a dns"
+    "dns": "https//toto.com"
   }
 }

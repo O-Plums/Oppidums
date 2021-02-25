@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/logo.dart';
 
-class JimAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> actions;
   final String title;
   final Function onBack;
 
-  JimAppBar({Key key, this.actions, this.title, this.onBack}) : super(key: key);
+  CustomAppBar({Key key, this.actions, this.title, this.onBack}) : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(55);
