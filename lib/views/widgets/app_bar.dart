@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: AppBar(
             title: title != null
                 ? Text(title, style: TextStyle(color: Colors.black))
-                : JimLogo(size: 40),
+                : CarcassonneLogo(size: 40),
             brightness: Brightness.light, // status bar brightness
             automaticallyImplyLeading: true,
             leading: onBack == null

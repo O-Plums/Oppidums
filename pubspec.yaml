@@ -65,10 +65,8 @@ flutter:
     - assets/
     - assets/images/
     - assets/lottie/
-    - assets/lottie/training/
     - assets/i18n/en/
     - assets/i18n/fr/
-    - assets/tflite/
     - config/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

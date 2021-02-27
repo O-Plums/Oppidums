@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 
-class JimLogo extends StatelessWidget {
+class CarcassonneLogo extends StatelessWidget {
   final double size;
 
-  JimLogo({this.size});
+  CarcassonneLogo({this.size});
 
   @override
   Widget build(BuildContext context) {

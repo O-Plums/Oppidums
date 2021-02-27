@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:carcassonne/app_config.dart';
 
-class JimAppDrawer extends StatefulWidget {
+class CustomAppDrawer extends StatefulWidget {
   final String dateToGet;
-  JimAppDrawer({Key key, this.dateToGet}) : super(key: key);
+  CustomAppDrawer({Key key, this.dateToGet}) : super(key: key);
   @override
-  _JimAppDrawerState createState() => _JimAppDrawerState();
+  _CustomAppDrawerState createState() => _CustomAppDrawerState();
 }
 
-class _JimAppDrawerState extends State<JimAppDrawer> {
+class _CustomAppDrawerState extends State<CustomAppDrawer> {
   String completeName;
   String picture;
   bool isSubscribe = false;
