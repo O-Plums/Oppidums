@@ -44,7 +44,7 @@ dependencies:
   app_review: ^2.0.1
   sentry_flutter: ^4.0.1
   firebase_analytics: ^7.0.1
-  flutter_search_bar: ^2.1.0
+  carousel_slider: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

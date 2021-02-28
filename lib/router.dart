@@ -5,6 +5,7 @@ import 'package:carcassonne/views/home/home_view.dart';
 import 'package:carcassonne/views/splash/splash_view.dart';
 import 'package:carcassonne/views/city/city_view.dart';
 import 'package:carcassonne/views/city/city_info_view.dart';
+import 'package:carcassonne/views/place/place_view.dart';
 
 class AppRouter {
   static FluroRouter router = FluroRouter();
@@ -30,6 +31,13 @@ class AppRouter {
       }
   );
 
+  static Handler _placeHandler = Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+        FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
+        return PlaceView();
+      }
+  );
+
     static Handler _homeHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) {
         FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
@@ -42,7 +50,7 @@ class AppRouter {
     router.define('city', handler: _cityHandler);
     router.define('home', handler: _homeHandler);
     router.define('city/info', handler: _cityInfoHandler);
+    router.define('place', handler: _placeHandler);
  
-
   }
 }

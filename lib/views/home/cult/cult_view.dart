@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/place_card.dart';
-
+import 'package:fluro/fluro.dart';
+import 'package:carcassonne/router.dart';
 
 var fakePlace = [
   {
@@ -46,7 +47,11 @@ class _CultViewState extends State<CultView> {
      return SingleChildScrollView(
         child: Column(children: [
       ...fakePlace.map((place) {
-        return PlaceCard(place: place);
+        return PlaceCard(place: place,
+          onPressed: () {
+              AppRouter.router.navigateTo(context, 'place', replace: false, transition: TransitionType.inFromRight);
+          }
+        );
       }).toList()
     ]));
   }

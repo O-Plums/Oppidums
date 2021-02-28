@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/app_bottom_navigation_action.dart';
+import 'package:carcassonne/views/widgets/app_bar.dart';
 import 'package:carcassonne/router.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 var fakeCitys = [
   {
@@ -157,26 +157,12 @@ class CityView extends StatefulWidget {
 }
 
 class _CityViewState extends State<CityView> {
-   SearchBar searchBar;
-
- AppBar buildAppBar(BuildContext context) {
-    return  AppBar(
-      title:  Text('City', style: TextStyle(color: Colors.black)),
-      actions: [searchBar.getSearchAction(context)],
-      backgroundColor: Colors.white 
-    );
-  }  
 
   @override
   void initState() {
     new Future.delayed(Duration.zero, () async {
     
-      searchBar = new SearchBar(
-      inBar: false,
-      setState: setState,
-      onSubmitted: print,
-      buildDefaultAppBar: buildAppBar
-    );
+  
       //TODO mon applle a la base de donner
     });
     super.initState();
@@ -184,7 +170,7 @@ class _CityViewState extends State<CityView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:searchBar?.build(context),//CustomAppBar(title: 'City'),
+        appBar: CustomAppBar(title: 'City'),
         bottomNavigationBar: AppBottomNavigationAction(
             title: 'Ajouter ma ville',
             loading: false,

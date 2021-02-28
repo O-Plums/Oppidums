@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class PlaceCard extends StatelessWidget {
   final Map<String, dynamic> place;
-
-  PlaceCard({this.place});
+  final Function onPressed;
+  
+  PlaceCard({this.place, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +14,7 @@ class PlaceCard extends StatelessWidget {
         width: double.infinity,
         
         child: InkWell(
-          onTap: () {
-            print('toto');
-          },
+          onTap: onPressed,
           child: Container(
               decoration: BoxDecoration(
       // border: Border.all(color: Color(0xffC4C4C4)),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/app_bar.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 var fakeCity = {
   'image':
@@ -10,19 +11,31 @@ var fakeCity = {
   'population': 28521,
   'type': 'small',
   'countryCode': 'BR',
+  'imageGallery': [
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Nivelles_JPG00_%289%29.jpg/170px-Nivelles_JPG00_%289%29.jpg',
+    'http://photos.wikimapia.org/p/00/03/56/50/92_big.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Street_in_Nivelles%2C_Belgium_Independence_Day.JPG/1280px-Street_in_Nivelles%2C_Belgium_Independence_Day.JPG'
+        'https://woody.cloudly.space/app/uploads/ville-saintes/2018/12/palais-de-justice-nivelles-redim-1920x960-crop-1543845892.jpg'
+  ]
 };
+
+List imageGallery = [
+  'http://photos.wikimapia.org/p/00/03/56/50/92_big.jpg',
+  'http://photos.wikimapia.org/p/00/03/56/50/92_big.jpg',
+  'http://photos.wikimapia.org/p/00/03/56/50/92_big.jpg',
+  'http://photos.wikimapia.org/p/00/03/56/50/92_big.jpg'
+];
 
 class CityInfoView extends StatefulWidget {
   final String id;
 
-  CityInfoView({Key key, this.id }) : super(key: key);
+  CityInfoView({Key key, this.id}) : super(key: key);
 
   @override
   _CityInfoViewState createState() => _CityInfoViewState();
 }
 
 class _CityInfoViewState extends State<CityInfoView> {
-
   @override
   void initState() {
     new Future.delayed(Duration.zero, () async {
@@ -32,7 +45,6 @@ class _CityInfoViewState extends State<CityInfoView> {
   }
 
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: CustomAppBar(title: 'City'),
         body: SingleChildScrollView(
@@ -76,6 +88,26 @@ class _CityInfoViewState extends State<CityInfoView> {
                 fakeCity['description'],
                 style: TextStyle(fontSize: 14),
               )),
+          CarouselSlider(
+            options: CarouselOptions(
+              height: 150,
+              // aspectRatio: 0.2,
+              viewportFraction: 0.5,
+              // initialPage: 0,
+              enableInfiniteScroll: true,
+              // reverse: false,
+              // enlargeCenterPage: true,
+              // scrollDirection: Axis.horizontal,
+            ),
+            items: imageGallery.map((i) {
+              return  Container(
+             margin: EdgeInsets.all(5.0),
+             child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  child: Image(image: NetworkImage(i))
+              ));
+            }).toList(),
+          )
         ])));
   }
 }
