@@ -33,7 +33,7 @@ class _NavigationBottomBarState extends State<NavigationBottomBar> {
           label: 'Culture',
         ),
       ],
-      selectedItemColor: Color(0xffEA178C),
+      selectedItemColor: Color(0xff5bb00a),
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,

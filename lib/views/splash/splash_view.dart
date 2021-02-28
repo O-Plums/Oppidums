@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:carcassonne/router.dart';
 
 import 'package:carcassonne/views/widgets/loading_widget.dart';
