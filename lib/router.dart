@@ -34,7 +34,9 @@ class AppRouter {
   static Handler _placeHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) {
         FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
-        return PlaceView();
+        final args = context.settings.arguments as Map<String, dynamic>;
+        final String placeId = args != null ? args['placeId'] : null;
+        return PlaceView(placeId: placeId);
       }
   );
 
@@ -46,7 +48,7 @@ class AppRouter {
   );
 
   static void setupRouter() {
-    router.define('splash', handler: _splashHandler);
+    // router.define('splash', handler: _splashHandler);
     router.define('city', handler: _cityHandler);
     router.define('home', handler: _homeHandler);
     router.define('city/info', handler: _cityInfoHandler);

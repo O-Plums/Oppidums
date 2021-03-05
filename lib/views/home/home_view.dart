@@ -6,7 +6,6 @@ import 'package:carcassonne/views/home/cult/cult_view.dart';
 import 'package:carcassonne/views/home/history/history_view.dart';
 import 'package:carcassonne/views/home/tourism/tourism_view.dart';
 
-
 class HomeView extends StatefulWidget {
   final bool showReminder;
 
@@ -26,15 +25,16 @@ class _HomeViewState extends State<HomeView> {
   ];
 
   void _handleChangeIndex(int index) {
-      if (mounted) {
-        setState(() {
-          tabIndex = index;
-        });
-      }
+    if (mounted) {
+      setState(() {
+        tabIndex = index;
+      });
+    }
   }
 
   @override
   void initState() {
+   
     super.initState();
   }
 

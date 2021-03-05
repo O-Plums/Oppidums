@@ -29,7 +29,7 @@ implements PreferredSizeWidget {
         loading: loading,
         width: 200,
         loadingColor: Colors.white,
-        color: Color(0xff5bb00a),
+        color: Color(0xffab9bd9),
         onPressed: onPressed,
         label: title,
       ),

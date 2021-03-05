@@ -1,91 +1,15 @@
+import 'package:carcassonne/models/city_model.dart';
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/app_bottom_navigation_action.dart';
 import 'package:carcassonne/views/widgets/app_bar.dart';
 import 'package:carcassonne/router.dart';
 import 'package:fluro/fluro.dart';
+import 'package:carcassonne/net/city_api.dart';
+import 'package:carcassonne/views/widgets/loading_widget.dart';
+import 'package:carcassonne/views/city/widgets/add_city_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-var fakeCitys = [
-  {
-    'image':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-    'name': 'Nivelles',
-    'description':
-        'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-    'population': 28521,
-    'type': 'small',
-    'countryCode': 'BR',
-  },
-  {
-    'image':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-    'name': 'Nivelles',
-    'description':
-        'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-    'population': 28521,
-    'type': 'small',
-    'countryCode': 'BR',
-  },
-  {
-    'image':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-    'name': 'Nivelles',
-    'description':
-        'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-    'population': 28521,
-    'type': 'small',
-    'countryCode': 'BR',
-  },
-  {
-    'image':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-    'name': 'Nivelles',
-    'description':
-        'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-    'population': 28521,
-    'type': 'small',
-    'countryCode': 'BR',
-  },
-  {
-    'image':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-    'name': 'Nivelles',
-    'description':
-        'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-    'population': 28521,
-    'type': 'small',
-    'countryCode': 'BR',
-  },
-  {
-    'image':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-    'name': 'Nivelles',
-    'description':
-        'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-    'population': 28521,
-    'type': 'small',
-    'countryCode': 'BR',
-  },
-  {
-    'image':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-    'name': 'Nivelles',
-    'description':
-        'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-    'population': 28521,
-    'type': 'small',
-    'countryCode': 'BR',
-  },
-  {
-    'image':
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-    'name': 'Nivelles',
-    'description':
-        'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-    'population': 28521,
-    'type': 'small',
-    'countryCode': 'BR',
-  },
-];
 
 Widget renderCityCard(context, city) {
   return (Container(
@@ -106,6 +30,9 @@ Widget renderCityCard(context, city) {
     ),
     child: InkWell(
         onTap: () {
+        var cityModel = Provider.of<CityModel>(context, listen: false);
+
+          cityModel.setCityId(city['_id']['\$oid']);
           AppRouter.router.navigateTo(context, 'home',
               replace: true, transition: TransitionType.inFromRight);
         },
@@ -133,12 +60,12 @@ Widget renderCityCard(context, city) {
                       Container(
                           width: 170,
                           child: Text(
-                            city['description'],
+                            city['shortDescription'],
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 12),
                           )),
-                      Text('Population: ${city['population']}',
+                      Text('Population: ${city['population']['\$numberInt']}',
                           style: TextStyle(
                               fontSize: 12, color: Colors.grey.shade600))
                     ],
@@ -157,17 +84,44 @@ class CityView extends StatefulWidget {
 }
 
 class _CityViewState extends State<CityView> {
+  List<dynamic> _allCity = [];
+
+  void fetchCities() async {
+    var data = await CarcassonneCityApi.getAllCity();
+    print(data['cities']);
+    if (mounted) {
+      setState(() {
+        _allCity = data['cities'];
+      });
+    }
+  }
 
   @override
   void initState() {
-    new Future.delayed(Duration.zero, () async {
-    
-  
-      //TODO mon applle a la base de donner
+    new Future.delayed(Duration.zero, () {
+      fetchCities();
     });
     super.initState();
   }
 
+  void _showDialog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Demande ressu"),
+          content: Text("Merci pour votre demande, on vous fait un retour dans les plus bref delai"),
+          actions: [
+            FlatButton(
+              child: Text("OK"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(title: 'City'),
@@ -175,22 +129,25 @@ class _CityViewState extends State<CityView> {
             title: 'Ajouter ma ville',
             loading: false,
             onPressed: () {
-              print('tot');
-            }),
+            showMaterialModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              expand: false,
+              builder: (context) => AddCityWidget(
+                onValidate: () {
+              _showDialog(context);
+
+                },
+              ),
+            );
+          }),
         body: SingleChildScrollView(
             child: Column(children: [
-          // Container(
-          //     margin: EdgeInsets.all(5),
-          //     child: TextField(
-          //       decoration: InputDecoration(
-          //         hintText: 'Search for your city',
-          //         border: UnderlineInputBorder(
-          //             borderSide: BorderSide(color: Colors.grey)),
-          //       ),
-          //     )),
-          ...fakeCitys.map((city) {
+          if (_allCity.length == 0) LoadingAnnimation(),
+          ..._allCity.map((city) {
             return renderCityCard(context, city);
           }).toList()
+
         ])));
   }
 }

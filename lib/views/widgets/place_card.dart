@@ -17,7 +17,6 @@ class PlaceCard extends StatelessWidget {
           onTap: onPressed,
           child: Container(
               decoration: BoxDecoration(
-      // border: Border.all(color: Color(0xffC4C4C4)),
       color: Colors.white,
       borderRadius: BorderRadius.all(Radius.circular(5.0)),
       boxShadow: [
@@ -59,14 +58,14 @@ class PlaceCard extends StatelessWidget {
                       fontSize: 18)
                       ),
                       Row(children: [
-                      Text(place['numberOfApproval'].toString(),
+                      Text(place['numberOfApproval']['\$numberInt'].toString(),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Color(0xff5bb00a),
+                      color: Color(0xffab9bd9),
                       fontSize: 18)
                       ),
-                      Icon(Icons.star, color: Color(0xff5bb00a)),
+                      Icon(Icons.star, color: Color(0xffab9bd9)),
                       ],)
                       ]
                       ),
@@ -74,7 +73,7 @@ class PlaceCard extends StatelessWidget {
                       ),
                    Padding(
                     padding: EdgeInsets.only(left: 10, right: 10),  
-                     child: Text(place['description'],
+                     child: Text(place['shortDescription'],
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                                 style: TextStyle(

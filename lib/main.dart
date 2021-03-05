@@ -13,6 +13,8 @@ import 'dart:io';
 import 'package:intl/intl.dart'; //for date format
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:carcassonne/models/city_model.dart';
+
 
 void main(List<String> args, {String env}) async {
 //Remove this method to stop OneSignal Debugging
@@ -40,6 +42,7 @@ void main(List<String> args, {String env}) async {
     appRunner: () => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserModel()),
+             ChangeNotifierProvider(create: (context) => CityModel()),
       ],
       child: MyApp(flutterI18nDelegate),
     )),
@@ -64,8 +67,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[observer],
         color: Color.fromARGB(255, 255, 255, 255),
-        title: 'Jim',
-        initialRoute: 'splash',
+        title: 'O-plums',
+        initialRoute: 'city',
         theme: ThemeData(
             textTheme:
               GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)),
