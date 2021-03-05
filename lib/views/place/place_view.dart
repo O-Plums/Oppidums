@@ -158,15 +158,15 @@ class _PlaceViewViewState extends State<PlaceView> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               CustomInkWell(
                 onTap: () {
-            showMaterialModalBottomSheet(
-              backgroundColor: Colors.transparent,
-              context: context,
-              expand: false,
-              builder: (context) => AuthWidget(
-                onValidate: () {
-                      // _showDialog(context);
-                },
-              )
+            // showMaterialModalBottomSheet(
+            //   backgroundColor: Colors.transparent,
+            //   context: context,
+            //   expand: false,
+            //   builder: (context) => AuthWidget(
+            //     onValidate: () {
+            //           // _showDialog(context);
+            //     },
+            //   );
           },
                 child: 
                 Container(

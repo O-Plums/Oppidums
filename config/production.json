@@ -1,6 +1,6 @@
 {
   "appVersion": "0.0.1",
-  "apiUrl": "http://192.168.1.12:8081/",
+  "apiUrl": "https://eu-central-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/staging-cadmy/",
   "apiVersion": "0.0.1",
   "sentry": {
     "dns": "https//toto.com"
