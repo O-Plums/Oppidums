@@ -5,6 +5,8 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:carcassonne/views/widgets/auth_widget.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 
 
 import 'package:carcassonne/views/widgets/loading_widget.dart';
@@ -158,15 +160,15 @@ class _PlaceViewViewState extends State<PlaceView> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               CustomInkWell(
                 onTap: () {
-            // showMaterialModalBottomSheet(
-            //   backgroundColor: Colors.transparent,
-            //   context: context,
-            //   expand: false,
-            //   builder: (context) => AuthWidget(
-            //     onValidate: () {
-            //           // _showDialog(context);
-            //     },
-            //   );
+            showMaterialModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              expand: false,
+              builder: (context) => AuthWidget(
+                onValidate: () {
+                      // _showDialog(context);
+                },
+              ));
           },
                 child: 
                 Container(

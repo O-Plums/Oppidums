@@ -48,7 +48,7 @@ class AppRouter {
   );
 
   static void setupRouter() {
-    // router.define('splash', handler: _splashHandler);
+    router.define('splash', handler: _splashHandler);
     router.define('city', handler: _cityHandler);
     router.define('home', handler: _homeHandler);
     router.define('city/info', handler: _cityInfoHandler);

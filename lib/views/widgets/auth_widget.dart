@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:carcassonne/views/widgets/app_flat_button.dart';
-import 'package:carcassonne/views/widgets/input_text.dart';
+import 'package:carcassonne/views/widgets/google_login_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:carcassonne/models/user_model.dart';
+import 'package:provider/provider.dart';
+import 'package:carcassonne/router.dart';
+
 
 class AuthWidget extends StatefulWidget {
   final Function onValidate;
@@ -15,34 +19,59 @@ class AuthWidget extends StatefulWidget {
 }
 
 class _AuthWidgetState extends State<AuthWidget> {
-  void _handleChange(String type, String value) {
-    print('$type $value');
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  bool isLoading = false;
+
+  void _handleLogin(context, Map<String, dynamic> userData) async {
+    print('In handleLogin');
+    final SharedPreferences prefs = await _prefs;
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
+
+    try {
+      var userModel = Provider.of<UserModel>(context, listen: false);
+      userModel.auth(userData['accessToken']);
+      prefs.setString('googlePYMP', userData['accessToken']);
+      await userModel.populate(userData);
+      AppRouter.router.pop(context);
+ if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } catch (error) {
+      prefs.remove('googlePYMP');
+      print(error);
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        height: 200,
+        height: 100,
         child: SingleChildScrollView(
             child: Column(children: [
-                  Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 20),
-                  child: Text(
-                    'Formulaire de contacte',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                ),
-          CustomFlatButton(
-            label: 'Google login',
-            color: Color(0xffab9bd9),
-            onPressed: () {
-              Navigator.pop(context);
-              widget.onValidate();
-
-            },
-            width: 300,
+          Container(
+            margin: EdgeInsets.only(top: 10, bottom: 10),
+            child: Text('Connexion',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           ),
+          if (!isLoading)
+            GoogleLoginButton(
+                onLogin: (Map<String, dynamic> userData) =>
+                    _handleLogin(context, userData)),
+          if (isLoading)
+            CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Color(0xffEA178C)))
         ])));
   }
 }

@@ -88,7 +88,6 @@ class _CityViewState extends State<CityView> {
 
   void fetchCities() async {
     var data = await CarcassonneCityApi.getAllCity();
-    print(data['cities']);
     if (mounted) {
       setState(() {
         _allCity = data['cities'];

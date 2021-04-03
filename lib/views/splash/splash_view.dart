@@ -12,7 +12,7 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
+  //TODO populate le user quand a les prefs
   @override
   void initState() {
     super.initState();
