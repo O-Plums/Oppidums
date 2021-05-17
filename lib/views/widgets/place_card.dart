@@ -58,7 +58,7 @@ class PlaceCard extends StatelessWidget {
                       fontSize: 18)
                       ),
                       Row(children: [
-                      Text(place['numberOfApproval']['\$numberInt'].toString(),
+                      Text(place['numberOfApproval']['\$numberLong'].toString(),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,

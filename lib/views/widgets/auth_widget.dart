@@ -5,7 +5,6 @@ import 'package:carcassonne/models/user_model.dart';
 import 'package:provider/provider.dart';
 import 'package:carcassonne/router.dart';
 
-
 class AuthWidget extends StatefulWidget {
   final Function onValidate;
 
@@ -32,12 +31,13 @@ class _AuthWidgetState extends State<AuthWidget> {
     }
 
     try {
+      print(userData['token']);
       var userModel = Provider.of<UserModel>(context, listen: false);
-      userModel.auth(userData['accessToken']);
-      prefs.setString('googlePYMP', userData['accessToken']);
+      userModel.auth(userData['token']);
+      prefs.setString('googlePYMP', userData['token']);
       await userModel.populate(userData);
       AppRouter.router.pop(context);
- if (mounted) {
+      if (mounted) {
         setState(() {
           isLoading = false;
         });

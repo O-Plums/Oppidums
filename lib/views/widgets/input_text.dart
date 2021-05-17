@@ -8,8 +8,19 @@ class InputText extends StatefulWidget {
   final bool border;
   final bool password;
   final TextInputType keyboardType;
+  final int maxLines;
 
-  InputText({Key key, this.label, this.placeholder, this.defaultValue, this.onChange, this.border = true, this.password = false, this.keyboardType = TextInputType.text}) : super(key: key);
+  InputText(
+      {Key key,
+      this.label,
+      this.placeholder,
+      this.defaultValue,
+      this.onChange,
+      this.border = true,
+      this.password = false,
+      this.maxLines,
+      this.keyboardType = TextInputType.text})
+      : super(key: key);
 
   @override
   _InputTextState createState() => _InputTextState();
@@ -28,20 +39,23 @@ class _InputTextState extends State<InputText> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.label != null) (
-            Text(widget.label, style: TextStyle(fontSize: 16))
-        ),
+        if (widget.label != null)
+          (Text(widget.label, style: TextStyle(fontSize: 16))),
         TextField(
           onChanged: widget.onChange,
           controller: _controller,
           decoration: InputDecoration(
-              hintText: widget.placeholder,
-              border: widget.border ? UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)) : InputBorder.none,
+            hintText: widget.placeholder,
+            border: widget.border
+                ? UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey))
+                : InputBorder.none,
           ),
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           obscureText: widget.password,
           enableSuggestions: widget.password,
           autocorrect: widget.password,
+          maxLines: widget.maxLines,
           keyboardType: widget.keyboardType,
         )
       ],

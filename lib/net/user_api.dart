@@ -14,4 +14,18 @@ class CarcassonneUserApi {
     );
     return res.data;
   }
+
+  static Future<Map<String, dynamic>> updateApproval(String userId, String placeId)  async {
+
+      var res = await _client.put(
+      '/service/User/incoming_webhook/updateApproval',
+      queryParameters: {
+        "userId": userId,
+        "placeId": placeId,
+      },
+    );
+    print('res => ${res}');
+    return res.data;
+
+  }
 }

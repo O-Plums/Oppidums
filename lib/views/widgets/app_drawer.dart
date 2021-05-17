@@ -79,18 +79,19 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                           ),
                           CustomInkWell(
                             child: Padding(
-                            padding: EdgeInsets.only(top: 5),
-                            child: Text(
-                              'Voir la ville',
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 14,
-                              ),
-                            )),
+                                padding: EdgeInsets.only(top: 5),
+                                child: Text(
+                                  'Voir la ville',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 14,
+                                  ),
+                                )),
                             onTap: () {
-                                      AppRouter.router.navigateTo(context, 'city/info',
-                replace: false, transition: TransitionType.inFromRight);
+                              AppRouter.router.navigateTo(context, 'city/info',
+                                  replace: false,
+                                  transition: TransitionType.inFromRight);
                             },
                           )
                         ],
@@ -100,6 +101,14 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
               ],
             )),
       ),
+      ListTile(
+          onTap: () {
+            print('show calendar');
+            // AppRouter.router.navigateTo(context, 'city',
+            //     replace: true, transition: TransitionType.inFromLeft);
+          },
+          leading: Icon(Icons.calendar_today),
+          title: Text('Calendar')),
       ListTile(
           onTap: () {
             AppRouter.router.navigateTo(context, 'city',

@@ -5,12 +5,15 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:carcassonne/views/widgets/auth_widget.dart';
+import 'package:carcassonne/views/widgets/comment_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
-
 
 import 'package:carcassonne/views/widgets/loading_widget.dart';
 import 'package:carcassonne/net/place_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:carcassonne/net/user_api.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 var fakeComments = [
   {
@@ -42,10 +45,40 @@ class PlaceView extends StatefulWidget {
 }
 
 class _PlaceViewViewState extends State<PlaceView> {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  bool isLogin = false;
   bool isApprove = false;
   int numberOfApproval = 0;
   bool loading = false;
   Map<String, dynamic> _place = null;
+
+  void _setApproval() async {
+    final SharedPreferences prefs = await _prefs;
+
+    final token = prefs.getString('googlePYMP');
+
+    Map<String, dynamic> payload = JwtDecoder.decode(token);
+
+    print('isApprove ${_place['_id']}');
+    await CarcassonneUserApi.updateApproval(
+        payload['_id'], _place['_id']['\$oid']);
+    print('NEW APPROVAL =>');
+    setState(() {
+      isApprove = !isApprove;
+    });
+  }
+
+  void _checkLocalStorage(context) async {
+    final SharedPreferences prefs = await _prefs;
+    final token = prefs.getString('googlePYMP');
+
+    if (token != null) {
+      setState(() {
+        isLogin = true;
+      });
+    }
+  }
 
   void fetchPlace(context) async {
     if (mounted) {
@@ -54,12 +87,12 @@ class _PlaceViewViewState extends State<PlaceView> {
       });
     }
     var data = await CarcassonnePlaceApi.getPlaceById(widget.placeId);
-    // print(data['place']['numberOfApproval']);
+    
     if (mounted) {
       setState(() {
         _place = data['place'];
         numberOfApproval =
-            int.parse(data['place']['numberOfApproval']['\$numberInt']);
+            int.parse(data['place']['numberOfApproval']['\$numberLong']);
         loading = false;
       });
     }
@@ -70,6 +103,7 @@ class _PlaceViewViewState extends State<PlaceView> {
     new Future.delayed(Duration.zero, () async {
       //TODO mon applle a la base de donner
       fetchPlace(context);
+      await _checkLocalStorage(context);
     });
     super.initState();
   }
@@ -158,39 +192,66 @@ class _PlaceViewViewState extends State<PlaceView> {
                   )),
               Divider(),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              CustomInkWell(
-                onTap: () {
-            showMaterialModalBottomSheet(
-              backgroundColor: Colors.transparent,
-              context: context,
-              expand: false,
-              builder: (context) => AuthWidget(
-                onValidate: () {
-                      // _showDialog(context);
-                },
-              ));
-          },
-                child: 
-                Container(
-                    width: 150,
-                    margin: EdgeInsets.all(10),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(Icons.check_circle,
-                              size: 20,
-                              color: !isApprove
-                                  ? Colors.grey.shade600
-                                  : Colors.black),
-                          Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: Text('Approuver',
-                                  style:
-                                      TextStyle(color: Colors.grey.shade600))),
-                        ]))),
+                CustomInkWell(
+                    onTap: isLogin == false
+                        ? () {
+                            showMaterialModalBottomSheet(
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                expand: false,
+                                builder: (context) => AuthWidget(
+                                      onValidate: () {
+                                        // _showDialog(context);
+                                      },
+                                    ));
+                          }
+                        : () {
+                            _setApproval();
+                          },
+                    child: Container(
+                        width: 150,
+                        margin: EdgeInsets.all(10),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(Icons.check_circle,
+                                  size: 20,
+                                  color: !isApprove
+                                      ? Colors.grey.shade600
+                                      : Colors.green),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Text('Approuver',
+                                      style: TextStyle(
+                                          color: Colors.grey.shade600))),
+                            ]))),
                 Text('|'),
+                 CustomInkWell(
+                    onTap: isLogin == false
+                        ? () {
+                            showMaterialModalBottomSheet(
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                expand: false,
+                                builder: (context) => AuthWidget(
+                                      onValidate: () {
+                                        // _showDialog(context);
+                                      },
+                                    ));
+                          }
+                        : () {
+                               showMaterialModalBottomSheet(
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                expand: false,
+                                builder: (context) => CommentWidget(
+                                      onValidate: () {
+                                        // _showDialog(context);
+                                      },
+                                    ));
+                          },
+                    child:
                 Container(
-                  
                     width: 150,
                     margin: EdgeInsets.all(10),
                     child: Row(children: [
@@ -200,57 +261,57 @@ class _PlaceViewViewState extends State<PlaceView> {
                           padding: EdgeInsets.only(left: 10),
                           child: Text('Commenter',
                               style: TextStyle(color: Colors.grey.shade600))),
-                    ]))
+                    ])))
               ]),
-              ...fakeComments.map((comment) {
-                return (
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-      // border: Border.all(color: Color(0xffC4C4C4)),
-      color: Colors.white,
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 2,
-          blurRadius: 2,
-          offset: Offset(0, 3), // changes position of shadow
-        ),
-      ],
-    ),
-                    child:
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                    CircleAvatar(
-                      radius: 30.0,
-                      backgroundImage: NetworkImage(comment['picture'])),
-                    Container(
-                      height: 60,
-                    margin: EdgeInsets.only(left: 20),
-                    child:
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                      Text(comment['name'],
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                      ),
-                      Text(comment['comment'])
-                    ],))
-
-                  ],))
-
-                );
-              }).toList()
             ])
         ])));
   }
 }
 
+    //         ...fakeComments.map((comment) {
+    //             return (
+    //               Container(
+    //                 margin: EdgeInsets.all(10),
+    //                 padding: EdgeInsets.all(10),
+    //                 decoration: BoxDecoration(
+    //   // border: Border.all(color: Color(0xffC4C4C4)),
+    //   color: Colors.white,
+    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    //   boxShadow: [
+    //     BoxShadow(
+    //       color: Colors.grey.withOpacity(0.5),
+    //       spreadRadius: 2,
+    //       blurRadius: 2,
+    //       offset: Offset(0, 3), // changes position of shadow
+    //     ),
+    //   ],
+    // ),
+    //                 child:
+    //               Row(
+    //                 crossAxisAlignment: CrossAxisAlignment.start,
+    //                 mainAxisAlignment: MainAxisAlignment.start,
+    //                 children: [
+    //                 CircleAvatar(
+    //                   radius: 30.0,
+    //                   backgroundImage: NetworkImage(comment['picture'])),
+    //                 Container(
+    //                   height: 60,
+    //                 margin: EdgeInsets.only(left: 20),
+    //                 child:
+    //                 Column(
+    //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //                   crossAxisAlignment: CrossAxisAlignment.start,
+    //                   children: [
+    //                   Text(comment['name'],
+    //                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
+    //                   ),
+    //                   Text(comment['comment'])
+    //                 ],))
+
+    //               ],))
+
+    //             );
+    //           }).toList()
 //  CustomInkWell(
 //               onTap: () {
 //                 setState(() {
