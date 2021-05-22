@@ -10,9 +10,6 @@ class CarcassonneCityApi {
 
   static Future<List<dynamic>> getAllCity() async {
     var res = await _client.get('cities');
-  final parsed = jsonDecode(res.data).cast<Map<String, dynamic>>();
-
-  return parsed.map<dynamic>((json) => json).toList();
+    return res.data;
   }
-
 }

@@ -88,9 +88,7 @@ class CityView extends StatefulWidget {
 class _CityViewState extends State<CityView> {
   List<dynamic> _allCity = [];
   void fetchCities() async {
-    print("toto");
     var data = await CarcassonneCityApi.getAllCity();
-    print("toto $data");
     
     if (mounted) {
       setState(() {
