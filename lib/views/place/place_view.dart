@@ -172,7 +172,7 @@ class _PlaceViewViewState extends State<PlaceView> {
                     data: _place['description'],
                     extensionSet: md.ExtensionSet.gitHubWeb,
                   )),
-              Padding(
+              /*Padding(
                   padding: EdgeInsets.all(10),
                   child: MarkdownBody(
                     data: _place['more_info_1'],
@@ -189,7 +189,7 @@ class _PlaceViewViewState extends State<PlaceView> {
                   child: MarkdownBody(
                     data: _place['more_info_3'],
                     extensionSet: md.ExtensionSet.gitHubWeb,
-                  )),
+                  )),*/
               Divider(),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                 CustomInkWell(

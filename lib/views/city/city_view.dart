@@ -108,8 +108,8 @@ class _CityViewState extends State<CityView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Demande ressu"),
-          content: Text("Merci pour votre demande, on vous fait un retour dans les plus bref delai"),
+          title: Text("Demande reçue"),
+          content: Text("Merci pour votre demande, nous vous contacterons dans le plus rapidement possible."),
           actions: [
             FlatButton(
               child: Text("OK"),

@@ -28,7 +28,7 @@ class _TourismeViewState extends State<TourismeView> {
     }
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var data = await CarcassonnePlaceApi.getPlaceByType('place', cityModel.id);
+    var data = await CarcassonnePlaceApi.getPlaceByType('tourism', cityModel.id);
     if (mounted) {
       setState(() {
         _places = data['places'];

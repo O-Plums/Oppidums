@@ -31,7 +31,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
                   Container(
                   margin: EdgeInsets.only(top: 20, bottom: 20),
                   child: Text(
-                    'Formulaire de contacte',
+                    'Formulaire de contact',
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ),
@@ -56,7 +56,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.grey)),
             child: InputText(
-              placeholder: 'Role dans la ville',
+              placeholder: 'Rôle dans la ville',
               border: false,
               onChange: (value) => _handleChange('cityJob', value),
             ),
@@ -69,7 +69,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.grey)),
             child: InputText(
-              placeholder: 'Email de contacte',
+              placeholder: 'Email de contact',
               border: false,
               onChange: (value) => _handleChange('contactEmail', value),
             ),

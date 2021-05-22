@@ -48,6 +48,7 @@ dependencies:
   modal_bottom_sheet: ^1.0.0+1
   google_sign_in: ^4.5.6
   firebase_analytics: ^7.0.1
+  table_calendar: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,7 +68,6 @@ flutter:
    # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - assets/images/
     - assets/lottie/
     - assets/i18n/en/
     - assets/i18n/fr/

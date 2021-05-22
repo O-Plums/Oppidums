@@ -44,7 +44,7 @@ class _CityInfoViewState extends State<CityInfoView> {
   @override
   void initState() {
     new Future.delayed(Duration.zero, () async {
-      //TODO mon applle a la base de donner
+      //TODO mon appel à la base de données
     });
     super.initState();
   }
