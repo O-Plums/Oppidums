@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:carcassonne/models/city_model.dart';
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/app_bottom_navigation_action.dart';
@@ -32,7 +34,7 @@ Widget renderCityCard(context, city) {
         onTap: () {
         var cityModel = Provider.of<CityModel>(context, listen: false);
 
-          cityModel.setCityId(city['_id']['\$oid']);
+          cityModel.setCityId(city['_id']);
           AppRouter.router.navigateTo(context, 'home',
               replace: true, transition: TransitionType.inFromRight);
         },
@@ -43,7 +45,7 @@ Widget renderCityCard(context, city) {
               Padding(
                   padding: EdgeInsets.all(5),
                   child: Image(
-                    image: NetworkImage(city['image']),
+                    image: NetworkImage(city['image']['url']),
                     height: 95,
                   )),
               Padding(
@@ -65,7 +67,7 @@ Widget renderCityCard(context, city) {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 12),
                           )),
-                      Text('Population: ${city['population']['\$numberInt']}',
+                      Text('Population: ${city['population']}',
                           style: TextStyle(
                               fontSize: 12, color: Colors.grey.shade600))
                     ],
@@ -85,20 +87,25 @@ class CityView extends StatefulWidget {
 
 class _CityViewState extends State<CityView> {
   List<dynamic> _allCity = [];
-
   void fetchCities() async {
+    print("toto");
     var data = await CarcassonneCityApi.getAllCity();
+    print("toto $data");
+    
     if (mounted) {
       setState(() {
-        _allCity = data['cities'];
+        _allCity = data;
       });
     }
   }
 
   @override
   void initState() {
+    print("toa");
     new Future.delayed(Duration.zero, () {
+    print("toa");
       fetchCities();
+
     });
     super.initState();
   }
@@ -122,6 +129,7 @@ class _CityViewState extends State<CityView> {
   }
   
   Widget build(BuildContext context) {
+    print("allcity$_allCity");
     return Scaffold(
         appBar: CustomAppBar(title: 'City'),
         bottomNavigationBar: AppBottomNavigationAction(
