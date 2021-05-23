@@ -104,7 +104,7 @@ class _CityInfoViewState extends State<CityInfoView> {
                               Container(
                                 alignment: Alignment.topLeft,
                                 child: Icon(Icons.location_on,
-                                    size: 30, color: Color(0xffab9bd9)),
+                                    size: 30, color: Color(0xfff6ac65)),
                               ),
                             ]))
                   ],
@@ -133,7 +133,7 @@ class _CityInfoViewState extends State<CityInfoView> {
                   margin: EdgeInsets.all(5.0),
                   child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                      child: Image(image: NetworkImage(i['url']))));
+                      child: FadeInImage.assetNetwork(placeholder: 'assets/image_loading.gif', image: i['url'])));
             }).toList(),
           )
         ])])));

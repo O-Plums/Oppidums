@@ -46,6 +46,8 @@ class _HomeViewState extends State<HomeView> {
         bottomNavigationBar: NavigationBottomBar(
             currentIndex: tabIndex, onChangeIndex: _handleChangeIndex),
         body: Container(
+          //  color: Colors.black,
+
           child: bottomBarPages[tabIndex],
         ));
   }

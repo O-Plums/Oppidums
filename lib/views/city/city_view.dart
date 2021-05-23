@@ -33,7 +33,6 @@ Widget renderCityCard(context, city) {
     child: InkWell(
         onTap: () {
         var cityModel = Provider.of<CityModel>(context, listen: false);
-
           cityModel.setCityBasicInfo(city['_id'],city['image']['url'], city['name']);
           AppRouter.router.navigateTo(context, 'home',
               replace: true, transition: TransitionType.inFromRight);
@@ -44,21 +43,28 @@ Widget renderCityCard(context, city) {
             children: [
               Padding(
                   padding: EdgeInsets.all(5),
-                  child: Image(
-                    image: NetworkImage(city['image']['url']),
-                    height: 95,
-                  )),
+                  
+                  child: Container(
+                    height: 90,
+                    width: 150,                
+                    color: Colors.black,
+                    child: FadeInImage.assetNetwork( placeholder: 'assets/image_loading.gif', image: city['image']['url']) )
+                    ),
               Padding(
                   padding: EdgeInsets.only(left: 10, top: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      Container(
+                          width: 170,
+                      child: Text(
                         '${city['name']} (${city['countryCode']})',
-                        style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+
+                       style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
-                      ),
+                      )),
                       Container(
                           width: 170,
                           child: Text(

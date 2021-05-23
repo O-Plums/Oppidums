@@ -17,9 +17,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         preferredSize: preferredSize,
         child: AppBar(
             title: title != null
-                ? Text(title, style: TextStyle(color: Colors.black))
-                : CarcassonneLogo(size: 40),
-            brightness: Brightness.light, // status bar brightness
+                ? Text(title, style: TextStyle(color: Colors.white))
+                : CarcassonneLogo(size: 60),
+            brightness: Brightness.dark, // status bar brightness
             automaticallyImplyLeading: true,
             leading: onBack == null
                 ? null
@@ -29,8 +29,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
             centerTitle: true,
             elevation: 1,
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: IconThemeData(color: Colors.white),
             actions: actions,
-            backgroundColor: Colors.white ));
+            backgroundColor: Color(0xff090f13),
+
+             ));
   }
 }

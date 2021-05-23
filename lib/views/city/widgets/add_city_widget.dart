@@ -76,7 +76,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
           ),
           CustomFlatButton(
             label: 'Envoyer',
-            color: Color(0xffab9bd9),
+            color: Color(0xfff6ac65),
             onPressed: () {
               Navigator.pop(context);
               widget.onValidate();

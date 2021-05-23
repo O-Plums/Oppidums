@@ -14,16 +14,10 @@ import 'package:carcassonne/net/place_api.dart';
 import 'package:provider/provider.dart';
 import 'package:carcassonne/models/city_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:carcassonne/net/city_api.dart';
 
-var fakeEvent = [
-  {
-    "startDate": 1621670400,
-    "endDate": 1621688400,
-    "title": "Marché de Nivelles",
-    "description": "Retrouvez les poissoniers et les vendeurs de viandes !",
-    "city": "mongoId" 
-     }
-];
+
+  
 
 class CustomCalendarView extends StatefulWidget {
   final String id;
@@ -39,21 +33,21 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   bool loading = false;
   List<dynamic> _events = null;
 
+
+
   List<Meeting> _getDataSource() {
-    final List<Meeting> meetings = fakeEvent.map((event) {
-      int s1 = event['startDate'];
-      int s2 = event['endDate'];
-
-      final DateTime startTime =
-          DateTime.fromMillisecondsSinceEpoch(s1 * 1000);
-      final DateTime endTime =
-          DateTime.fromMillisecondsSinceEpoch(s2 * 1000);
-
+    print(_events.length);
+    final List<Meeting> meetings = _events.map((event) {
+    
+      final DateTime startTime = DateTime.parse(event['startDate']);
+      final DateTime endTime = DateTime.parse(event['endDate']);
+    
       return Meeting(
-          event['title'], startTime, endTime, Color(0xFF0F8644), false);
+          event['title'], startTime, endTime, Color(int.parse(event['color'] ?? '0xFF960f1f')), false);
     }).toList();
     return meetings;
   }
+
 
   void fetchEvents(context) async {
     if (mounted) {
@@ -61,12 +55,12 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
         loading = true;
       });
     }
-    // var cityModel = Provider.of<CityModel>(context, listen: false);
+    var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    // var event = await CarcassonnePlaceApi.getEventCity(cityModel.id);
+    var event = await CarcassonneCityApi.getEventOfCitie(cityModel.id);
     if (mounted) {
       setState(() {
-        _events = fakeEvent;
+        _events = event;
         loading = false;
       });
     }

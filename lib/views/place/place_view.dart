@@ -159,7 +159,7 @@ class _PlaceViewViewState extends State<PlaceView> {
                                       Container(
                                         alignment: Alignment.topLeft,
                                         child: Icon(Icons.location_on,
-                                            size: 30, color: Color(0xffab9bd9)),
+                                            size: 30, color: Color(0xfff6ac65)),
                                       ),
                                     ]))
                           ]))),
@@ -323,7 +323,7 @@ class _PlaceViewViewState extends State<PlaceView> {
 //                   padding: EdgeInsets.all(5),
 //                   decoration: BoxDecoration(
 //                     color:
-//                         !isApprove ? Colors.grey.shade300 : Color(0xffab9bd9),
+//                         !isApprove ? Colors.grey.shade300 : Color(0xfff6ac65),
 //                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
 //                     boxShadow: [
 //                       BoxShadow(

@@ -19,6 +19,7 @@ class _NavigationBottomBarState extends State<NavigationBottomBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: Color(0xff101519),
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.location_city),
@@ -33,7 +34,7 @@ class _NavigationBottomBarState extends State<NavigationBottomBar> {
           label: 'Culture',
         ),
       ],
-      selectedItemColor: Color(0xffab9bd9),
+      selectedItemColor: Color(0xfff6ac65),
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,
