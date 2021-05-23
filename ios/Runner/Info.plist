@@ -42,23 +42,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 
-
-<key>FlutterDeepLinkingEnabled</key>
-<true/>
-<key>CFBundleURLTypes</key>
-<array>
-	<dict>
-	<key>CFBundleTypeRole</key>
-	<string>Editor</string>
-	<key>CFBundleURLName</key>
-	<string>carcassonne.com</string>
-	<key>CFBundleURLSchemes</key>
-	<array>
-	<string>carcassonne</string>
-	</array>
-	</dict>
-</array>
-
 <!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
 <!-- Google Sign-in Section -->
 <key>CFBundleURLTypes</key>

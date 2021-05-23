@@ -5,17 +5,6 @@ import 'package:carcassonne/views/widgets/app_inkwell.dart';
 import 'package:provider/provider.dart';
 import 'package:carcassonne/models/city_model.dart';
 
-var fakeCity = {
-  'image':
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Nivelles2011.JPG/280px-Nivelles2011.JPG',
-  'name': 'Nivelles',
-  'description':
-      'Nivelles (en néerlandais Nijvel, en wallon Nivele) est une ville francophone de Belgique située en Région wallonne dans la province du Brabant wallon, chef-lieu de l\'arrondissement administratif et judiciaire de Nivelles.',
-  'population': 28521,
-  'type': 'small',
-  'countryCode': 'BR',
-};
-
 class CustomAppDrawer extends StatefulWidget {
   final String dateToGet;
   CustomAppDrawer({Key key, this.dateToGet}) : super(key: key);
