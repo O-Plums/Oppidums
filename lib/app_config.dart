@@ -5,6 +5,7 @@ class AppConfig {
   static String appVersion;
   static String env;
   static String apiUrl;
+  static String realmUrl;
   static String apiVersion;
   static String sentryDns;
 
@@ -17,6 +18,7 @@ class AppConfig {
     final json = jsonDecode(contents);
     appVersion = json['appVersion'];
     apiUrl = json['apiUrl'];
+    realmUrl = json['realmUrl'];
     apiVersion = json['apiVersion'];
     sentryDns = json['sentry']['dns'];
   }

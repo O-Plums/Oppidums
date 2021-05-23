@@ -21,7 +21,7 @@ bool loading = false;
   List<dynamic> _places = [];
 
 
- void fetchPlace(context) async {
+void fetchPlace(context) async {
     if (mounted) {
       setState(() {
         loading = true;
@@ -29,10 +29,10 @@ bool loading = false;
     }
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var data = await CarcassonnePlaceApi.getPlaceByType('history', cityModel.id);
+    var places = await CarcassonnePlaceApi.getPlaceByType('history', cityModel.id);
     if (mounted) {
       setState(() {
-        _places = data['places'];
+        _places = places;
         loading = false;
       });
     }
@@ -55,11 +55,15 @@ bool loading = false;
           margin: EdgeInsets.only(top: 50),
           child: Text('No data')),
       ..._places.map((place) {
-        return PlaceCard(
+       return PlaceCard(
             place: place,
             onPressed: () {
               AppRouter.router.navigateTo(context, 'place',
-                  replace: false, transition: TransitionType.inFromRight);
+                  replace: false, transition: TransitionType.inFromRight,
+                 routeSettings: RouteSettings(arguments: {
+                          'placeId': place['_id'],
+                        }),
+                   );
             });
       }).toList()
     ]));

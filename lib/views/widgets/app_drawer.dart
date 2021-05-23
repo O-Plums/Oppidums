@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carcassonne/router.dart';
 import 'package:fluro/fluro.dart';
 import 'package:carcassonne/views/widgets/app_inkwell.dart';
+import 'package:provider/provider.dart';
+import 'package:carcassonne/models/city_model.dart';
 
 var fakeCity = {
   'image':
@@ -26,16 +28,23 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
   String picture;
   bool isSubscribe = false;
 
+  Map<String, dynamic> _citie = null;
+
+
+
   @override
   void initState() {
     super.initState();
     new Future.delayed(Duration.zero, () async {
-      if (mounted) {
-        setState(() {
-          picture = fakeCity['image'];
-          name = fakeCity['name'];
-        });
-      }
+
+        if (mounted) {
+    var cityModel = Provider.of<CityModel>(context, listen: false);
+
+      setState(() {
+          picture = cityModel.url;
+          name = cityModel.name;
+      });
+    }
     });
   }
 
@@ -104,8 +113,8 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
       ListTile(
           onTap: () {
             print('show calendar');
-            // AppRouter.router.navigateTo(context, 'city',
-            //     replace: true, transition: TransitionType.inFromLeft);
+            AppRouter.router.navigateTo(context, 'calendar',
+                replace: false, transition: TransitionType.inFromLeft);
           },
           leading: Icon(Icons.calendar_today),
           title: Text('Calendar')),

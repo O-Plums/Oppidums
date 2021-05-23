@@ -34,7 +34,7 @@ Widget renderCityCard(context, city) {
         onTap: () {
         var cityModel = Provider.of<CityModel>(context, listen: false);
 
-          cityModel.setCityId(city['_id']);
+          cityModel.setCityBasicInfo(city['_id'],city['image']['url'], city['name']);
           AppRouter.router.navigateTo(context, 'home',
               replace: true, transition: TransitionType.inFromRight);
         },
@@ -99,11 +99,8 @@ class _CityViewState extends State<CityView> {
 
   @override
   void initState() {
-    print("toa");
     new Future.delayed(Duration.zero, () {
-    print("toa");
       fetchCities();
-
     });
     super.initState();
   }
@@ -127,7 +124,6 @@ class _CityViewState extends State<CityView> {
   }
   
   Widget build(BuildContext context) {
-    print("allcity$_allCity");
     return Scaffold(
         appBar: CustomAppBar(title: 'City'),
         bottomNavigationBar: AppBottomNavigationAction(

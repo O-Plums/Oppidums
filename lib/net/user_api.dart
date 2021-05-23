@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:carcassonne/net/client.dart';
+import 'package:carcassonne/net/realm_client.dart';
 
 class CarcassonneUserApi {
-  static Dio _client = createCarcassonneDioClient();
+  static Dio _client = createCarcassonneRealmDioClient();
 
   static Future<Map<String, dynamic>> googleSignIn(String accessToken) async {
     var res = await _client.get(
@@ -24,7 +24,6 @@ class CarcassonneUserApi {
         "placeId": placeId,
       },
     );
-    print('res => ${res}');
     return res.data;
 
   }

@@ -12,4 +12,13 @@ class CarcassonneCityApi {
     var res = await _client.get('cities');
     return res.data;
   }
+
+static Future<Map<String, dynamic>> getCitieById(String citiesId) async {
+    var res = await _client.get('cities/$citiesId'
+        // 'service/GetOnePlace/incoming_webhook/webhook0',
+        // queryParameters: {"placeId": placeId},
+        );
+    return res.data;
+  }
+
 }

@@ -28,10 +28,10 @@ class _TourismeViewState extends State<TourismeView> {
     }
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var data = await CarcassonnePlaceApi.getPlaceByType('tourism', cityModel.id);
+    var places = await CarcassonnePlaceApi.getPlaceByType('tourism', cityModel.id);
     if (mounted) {
       setState(() {
-        _places = data['places'];
+        _places = places;
         loading = false;
       });
     }
@@ -60,7 +60,7 @@ class _TourismeViewState extends State<TourismeView> {
               AppRouter.router.navigateTo(context, 'place',
                   replace: false, transition: TransitionType.inFromRight,
                  routeSettings: RouteSettings(arguments: {
-                          'placeId': place['_id']['\$oid'],
+                          'placeId': place['_id'],
                         }),
                    );
             });

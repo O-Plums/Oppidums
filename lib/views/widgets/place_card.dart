@@ -39,7 +39,7 @@ class PlaceCard extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(place['image']), fit: BoxFit.cover),
+                          image: NetworkImage(place['image']['url']), fit: BoxFit.cover),
                     ),
                     alignment: Alignment.bottomCenter,
                     height: 170,
@@ -58,7 +58,7 @@ class PlaceCard extends StatelessWidget {
                       fontSize: 18)
                       ),
                       Row(children: [
-                      Text(place['numberOfApproval']['\$numberLong'].toString(),
+                      Text(place['numberOfApproval'].toString(),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -83,47 +83,3 @@ class PlaceCard extends StatelessWidget {
         ));
   }
 }
-
-// decoration: BoxDecoration(
-//                   image: DecorationImage(
-//                       alignment: Alignment(-.2, 0),
-//                       image: NetworkImage(place['image']),
-//                       fit: BoxFit.cover),
-//                 ),
-//                 child: Stack(
-//                   fit: StackFit.expand,
-//                   children: [
-//                     Container(
-//                       decoration: new BoxDecoration(
-//                         gradient: new LinearGradient(
-//                             colors: [Colors.transparent, Colors.black],
-//                             begin: const FractionalOffset(.1, .4),
-//                             end: const FractionalOffset(.1, 1),
-//                             stops: [0.0, 1.0],
-//                             tileMode: TileMode.clamp),
-//                       ),
-//                       padding: EdgeInsets.only(bottom: 10),
-//                     ),
-//                     Positioned(
-//                         bottom: 15,
-//                         left: 5,
-//                         right: 5,
-//                         child: Column(
-//                           mainAxisAlignment: MainAxisAlignment.end,
-//                           children: [
-//                             Text(place['name'],
-//                                 textAlign: TextAlign.center,
-
-//                                 style: TextStyle(
-//                                     fontWeight: FontWeight.bold,
-//                                     color: Colors.white,
-//                                     fontSize: 20)),
-//                             Text(place['description'],
-//                             maxLines: 2,
-//                             overflow: TextOverflow.ellipsis,
-//                                 style: TextStyle(
-//                                     color: Colors.white, fontSize: 15)),
-//                           ],
-//                         ))
-//                   ],
-//                 ),

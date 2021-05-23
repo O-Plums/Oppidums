@@ -15,26 +15,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:carcassonne/net/user_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-var fakeComments = [
-  {
-    "picture":
-        "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
-    "name": "Pierre",
-    "comment": "Super grec pour manger avec c\'est pote",
-  },
-  {
-    "picture":
-        "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
-    "name": "Pierre",
-    "comment": "Super grec pour manger avec c\'est pote",
-  },
-  {
-    "picture":
-        "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
-    "name": "Pierre",
-    "comment": "Super grec pour manger avec c\'est pote",
-  }
-];
+// var fakeComments = [
+//   {
+//     "picture":
+//         "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
+//     "name": "Pierre",
+//     "comment": "Super grec pour manger avec c\'est pote",
+//   },
+//   {
+//     "picture":
+//         "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
+//     "name": "Pierre",
+//     "comment": "Super grec pour manger avec c\'est pote",
+//   },
+//   {
+//     "picture":
+//         "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
+//     "name": "Pierre",
+//     "comment": "Super grec pour manger avec c\'est pote",
+//   }
+// ];
 
 class PlaceView extends StatefulWidget {
   final String id;
@@ -60,10 +60,7 @@ class _PlaceViewViewState extends State<PlaceView> {
 
     Map<String, dynamic> payload = JwtDecoder.decode(token);
 
-    print('isApprove ${_place['_id']}');
-    await CarcassonneUserApi.updateApproval(
-        payload['_id'], _place['_id']['\$oid']);
-    print('NEW APPROVAL =>');
+    await CarcassonneUserApi.updateApproval(payload['_id'], _place['_id']);
     setState(() {
       isApprove = !isApprove;
     });
@@ -86,13 +83,13 @@ class _PlaceViewViewState extends State<PlaceView> {
         loading = true;
       });
     }
-    var data = await CarcassonnePlaceApi.getPlaceById(widget.placeId);
-    
+    print('placeId ${widget.placeId}');
+    var place = await CarcassonnePlaceApi.getPlaceById(widget.placeId);
+    print('Place => $place');
     if (mounted) {
       setState(() {
-        _place = data['place'];
-        numberOfApproval =
-            int.parse(data['place']['numberOfApproval']['\$numberLong']);
+        _place = place;
+        numberOfApproval = place['numberOfApproval'];
         loading = false;
       });
     }
@@ -120,7 +117,7 @@ class _PlaceViewViewState extends State<PlaceView> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         alignment: Alignment(-.2, 0),
-                        image: NetworkImage(_place['image']),
+                        image: NetworkImage(_place['image']['url']),
                         fit: BoxFit.cover),
                   ),
                   child: Container(
@@ -226,7 +223,7 @@ class _PlaceViewViewState extends State<PlaceView> {
                                           color: Colors.grey.shade600))),
                             ]))),
                 Text('|'),
-                 CustomInkWell(
+                CustomInkWell(
                     onTap: isLogin == false
                         ? () {
                             showMaterialModalBottomSheet(
@@ -240,7 +237,7 @@ class _PlaceViewViewState extends State<PlaceView> {
                                     ));
                           }
                         : () {
-                               showMaterialModalBottomSheet(
+                            showMaterialModalBottomSheet(
                                 backgroundColor: Colors.transparent,
                                 context: context,
                                 expand: false,
@@ -250,18 +247,18 @@ class _PlaceViewViewState extends State<PlaceView> {
                                       },
                                     ));
                           },
-                    child:
-                Container(
-                    width: 150,
-                    margin: EdgeInsets.all(10),
-                    child: Row(children: [
-                      Icon(Icons.chat_bubble_outline,
-                          size: 20, color: Colors.grey.shade600),
-                      Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text('Commenter',
-                              style: TextStyle(color: Colors.grey.shade600))),
-                    ])))
+                    child: Container(
+                        width: 150,
+                        margin: EdgeInsets.all(10),
+                        child: Row(children: [
+                          Icon(Icons.chat_bubble_outline,
+                              size: 20, color: Colors.grey.shade600),
+                          Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text('Commenter',
+                                  style:
+                                      TextStyle(color: Colors.grey.shade600))),
+                        ])))
               ]),
             ])
         ])));

@@ -48,7 +48,7 @@ dependencies:
   modal_bottom_sheet: ^1.0.0+1
   google_sign_in: ^4.5.6
   firebase_analytics: ^7.0.1
-  table_calendar: ^3.0.0
+  syncfusion_flutter_calendar: ^19.1.64
 dev_dependencies:
   flutter_test:
     sdk: flutter
