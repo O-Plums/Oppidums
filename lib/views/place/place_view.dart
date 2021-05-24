@@ -170,7 +170,7 @@ class _PlaceViewViewState extends State<PlaceView> {
               Padding(
                   padding: EdgeInsets.all(10),
                   child: MarkdownBody(
-                    data: _place['description'],
+                    data: _place['description'] ?? '',
                     extensionSet: md.ExtensionSet.gitHubWeb,
                         styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
                 p: TextStyle(color: Colors.white),
