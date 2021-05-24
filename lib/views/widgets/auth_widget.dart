@@ -31,11 +31,11 @@ class _AuthWidgetState extends State<AuthWidget> {
     }
 
     try {
-      print(userData['token']);
       var userModel = Provider.of<UserModel>(context, listen: false);
       userModel.auth(userData['token']);
       prefs.setString('googlePYMP', userData['token']);
       await userModel.populate(userData);
+      widget.onValidate();
       AppRouter.router.pop(context);
       if (mounted) {
         setState(() {
@@ -56,14 +56,17 @@ class _AuthWidgetState extends State<AuthWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
+        color: Color(0xff101519),
         height: 100,
         child: SingleChildScrollView(
             child: Column(children: [
           Container(
             margin: EdgeInsets.only(top: 10, bottom: 10),
             child: Text('Connexion',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
           ),
           if (!isLoading)
             GoogleLoginButton(

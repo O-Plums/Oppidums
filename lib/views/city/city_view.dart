@@ -120,14 +120,15 @@ class _CityViewState extends State<CityView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Demande reçue"),
-          content: Text("Merci pour votre demande, nous vous contacterons dans le plus rapidement possible."),
+          title: Text("Demande reçue", style: TextStyle(color: Colors.white)),
+          content: Text("Merci pour votre demande, nous vous contacterons dans le plus rapidement possible.",  style: TextStyle(color: Colors.white)),
           actions: [
             FlatButton(
-              child: Text("OK"),
+              child: Text("OK",  style: TextStyle(color: Color(0xfff6ac65))),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ],
+          backgroundColor: Color(0xff101519),
         );
       },
     );

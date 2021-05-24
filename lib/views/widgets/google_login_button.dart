@@ -61,9 +61,10 @@ class GoogleLoginButton extends StatelessWidget {
       margin: EdgeInsets.only(top: 5, bottom: 5),
       child: CustomFlatButton(
           eventName: 'Action_google_login',
-          color: Colors.black,
+          color: Colors.white,
           onPressed: () => _handleSignIn(context),
           width: 300,
+          textColor: Colors.black,
           label: FlutterI18n.translate(context, 'Google')),
     );
   }

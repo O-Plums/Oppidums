@@ -10,6 +10,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:carcassonne/views/widgets/loading_widget.dart';
 import 'package:carcassonne/net/place_api.dart';
+import 'package:carcassonne/net/comment_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:carcassonne/net/user_api.dart';
@@ -51,6 +52,7 @@ class _PlaceViewViewState extends State<PlaceView> {
   bool isApprove = false;
   int numberOfApproval = 0;
   bool loading = false;
+  List<dynamic> _comments = [];
   Map<String, dynamic> _place = null;
 
   void _setApproval() async {
@@ -84,11 +86,14 @@ class _PlaceViewViewState extends State<PlaceView> {
       });
     }
     var place = await CarcassonnePlaceApi.getPlaceById(widget.placeId);
+    var comments =
+        await CarcassonneCommentApi.getCommentByPlace(widget.placeId);
     if (mounted) {
       setState(() {
         _place = place;
         numberOfApproval = place['numberOfApproval'];
         loading = false;
+        _comments = comments;
       });
     }
   }
@@ -103,89 +108,89 @@ class _PlaceViewViewState extends State<PlaceView> {
   }
 
   Widget build(BuildContext context) {
+    print("comments => ${_comments}");
     return Scaffold(
         appBar: CustomAppBar(title: 'Place'),
-        body: 
-           Stack(
-        children: [
-          Container(
-            decoration: new BoxDecoration(
-          color: Color(0xff101519)
-          )),
-        SingleChildScrollView(
-            child: Column(children: [
-          if (loading == true) LoadingAnnimation(),
-          if (_place != null)
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        alignment: Alignment(-.2, 0),
-                        image: NetworkImage(_place['image']['url']),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Container(
-                      height: 200,
-                      width: double.infinity,
-                      decoration: new BoxDecoration(
-                        gradient: new LinearGradient(
-                            colors: [Colors.transparent, Colors.black],
-                            begin: const FractionalOffset(.1, .4),
-                            end: const FractionalOffset(.1, 1),
-                            stops: [0.0, 1.0],
-                            tileMode: TileMode.clamp),
-                      ),
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(_place['name'],
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    height: 3,
-                                    fontSize: 20)),
-                            CustomInkWell(
-                                onTap: () {
-                                  MapsLauncher.launchQuery(_place['address']);
-                                },
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(_place['address'],
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontStyle: FontStyle.italic,
-                                              fontSize: 14)),
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        child: Icon(Icons.location_on,
-                                            size: 30, color: Color(0xfff6ac65)),
-                                      ),
-                                    ]))
-                          ]))),
-              Padding(
-                  padding: EdgeInsets.all(10),
-                  child: MarkdownBody(
-                    data: _place['description'] ?? '',
-                    extensionSet: md.ExtensionSet.gitHubWeb,
-                        styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
-                p: TextStyle(color: Colors.white),
-                checkbox: TextStyle(color: Colors.white),
-                blockquote: TextStyle(color: Colors.white),
-                tableBody: TextStyle(color: Colors.white),
-                h1: TextStyle(color: Colors.white),
-                h2: TextStyle(color: Colors.white),
-                h3: TextStyle(color: Colors.white),
-                h4: TextStyle(color: Colors.white),
-                h5: TextStyle(color: Colors.white),
-                h6: TextStyle(color: Colors.white),
-                listBullet: TextStyle(color: Colors.white)),
-                  )),
-              /*Padding(
+        body: Stack(children: [
+          Container(decoration: new BoxDecoration(color: Color(0xff101519))),
+          SingleChildScrollView(
+              child: Column(children: [
+            if (loading == true) LoadingAnnimation(),
+            if (_place != null)
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          alignment: Alignment(-.2, 0),
+                          image: NetworkImage(_place['image']['url']),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Container(
+                        height: 200,
+                        width: double.infinity,
+                        decoration: new BoxDecoration(
+                          gradient: new LinearGradient(
+                              colors: [Colors.transparent, Colors.black],
+                              begin: const FractionalOffset(.1, .4),
+                              end: const FractionalOffset(.1, 1),
+                              stops: [0.0, 1.0],
+                              tileMode: TileMode.clamp),
+                        ),
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(_place['name'],
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      height: 3,
+                                      fontSize: 20)),
+                              CustomInkWell(
+                                  onTap: () {
+                                    MapsLauncher.launchQuery(_place['address']);
+                                  },
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(_place['address'],
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                fontStyle: FontStyle.italic,
+                                                fontSize: 14)),
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          child: Icon(Icons.location_on,
+                                              size: 30,
+                                              color: Color(0xfff6ac65)),
+                                        ),
+                                      ]))
+                            ]))),
+                Padding(
+                    padding: EdgeInsets.all(10),
+                    child: MarkdownBody(
+                      data: _place['description'] ?? '',
+                      extensionSet: md.ExtensionSet.gitHubWeb,
+                      styleSheet:
+                          MarkdownStyleSheet.fromTheme(Theme.of(context))
+                              .copyWith(
+                                  p: TextStyle(color: Colors.white),
+                                  checkbox: TextStyle(color: Colors.white),
+                                  blockquote: TextStyle(color: Colors.white),
+                                  tableBody: TextStyle(color: Colors.white),
+                                  h1: TextStyle(color: Colors.white),
+                                  h2: TextStyle(color: Colors.white),
+                                  h3: TextStyle(color: Colors.white),
+                                  h4: TextStyle(color: Colors.white),
+                                  h5: TextStyle(color: Colors.white),
+                                  h6: TextStyle(color: Colors.white),
+                                  listBullet: TextStyle(color: Colors.white)),
+                    )),
+                /*Padding(
                   padding: EdgeInsets.all(10),
                   child: MarkdownBody(
                     data: _place['more_info_1'],
@@ -203,128 +208,141 @@ class _PlaceViewViewState extends State<PlaceView> {
                     data: _place['more_info_3'],
                     extensionSet: md.ExtensionSet.gitHubWeb,
                   )),*/
-              Divider(),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                CustomInkWell(
-                    onTap: isLogin == false
-                        ? () {
-                            showMaterialModalBottomSheet(
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                expand: false,
-                                builder: (context) => AuthWidget(
-                                      onValidate: () {
-                                        // _showDialog(context);
-                                      },
-                                    ));
-                          }
-                        : () {
-                            _setApproval();
-                          },
-                    child: Container(
-                        width: 150,
-                        margin: EdgeInsets.all(10),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Icon(Icons.check_circle,
-                                  size: 20,
-                                  color: !isApprove
-                                      ? Colors.white
-                                      : Colors.green),
-                              Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Text('Approuver',
-                                      style: TextStyle(
-                                          color: Colors.white))),
-                            ]))),
-                Text('|'),
-                CustomInkWell(
-                    onTap: isLogin == false
-                        ? () {
-                            showMaterialModalBottomSheet(
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                expand: false,
-                                builder: (context) => AuthWidget(
-                                      onValidate: () {
-                                        // _showDialog(context);
-                                      },
-                                    ));
-                          }
-                        : () {
-                            showMaterialModalBottomSheet(
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                expand: false,
-                                builder: (context) => CommentWidget(
-                                      onValidate: () {
-                                        // _showDialog(context);
-                                      },
-                                    ));
-                          },
-                    child: Container(
-                        width: 150,
-                        margin: EdgeInsets.all(10),
-                        child: Row(children: [
-                          Icon(Icons.chat_bubble_outline,
-                              size: 20, color: Colors.white),
-                          Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: Text('Commenter',
-                                  style:
-                                      TextStyle(color: Colors.white))),
-                        ])))
-              ]),
-            ])
-        ]))]));
+                Divider(),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomInkWell(
+                          onTap: isLogin == false
+                              ? () {
+                                  showMaterialModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      expand: false,
+                                      builder: (context) => AuthWidget(
+                                            onValidate: () {
+                                              _checkLocalStorage(context);
+                                            },
+                                          ));
+                                }
+                              : () {
+                                  _setApproval();
+                                },
+                          child: Container(
+                              width: 150,
+                              margin: EdgeInsets.all(10),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Icon(Icons.check_circle,
+                                        size: 20,
+                                        color: !isApprove
+                                            ? Colors.white
+                                            : Colors.green),
+                                    Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Text('Approuver',
+                                            style: TextStyle(
+                                                color: Colors.white))),
+                                  ]))),
+                      Text('|'),
+                      CustomInkWell(
+                          onTap: isLogin == false
+                              ? () {
+                                  showMaterialModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      expand: false,
+                                      builder: (context) => AuthWidget(
+                                            onValidate: () {
+                                              _checkLocalStorage(context);
+                                            },
+                                          ));
+                                }
+                              : () {
+                                  showMaterialModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      expand: false,
+                                      builder: (context) => CommentWidget(
+                                            onValidate: () {
+                                              // _showDialog(context);
+                                            },
+                                            placeId: widget.placeId,
+                                          ));
+                                },
+                          child: Container(
+                              width: 150,
+                              margin: EdgeInsets.all(10),
+                              child: Row(children: [
+                                Icon(Icons.chat_bubble_outline,
+                                    size: 20, color: Colors.white),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Text('Commenter',
+                                        style: TextStyle(color: Colors.white))),
+                              ])))
+                    ]),
+                             ..._comments.map((comment) {
+                return (
+                  Container(
+
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+      // border: Border.all(color: Color(0xffC4C4C4)),
+                color: Color(0xff101519),
+
+      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      // border: 
+      // boxShadow: [
+      //   BoxShadow(
+      //     color: Colors.grey.withOpacity(0.5),
+      //     spreadRadius: 2,
+      //     blurRadius: 2,
+      //     offset: Offset(0, 3), // changes position of shadow
+      //   ),
+      // ],
+    ),
+                    child:
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                    CircleAvatar(
+                      radius: 30.0,
+                      backgroundImage: NetworkImage(comment['app_user']['picture'])),
+                    Container(
+                      height: 60,
+                    margin: EdgeInsets.only(left: 20),
+                    child:
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                      Text(comment['title'],
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, 
+                        color: Colors.white
+                      )
+                      ),
+                      Text(comment['description'],
+                      style: TextStyle( 
+                        color: Colors.white
+                      )
+                      )
+                    ],))
+
+                  ],))
+
+                );
+              }).toList()  
+              ])
+          ]))
+        ]));
   }
 }
 
-    //         ...fakeComments.map((comment) {
-    //             return (
-    //               Container(
-    //                 margin: EdgeInsets.all(10),
-    //                 padding: EdgeInsets.all(10),
-    //                 decoration: BoxDecoration(
-    //   // border: Border.all(color: Color(0xffC4C4C4)),
-    //   color: Colors.white,
-    //   borderRadius: BorderRadius.all(Radius.circular(5.0)),
-    //   boxShadow: [
-    //     BoxShadow(
-    //       color: Colors.grey.withOpacity(0.5),
-    //       spreadRadius: 2,
-    //       blurRadius: 2,
-    //       offset: Offset(0, 3), // changes position of shadow
-    //     ),
-    //   ],
-    // ),
-    //                 child:
-    //               Row(
-    //                 crossAxisAlignment: CrossAxisAlignment.start,
-    //                 mainAxisAlignment: MainAxisAlignment.start,
-    //                 children: [
-    //                 CircleAvatar(
-    //                   radius: 30.0,
-    //                   backgroundImage: NetworkImage(comment['picture'])),
-    //                 Container(
-    //                   height: 60,
-    //                 margin: EdgeInsets.only(left: 20),
-    //                 child:
-    //                 Column(
-    //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //                   crossAxisAlignment: CrossAxisAlignment.start,
-    //                   children: [
-    //                   Text(comment['name'],
-    //                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-    //                   ),
-    //                   Text(comment['comment'])
-    //                 ],))
-
-    //               ],))
-
-    //             );
-    //           }).toList()
+ 
 //  CustomInkWell(
 //               onTap: () {
 //                 setState(() {
