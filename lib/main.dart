@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         navigatorObservers: <NavigatorObserver>[observer],
         color: Color.fromARGB(255, 255, 255, 255),
-        title: 'O-plums',
+        title: 'Carcassonne',
         initialRoute: 'splash',
         theme: ThemeData(
             textTheme:

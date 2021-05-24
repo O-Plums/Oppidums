@@ -54,7 +54,14 @@ class _CityInfoViewState extends State<CityInfoView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(title: 'City'),
-        body: SingleChildScrollView(
+        body: 
+         Stack(
+        children: [
+          Container(
+            decoration: new BoxDecoration(
+          color: Color(0xff101519)
+          )),
+        SingleChildScrollView(
        child: Column(children: [
           if (loading == true) LoadingAnnimation(),
           if (_citie != null)
@@ -115,27 +122,42 @@ class _CityInfoViewState extends State<CityInfoView> {
               child: MarkdownBody(
                 data: _citie['description'],
                 extensionSet: md.ExtensionSet.gitHubWeb,
+                styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                p: TextStyle(color: Colors.white),
+                checkbox: TextStyle(color: Colors.white),
+                blockquote: TextStyle(color: Colors.white),
+                tableBody: TextStyle(color: Colors.white),
+                h1: TextStyle(color: Colors.white),
+                h2: TextStyle(color: Colors.white),
+                h3: TextStyle(color: Colors.white),
+                h4: TextStyle(color: Colors.white),
+                h5: TextStyle(color: Colors.white),
+                h6: TextStyle(color: Colors.white),
+                listBullet: TextStyle(color: Colors.white)),             
               )),
         if(_imageGallery.length > 0)
           CarouselSlider(
             options: CarouselOptions(
-              height: 150,
+              // height: 150,
               // aspectRatio: 0.2,
-              viewportFraction: 0.5,
+              // viewportFraction: 0.5,
               // initialPage: 0,
               enableInfiniteScroll: true,
               // reverse: false,
-              // enlargeCenterPage: true,
+              enlargeCenterPage: true,
               // scrollDirection: Axis.horizontal,
             ),
             items: _imageGallery.map((i) {
               return Container(
-                  margin: EdgeInsets.all(5.0),
                   child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      child: FadeInImage.assetNetwork(placeholder: 'assets/image_loading.gif', image: i['url'])));
+                      // borderRadius: BorderRadius.all(Radius.circular(5)),
+                      child: 
+                      FadeInImage.assetNetwork(placeholder: 'assets/image_loading.gif', image: i['url'])));
             }).toList(),
+          ),
+          Container(
+                        margin: EdgeInsets.only(bottom: 15.0),
           )
-        ])])));
+        ])]))]));
   }
 }

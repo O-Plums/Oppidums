@@ -83,9 +83,7 @@ class _PlaceViewViewState extends State<PlaceView> {
         loading = true;
       });
     }
-    print('placeId ${widget.placeId}');
     var place = await CarcassonnePlaceApi.getPlaceById(widget.placeId);
-    print('Place => $place');
     if (mounted) {
       setState(() {
         _place = place;
@@ -98,7 +96,6 @@ class _PlaceViewViewState extends State<PlaceView> {
   @override
   void initState() {
     new Future.delayed(Duration.zero, () async {
-      //TODO mon applle a la base de donner
       fetchPlace(context);
       await _checkLocalStorage(context);
     });
@@ -108,7 +105,14 @@ class _PlaceViewViewState extends State<PlaceView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(title: 'Place'),
-        body: SingleChildScrollView(
+        body: 
+           Stack(
+        children: [
+          Container(
+            decoration: new BoxDecoration(
+          color: Color(0xff101519)
+          )),
+        SingleChildScrollView(
             child: Column(children: [
           if (loading == true) LoadingAnnimation(),
           if (_place != null)
@@ -168,6 +172,18 @@ class _PlaceViewViewState extends State<PlaceView> {
                   child: MarkdownBody(
                     data: _place['description'],
                     extensionSet: md.ExtensionSet.gitHubWeb,
+                        styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                p: TextStyle(color: Colors.white),
+                checkbox: TextStyle(color: Colors.white),
+                blockquote: TextStyle(color: Colors.white),
+                tableBody: TextStyle(color: Colors.white),
+                h1: TextStyle(color: Colors.white),
+                h2: TextStyle(color: Colors.white),
+                h3: TextStyle(color: Colors.white),
+                h4: TextStyle(color: Colors.white),
+                h5: TextStyle(color: Colors.white),
+                h6: TextStyle(color: Colors.white),
+                listBullet: TextStyle(color: Colors.white)),
                   )),
               /*Padding(
                   padding: EdgeInsets.all(10),
@@ -214,13 +230,13 @@ class _PlaceViewViewState extends State<PlaceView> {
                               Icon(Icons.check_circle,
                                   size: 20,
                                   color: !isApprove
-                                      ? Colors.grey.shade600
+                                      ? Colors.white
                                       : Colors.green),
                               Padding(
                                   padding: EdgeInsets.only(left: 10),
                                   child: Text('Approuver',
                                       style: TextStyle(
-                                          color: Colors.grey.shade600))),
+                                          color: Colors.white))),
                             ]))),
                 Text('|'),
                 CustomInkWell(
@@ -252,16 +268,16 @@ class _PlaceViewViewState extends State<PlaceView> {
                         margin: EdgeInsets.all(10),
                         child: Row(children: [
                           Icon(Icons.chat_bubble_outline,
-                              size: 20, color: Colors.grey.shade600),
+                              size: 20, color: Colors.white),
                           Padding(
                               padding: EdgeInsets.only(left: 10),
                               child: Text('Commenter',
                                   style:
-                                      TextStyle(color: Colors.grey.shade600))),
+                                      TextStyle(color: Colors.white))),
                         ])))
               ]),
             ])
-        ])));
+        ]))]));
   }
 }
 

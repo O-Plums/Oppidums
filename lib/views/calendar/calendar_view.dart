@@ -1,16 +1,6 @@
-import 'package:carcassonne/views/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/app_bar.dart';
-import 'package:carcassonne/views/widgets/app_inkwell.dart';
-import 'package:maps_launcher/maps_launcher.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:markdown/markdown.dart' as md;
-import 'package:carcassonne/views/widgets/auth_widget.dart';
-import 'package:carcassonne/views/widgets/comment_widget.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
 import 'package:carcassonne/views/widgets/loading_widget.dart';
-import 'package:carcassonne/net/place_api.dart';
 import 'package:provider/provider.dart';
 import 'package:carcassonne/models/city_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -36,7 +26,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
 
 
   List<Meeting> _getDataSource() {
-    print(_events.length);
+
     final List<Meeting> meetings = _events.map((event) {
     
       final DateTime startTime = DateTime.parse(event['startDate']);
@@ -77,15 +67,51 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
   Widget build(BuildContext context) {
     if (loading == true) {
       return Scaffold(
+          backgroundColor: Color(0xff101519),
+
           appBar: CustomAppBar(title: 'Calendar'), body: LoadingAnnimation());
     }
 
     return Scaffold(
+          backgroundColor: Color(0xff101519),
+
         appBar: CustomAppBar(title: 'Calendar'),
-        body: SfCalendar(
+        body:  SfCalendar(
+          backgroundColor: Color(0xff101519),
+         
+
+          headerStyle: CalendarHeaderStyle(
+          backgroundColor: Color(0xff101519),
+          textStyle: TextStyle(color: Colors.white)
+          ),
+          viewHeaderStyle: ViewHeaderStyle(
+          backgroundColor: Color(0xff101519),
+                 dayTextStyle: TextStyle(color: Colors.white),
+           dateTextStyle: TextStyle(color: Colors.white),
+          ),
+          todayTextStyle: TextStyle(color: Colors.white),
+          todayHighlightColor: Color(0xfff6ac65),
           view: CalendarView.month,
-          monthViewSettings: MonthViewSettings(showAgenda: true),
+          // monthViewSettings: MonthViewSettings(showAgenda: true),
           dataSource: MeetingDataSource(_getDataSource()),
+  monthViewSettings: MonthViewSettings(
+           dayFormat: 'EEE',
+           numberOfWeeksInView: 4,
+           appointmentDisplayCount: 2,
+           showAgenda: true,
+           monthCellStyle: MonthCellStyle(textStyle: TextStyle( color: Colors.white),
+               trailingDatesTextStyle: TextStyle(
+                   color: Colors.white),
+               leadingDatesTextStyle: TextStyle(
+                   color: Colors.white),
+               ),
+                agendaStyle: AgendaStyle(
+             backgroundColor: Colors.transparent,
+            appointmentTextStyle: TextStyle(color: Colors.white),
+             dayTextStyle: TextStyle(color: Colors.white),
+             dateTextStyle: TextStyle(color: Colors.white)
+        ),
+               ),
         ));
   }
 }

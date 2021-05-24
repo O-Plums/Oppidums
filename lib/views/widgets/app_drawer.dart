@@ -40,6 +40,8 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      child: Container(
+        color: Color(0xff101519),
         child: Column(children: [
       Container(
         height: 125,
@@ -50,20 +52,14 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                 colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.dstATop),
                 image: NetworkImage(picture ?? 'assets/image_loading.gif'),
                 fit: BoxFit.cover),
-     borderRadius: BorderRadius.only(
-        bottomRight: Radius.circular(40),
-      ),
+    //  borderRadius: BorderRadius.only(
+    //     bottomRight: Radius.circular(40),
+    //   ),
 
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // if (picture != null)
-                //   CircleAvatar(
-                //     backgroundImage: NetworkImage(picture),
-                //     minRadius: 30,
-                //     maxRadius: 30,
-                //   ),
                 if (name != null)
                   Flexible(
                     child: Container(
@@ -80,8 +76,6 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Colors.white,
-                                
-                                // fontWeight: FontWeight.bold,
                                 fontSize: 20,
                               ),
                             ),
@@ -100,23 +94,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
         fontSize: 12,
         label: 'Voir la ville',
       ),
-                          // CustomInkWell(
-                          //   child: Padding(
-                          //       padding: EdgeInsets.only(top: 5),
-                          //       child: Text(
-                          //         'Voir la ville',
-                          //         overflow: TextOverflow.ellipsis,
-                          //         style: TextStyle(
-                          //           color: Colors.white,
-                          //           fontSize: 14,
-                          //         ),
-                          //       )),
-                          //   onTap: () {
-                          //     AppRouter.router.navigateTo(context, 'city/info',
-                          //         replace: false,
-                          //         transition: TransitionType.inFromRight);
-                          //   },
-                          // )
+          
                         ],
                       ),
                     ),
@@ -126,12 +104,11 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
       ),
       ListTile(
           onTap: () {
-            print('show calendar');
             AppRouter.router.navigateTo(context, 'calendar',
                 replace: false, transition: TransitionType.inFromLeft);
           },
-          leading: Icon(Icons.calendar_today),
-          title: Text('Calendar')),
+          leading: Icon(Icons.calendar_today, color: Color(0xfff6ac65)),
+          title: Text('Calendar', style: TextStyle(color: Colors.white))),
       Expanded(child: Container()),
       Divider(),
       ListTile(
@@ -139,8 +116,8 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
             AppRouter.router.navigateTo(context, 'city',
                 replace: true, transition: TransitionType.inFromLeft);
           },
-          leading: Icon(Icons.swap_calls),
-          title: Text('Changer de ville')),
-    ]));
+          leading: Icon(Icons.swap_calls, color: Color(0xfff6ac65)),
+          title: Text('Changer de ville', style: TextStyle(color: Colors.white))),
+    ])));
   }
 }

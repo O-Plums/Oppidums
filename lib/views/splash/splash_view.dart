@@ -25,6 +25,7 @@ class _SplashViewState extends State<SplashView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+          backgroundColor: Color(0xff101519),
       body: LoadingAnnimation()
     );
   }

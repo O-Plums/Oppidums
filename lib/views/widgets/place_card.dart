@@ -28,9 +28,7 @@ class PlaceCard extends StatelessWidget {
         ),
       ],
     ),
-              // clipBehavior: Clip.antiAliasWithSaveLayer,
-              // elevation: 5,
-              // margin: EdgeInsets.all(2),
+    
               child: 
               
               Container(

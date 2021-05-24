@@ -15,21 +15,17 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 Widget renderCityCard(context, city) {
   return (Container(
-    height: 100,
-    margin: EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      // border: Border.all(color: Color(0xffC4C4C4)),
-      color: Colors.white,
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 2,
-          blurRadius: 2,
-          offset: Offset(0, 3), // changes position of shadow
-        ),
-      ],
-    ),
+    height: 150,
+    // margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+              color: Colors.black,
+              image: DecorationImage(
+                colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                image: NetworkImage(city['image']['url'] ?? 'assets/image_loading.gif'),
+                fit: BoxFit.cover),
+
+            ),
+
     child: InkWell(
         onTap: () {
         var cityModel = Provider.of<CityModel>(context, listen: false);
@@ -42,40 +38,35 @@ Widget renderCityCard(context, city) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                  padding: EdgeInsets.all(5),
-                  
-                  child: Container(
-                    height: 90,
-                    width: 150,                
-                    color: Colors.black,
-                    child: FadeInImage.assetNetwork( placeholder: 'assets/image_loading.gif', image: city['image']['url']) )
-                    ),
-              Padding(
                   padding: EdgeInsets.only(left: 10, top: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          width: 170,
+                          width: 300,
                       child: Text(
                         '${city['name']} (${city['countryCode']})',
                               overflow: TextOverflow.ellipsis,
 
                        style: TextStyle(
+                         color: Colors.white,
                             fontSize: 14, fontWeight: FontWeight.bold),
                       )),
                       Container(
-                          width: 170,
+                          width: 300,
                           child: Text(
                             city['shortDescription'],
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: 12,
+                            color: Colors.white,
+                            
+                            ),
                           )),
                       Text('Population: ${city['population']}',
                           style: TextStyle(
-                              fontSize: 12, color: Colors.grey.shade600))
+                              fontSize: 12, color: Colors.white))
                     ],
                   )),
             ])),
@@ -101,6 +92,19 @@ class _CityViewState extends State<CityView> {
         _allCity = data;
       });
     }
+  }
+
+   Future<String> refetchCities() async {
+    var data = await CarcassonneCityApi.getAllCity();
+    
+    if (mounted) {
+      setState(() {
+        _allCity = data;
+      });
+      return 'success';
+    }
+      return 'success';
+
   }
 
   @override
@@ -131,6 +135,7 @@ class _CityViewState extends State<CityView> {
   
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff101519),
         appBar: CustomAppBar(title: 'City'),
         bottomNavigationBar: AppBottomNavigationAction(
             title: 'Ajouter ma ville',
@@ -148,13 +153,18 @@ class _CityViewState extends State<CityView> {
               ),
             );
           }),
-        body: SingleChildScrollView(
+        body: 
+            RefreshIndicator(
+          onRefresh: () {
+           return refetchCities();
+          },
+          child: SingleChildScrollView(
             child: Column(children: [
           if (_allCity.length == 0) LoadingAnnimation(),
           ..._allCity.map((city) {
             return renderCityCard(context, city);
           }).toList()
 
-        ])));
+        ]))));
   }
 }

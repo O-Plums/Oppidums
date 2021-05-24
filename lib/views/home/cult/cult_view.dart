@@ -19,8 +19,7 @@ class CultView extends StatefulWidget {
 class _CultViewState extends State<CultView> {
 bool loading = false;
   List<dynamic> _places = [];
-
-void fetchPlace(context) async {
+ void fetchPlace(context) async {
     if (mounted) {
       setState(() {
         loading = true;
@@ -28,7 +27,8 @@ void fetchPlace(context) async {
     }
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var places = await CarcassonnePlaceApi.getPlaceByType('cult', cityModel.id);
+    var places =
+        await CarcassonnePlaceApi.getPlaceByType('cult', cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
@@ -36,25 +36,52 @@ void fetchPlace(context) async {
       });
     }
   }
+  Future<String>  refetchPlace(context) async {
+    var cityModel = Provider.of<CityModel>(context, listen: false);
+
+    var places =
+        await CarcassonnePlaceApi.getPlaceByType('cult', cityModel.id);
+    if (mounted) {
+      setState(() {
+        _places = places;
+      });
+      return 'success';
+    }
+      return 'success';
+
+  }
 
   @override
   void initState() {
     new Future.delayed(Duration.zero, () {
-      fetchPlace(context);
+       fetchPlace(context);
     });
     super.initState();
   }
 
   Widget build(BuildContext context) {
-     return SingleChildScrollView(
-        child: Column(children: [
+    return Stack(children: [
+      Container(
+          decoration: new BoxDecoration(
+        color: Color(0xff101519),
+      )),
+      RefreshIndicator(
+          onRefresh: () {
+           return refetchPlace(context);
+          },
+          child: SingleChildScrollView(
+        child: 
+        Column(children: [
         if (loading == true) LoadingAnnimation(),
-        if (_places.length == 0 && loading == false) Container(
+         if (_places.length == 0 && loading == false) Container(
           alignment: Alignment.center,
           margin: EdgeInsets.only(top: 50),
-          child: Text('No data')),
+          child: Text('No data',  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 18))),
       ..._places.map((place) {
-      return PlaceCard(
+        return PlaceCard(
             place: place,
             onPressed: () {
               AppRouter.router.navigateTo(context, 'place',
@@ -65,6 +92,6 @@ void fetchPlace(context) async {
                    );
             });
       }).toList()
-    ]));
+    ])))]);
   }
 }
