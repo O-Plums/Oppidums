@@ -4,7 +4,7 @@ import 'package:carcassonne/net/client.dart';
 class CarcassonneCommentApi {
   static Dio _client = createCarcassonneDioClient();
 
-  static Future<List<dynamic>> createComment(
+  static Future<Map<String,dynamic>> createComment(
       String title, String description, String placeId, String userId) async {
     var res = await _client.post('comments', data: {
       'title': title,
@@ -17,7 +17,10 @@ class CarcassonneCommentApi {
 
 static Future<List<dynamic>> getCommentByPlace(String placeId) async {
   var res = await _client.get('comments',
-      queryParameters: {"place": placeId},
+      queryParameters: {
+        "place": placeId,
+      "_sort": "createdAt:DESC"
+      },
       );
   return res.data;
 }

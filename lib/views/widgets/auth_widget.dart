@@ -22,7 +22,6 @@ class _AuthWidgetState extends State<AuthWidget> {
   bool isLoading = false;
 
   void _handleLogin(context, Map<String, dynamic> userData) async {
-    print('In handleLogin');
     final SharedPreferences prefs = await _prefs;
     if (mounted) {
       setState(() {

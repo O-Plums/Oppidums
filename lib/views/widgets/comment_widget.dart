@@ -46,7 +46,7 @@ class _CommentWidget extends State<CommentWidget> {
   Widget build(BuildContext context) {
     return Container(
         color: Color(0xff101519),
-        height: 350,
+        height: 550,
         child: SingleChildScrollView(
             child: Column(children: [
           Container(
@@ -88,16 +88,17 @@ class _CommentWidget extends State<CommentWidget> {
           CustomFlatButton(
             label: 'Envoyer',
             color: Color(0xfff6ac65),
-            onPressed:  ()async  {
+            onPressed: () async {
               final SharedPreferences prefs = await _prefs;
 
               final token = prefs.getString('googlePYMP');
 
-               Map<String, dynamic> payload = JwtDecoder.decode(token);
-                  Navigator.pop(context);
-                  await CarcassonneCommentApi.createComment(_title, _description, widget.placeId, payload['_id']);
-                  widget.onValidate();
-              },
+              Map<String, dynamic> payload = JwtDecoder.decode(token);
+              Navigator.pop(context);
+              var newComment = await CarcassonneCommentApi.createComment(
+                  _title, _description, widget.placeId, payload['_id']);
+              widget.onValidate(newComment);
+            },
             width: 300,
           ),
         ])));

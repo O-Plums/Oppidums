@@ -105,10 +105,17 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
       ListTile(
           onTap: () {
             AppRouter.router.navigateTo(context, 'calendar',
-                replace: false, transition: TransitionType.inFromLeft);
+                replace: false, transition: TransitionType.inFromRight);
           },
           leading: Icon(Icons.calendar_today, color: Color(0xfff6ac65)),
           title: Text('Calendar', style: TextStyle(color: Colors.white))),
+          ListTile(
+          onTap: () {
+            AppRouter.router.navigateTo(context, 'meet',
+                replace: false, transition: TransitionType.inFromRight);
+          },
+          leading: Icon(Icons.people, color: Color(0xfff6ac65)),
+          title: Text('Rencontre', style: TextStyle(color: Colors.white))),
       Expanded(child: Container()),
       Divider(),
       ListTile(

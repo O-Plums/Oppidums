@@ -6,9 +6,6 @@ import 'package:carcassonne/models/city_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:carcassonne/net/city_api.dart';
 
-
-  
-
 class CustomCalendarView extends StatefulWidget {
   final String id;
   final String placeId;
@@ -22,8 +19,6 @@ class CustomCalendarView extends StatefulWidget {
 class _CustomCalendarViewState extends State<CustomCalendarView> {
   bool loading = false;
   List<dynamic> _events = null;
-
-
 
   List<Meeting> _getDataSource() {
 

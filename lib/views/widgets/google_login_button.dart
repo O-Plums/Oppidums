@@ -21,7 +21,6 @@ class GoogleLoginButton extends StatelessWidget {
   Future<void> _handleSignIn(context) async {
     try {
       var res = await _googleSignIn.signIn();
-      print(res);
       if (res != null) {
         var authInstance = await res.authentication;
 
@@ -31,7 +30,6 @@ class GoogleLoginButton extends StatelessWidget {
       }
     } catch (error) {
       _showDialog(context, error);
-      print(error);
     }
   }
 

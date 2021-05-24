@@ -108,7 +108,6 @@ class _PlaceViewViewState extends State<PlaceView> {
   }
 
   Widget build(BuildContext context) {
-    print("comments => ${_comments}");
     return Scaffold(
         appBar: CustomAppBar(title: 'Place'),
         body: Stack(children: [
@@ -190,24 +189,6 @@ class _PlaceViewViewState extends State<PlaceView> {
                                   h6: TextStyle(color: Colors.white),
                                   listBullet: TextStyle(color: Colors.white)),
                     )),
-                /*Padding(
-                  padding: EdgeInsets.all(10),
-                  child: MarkdownBody(
-                    data: _place['more_info_1'],
-                    extensionSet: md.ExtensionSet.gitHubWeb,
-                  )),
-              Padding(
-                  padding: EdgeInsets.all(10),
-                  child: MarkdownBody(
-                    data: _place['more_info_2'],
-                    extensionSet: md.ExtensionSet.gitHubWeb,
-                  )),
-              Padding(
-                  padding: EdgeInsets.all(10),
-                  child: MarkdownBody(
-                    data: _place['more_info_3'],
-                    extensionSet: md.ExtensionSet.gitHubWeb,
-                  )),*/
                 Divider(),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -265,7 +246,12 @@ class _PlaceViewViewState extends State<PlaceView> {
                                       context: context,
                                       expand: false,
                                       builder: (context) => CommentWidget(
-                                            onValidate: () {
+                                            onValidate: (comment) {
+                                              _comments.insert(0 ,comment);
+
+                                              setState(() {
+                                                _comments = _comments;
+                                              });
                                               // _showDialog(context);
                                             },
                                             placeId: widget.placeId,
@@ -283,59 +269,63 @@ class _PlaceViewViewState extends State<PlaceView> {
                                         style: TextStyle(color: Colors.white))),
                               ])))
                     ]),
-                             ..._comments.map((comment) {
-                return (
-                  Container(
-
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-      // border: Border.all(color: Color(0xffC4C4C4)),
-                color: Color(0xff101519),
-
-      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      // border: 
-      // boxShadow: [
-      //   BoxShadow(
-      //     color: Colors.grey.withOpacity(0.5),
-      //     spreadRadius: 2,
-      //     blurRadius: 2,
-      //     offset: Offset(0, 3), // changes position of shadow
-      //   ),
-      // ],
-    ),
-                    child:
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                    CircleAvatar(
-                      radius: 30.0,
-                      backgroundImage: NetworkImage(comment['app_user']['picture'])),
-                    Container(
-                      height: 60,
-                    margin: EdgeInsets.only(left: 20),
-                    child:
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                      Text(comment['title'],
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, 
-                        color: Colors.white
-                      )
+                Divider(color: Colors.white),
+                ..._comments.map((comment) {
+                  return (Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color(0xff101519),
+                        border: Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
-                      Text(comment['description'],
-                      style: TextStyle( 
-                        color: Colors.white
-                      )
-                      )
-                    ],))
-
-                  ],))
-
-                );
-              }).toList()  
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                          CircleAvatar(
+                              radius: 20.0,
+                              backgroundImage:
+                                  NetworkImage(comment['app_user']['picture'])),
+                          Padding(padding: EdgeInsets.only(top: 10),
+                          child: 
+                          Text(comment['app_user']['name'],
+                           style: TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.white) )
+                          )]),
+                          VerticalDivider(
+                            color: Colors.red,
+                            thickness: 1,
+                          ),
+                          Container(
+                              margin: EdgeInsets.only(left: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(comment['title'],
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                  // Divider(color: Colors.red,
+                                  //    thickness: 1.0,
+                                  // ),
+                                  Container(
+                                    width: 225,
+                                    child:
+                                Text(comment['description'],
+                                      maxLines: 20,
+                                    
+                                      style: TextStyle(color: Colors.white))
+                                  )],
+                              ))
+                        ],
+                      )));
+                }).toList()
               ])
           ]))
         ]));
