@@ -16,27 +16,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:carcassonne/net/user_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-// var fakeComments = [
-//   {
-//     "picture":
-//         "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
-//     "name": "Pierre",
-//     "comment": "Super grec pour manger avec c\'est pote",
-//   },
-//   {
-//     "picture":
-//         "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
-//     "name": "Pierre",
-//     "comment": "Super grec pour manger avec c\'est pote",
-//   },
-//   {
-//     "picture":
-//         "https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg",
-//     "name": "Pierre",
-//     "comment": "Super grec pour manger avec c\'est pote",
-//   }
-// ];
-
 class PlaceView extends StatefulWidget {
   final String id;
   final String placeId;
@@ -331,46 +310,3 @@ class _PlaceViewViewState extends State<PlaceView> {
         ]));
   }
 }
-
- 
-//  CustomInkWell(
-//               onTap: () {
-//                 setState(() {
-//                   isApprove = !isApprove;
-//                   numberOfApproval = !isApprove
-//                       ? numberOfApproval - 1
-//                       : numberOfApproval + 1;
-//                 });
-//               },
-//               child: Container(
-//                   width: 100,
-//                   padding: EdgeInsets.all(5),
-//                   decoration: BoxDecoration(
-//                     color:
-//                         !isApprove ? Colors.grey.shade300 : Color(0xfff6ac65),
-//                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-//                     boxShadow: [
-//                       BoxShadow(
-//                         color: Colors.grey.withOpacity(0.5),
-//                         spreadRadius: 2,
-//                         blurRadius: 2,
-//                         offset: Offset(0, 3), // changes position of shadow
-//                       ),
-//                     ],
-//                   ),
-//                   margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-//                   child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                       children: [
-
-//                         Icon(Icons.check_circle,
-//                             size: 20,
-//                             color: !isApprove
-//                                 ? Colors.grey.shade600
-//                                 : Colors.black),
-//                                        Text('Approve',
-//                             style: TextStyle(
-//                                 color: !isApprove
-//                                     ? Colors.grey.shade600
-//                                     : Colors.black))
-//                       ])))

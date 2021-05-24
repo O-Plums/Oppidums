@@ -6,6 +6,8 @@ import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:provider/provider.dart';
 import 'package:carcassonne/models/city_model.dart';
 import 'package:carcassonne/net/meet_api.dart';
+import 'package:fluro/fluro.dart';
+import 'package:carcassonne/router.dart';
 
 class MeetView extends StatefulWidget {
   final String id;
@@ -95,12 +97,12 @@ class _MeetView extends State<MeetView> {
         return MeetCard(
             meet: meet,
             onPressed: () {
-              // AppRouter.router.navigateTo(context, 'place',
-              //     replace: false, transition: TransitionType.inFromRight,
-              //    routeSettings: RouteSettings(arguments: {
-              //             'placeId': place['_id'],
-              //           }),
-              //      );
+              AppRouter.router.navigateTo(context, 'meet/one',
+                  replace: false, transition: TransitionType.inFromRight,
+                 routeSettings: RouteSettings(arguments: {
+                          'meetId': meet['_id'],
+                        }),
+                   );
             });
       }).toList()
       ])
