@@ -91,6 +91,7 @@ class _CityViewState extends State<CityView> {
 
   AppBar buildAppBar(BuildContext context) {
     return new AppBar(
+        brightness: Brightness.dark, // status bar brightness
         backgroundColor: Color(0xff101519),
         title: new Text('Trouver une ville'),
         actions: [searchBar.getSearchAction(context)]);

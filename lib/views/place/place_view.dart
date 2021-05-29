@@ -16,6 +16,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:carcassonne/net/user_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:lottie/lottie.dart';
+import 'dart:async';
+
 class PlaceView extends StatefulWidget {
   final String id;
   final String placeId;
@@ -24,15 +28,63 @@ class PlaceView extends StatefulWidget {
   _PlaceViewViewState createState() => _PlaceViewViewState();
 }
 
-class _PlaceViewViewState extends State<PlaceView> {
+class _PlaceViewViewState extends State<PlaceView>
+    with TickerProviderStateMixin {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
+  final assetsAudioPlayer = AssetsAudioPlayer();
+  AnimationController _controller;
+  bool isStarted = false;
+  String _currentPos = '0:00:00';
   bool isLogin = false;
   bool isApprove = false;
   int numberOfApproval = 0;
   bool loading = false;
   List<dynamic> _comments = [];
   Map<String, dynamic> _place = null;
+
+  void startStopAudio() async {
+    bool isPlaying = assetsAudioPlayer.isPlaying.value;
+    final Playing playing = assetsAudioPlayer.current.value;
+    if (playing == null) {
+      await assetsAudioPlayer
+          .open(Audio.network(_place['audioDescription']['url']));
+      assetsAudioPlayer.playlistFinished.listen((finished) {
+        if (finished) {
+          setState(() {
+            isStarted = false;
+          });
+          assetsAudioPlayer.stop();
+          _controller.reset();
+        }
+      });
+
+      final duration = assetsAudioPlayer.current.value.audio.duration;
+      _controller.duration = duration;
+      _controller.forward();
+      setState(() {
+        isStarted = true;
+      });
+      Timer.periodic(new Duration(seconds: 1), (timer) {
+      setState(() {
+        _currentPos = assetsAudioPlayer.currentPosition.value.toString().split('.')[0];
+      });  
+      });
+    }
+    if (!isPlaying) {
+      assetsAudioPlayer.play();
+      _controller.forward();
+      setState(() {
+        isStarted = true;
+      });
+    } else {
+      _controller.stop();
+      assetsAudioPlayer.pause();
+      setState(() {
+        isStarted = false;
+      });
+    }
+  }
 
   void _setApproval() async {
     final SharedPreferences prefs = await _prefs;
@@ -82,8 +134,17 @@ class _PlaceViewViewState extends State<PlaceView> {
     new Future.delayed(Duration.zero, () async {
       fetchPlace(context);
       await _checkLocalStorage(context);
+      _controller = AnimationController(vsync: this);
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    assetsAudioPlayer.pause();
+    assetsAudioPlayer.stop();
+    _controller.dispose();
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
@@ -133,13 +194,16 @@ class _PlaceViewViewState extends State<PlaceView> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text(_place['address'],
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                                fontStyle: FontStyle.italic,
-                                                fontSize: 14)),
+                                        Container(
+                                            width: 300,
+                                            child: Text(_place['address'],
+                                                textAlign: TextAlign.center,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontStyle: FontStyle.italic,
+                                                    fontSize: 14))),
                                         Container(
                                           alignment: Alignment.topLeft,
                                           child: Icon(Icons.location_on,
@@ -148,6 +212,38 @@ class _PlaceViewViewState extends State<PlaceView> {
                                         ),
                                       ]))
                             ]))),
+                if (_place['audioDescription'] != null &&
+                    _place['audioDescription']['url'] != '')
+                  CustomInkWell(
+                      onTap: () async {
+                        startStopAudio();
+                      },
+                      child: Container(
+                          alignment: Alignment.topRight,
+                          margin: EdgeInsets.all(10),
+                          child: Row(children: [
+                            Padding(
+                                padding: EdgeInsets.all(5),
+                                child: Icon(
+                                  !isStarted
+                                      ? Icons.play_circle_fill
+                                      : Icons.pause_circle_filled,
+                                  color: Color(0xfff6ac65),
+                                )),
+                            Container(
+                                child: Lottie.asset(
+                              'assets/lottie/audio-player.json',
+                              controller: _controller,
+                              height: 40,
+                              width: 275,
+                              repeat: false,
+                            )),
+                            Container(
+                              child: Text(_currentPos,
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.white)),
+                            )
+                          ]))),
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: MarkdownBody(
@@ -219,19 +315,18 @@ class _PlaceViewViewState extends State<PlaceView> {
                                             },
                                           ));
                                 }
-                              : () {
+                              : () async {
                                   showMaterialModalBottomSheet(
                                       backgroundColor: Colors.transparent,
                                       context: context,
                                       expand: false,
                                       builder: (context) => CommentWidget(
                                             onValidate: (comment) {
-                                              _comments.insert(0 ,comment);
+                                              _comments.insert(0, comment);
 
                                               setState(() {
                                                 _comments = _comments;
                                               });
-                                              // _showDialog(context);
                                             },
                                             placeId: widget.placeId,
                                           ));
@@ -255,7 +350,7 @@ class _PlaceViewViewState extends State<PlaceView> {
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Color(0xff101519),
-                        border: Border.all(color: Colors.white),
+                        border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                       child: Row(
@@ -263,19 +358,18 @@ class _PlaceViewViewState extends State<PlaceView> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                          CircleAvatar(
-                              radius: 20.0,
-                              backgroundImage:
-                                  NetworkImage(comment['app_user']['picture'])),
-                          Padding(padding: EdgeInsets.only(top: 10),
-                          child: 
-                          Text(comment['app_user']['name'],
-                           style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.white) )
-                          )]),
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                    radius: 20.0,
+                                    backgroundImage: NetworkImage(
+                                        comment['app_user']['picture'])),
+                                Padding(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: Text(comment['app_user']['name'],
+                                        style: TextStyle(
+                                            fontSize: 10, color: Colors.white)))
+                              ]),
                           VerticalDivider(
                             color: Colors.red,
                             thickness: 1,
@@ -294,13 +388,12 @@ class _PlaceViewViewState extends State<PlaceView> {
                                   //    thickness: 1.0,
                                   // ),
                                   Container(
-                                    width: 225,
-                                    child:
-                                Text(comment['description'],
-                                      maxLines: 20,
-                                    
-                                      style: TextStyle(color: Colors.white))
-                                  )],
+                                      width: 225,
+                                      child: Text(comment['description'],
+                                          maxLines: 20,
+                                          style:
+                                              TextStyle(color: Colors.white)))
+                                ],
                               ))
                         ],
                       )));

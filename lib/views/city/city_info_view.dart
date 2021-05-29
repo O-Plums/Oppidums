@@ -101,13 +101,17 @@ class _CityInfoViewState extends State<CityInfoView> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(_citie['address'],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 14)),
+                               Container(
+                                          width: 300,
+                                          child:
+                                        Text(_citie['address'],
+                                            textAlign: TextAlign.center,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                fontStyle: FontStyle.italic,
+                                                fontSize: 14))),
                               Container(
                                 alignment: Alignment.topLeft,
                                 child: Icon(Icons.location_on,
