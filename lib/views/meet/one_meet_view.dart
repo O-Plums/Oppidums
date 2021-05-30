@@ -32,7 +32,7 @@ class _OneMeetViewState extends State<OneMeetView> {
   bool loading = false;
   bool _loadingButton = false;
   bool _didjoin = false;
-  Map<String, dynamic> _meet = null;
+  Map<String, dynamic> _meet;
 
   void updateMeet() async {
     if (mounted) {
@@ -40,7 +40,6 @@ class _OneMeetViewState extends State<OneMeetView> {
         _loadingButton = true;
       });
     }
-    print(_meet['participens']);
     List<dynamic> participens = [
       ..._meet['participens'].map((p) {
         return p['_id'];
@@ -48,9 +47,7 @@ class _OneMeetViewState extends State<OneMeetView> {
     ];
     if (participens.indexOf(userId) == -1) {
       participens.add(userId);
-      print("ADD");
     } else {
-      print("DELETE");
       participens.remove(userId);
     }
 

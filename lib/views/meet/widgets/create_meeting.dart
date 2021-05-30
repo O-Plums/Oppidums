@@ -114,16 +114,15 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
   }
 
   Widget build(BuildContext context) {
-        if (loading == true) {
-      return Center(
-          child: LoadingAnnimation());
-    }
     return Column(crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             margin: EdgeInsets.only(top: 20),
           ),
+          if (loading) 
+           CircularProgressIndicator(),
+          if (!loading) 
           Container(
             child: SimpleSelect(
               label: 'Choissier un lieux',
@@ -132,6 +131,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
               onChange: (value) => _handleChange('place', value),
             ),
           ),
+
           Container(
               width: double.infinity,
               margin: EdgeInsets.only(top: 20),

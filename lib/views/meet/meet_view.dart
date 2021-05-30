@@ -107,6 +107,13 @@ class _MeetView extends State<MeetView> {
                   });
                 },
               ),
+                  if (_currentSelection == 0 && _meets.length == 0 && loading == false) Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(top: 50),
+          child: Text('No data',  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 18))),
               if (_currentSelection == 0)
                 Container(
                     margin: EdgeInsets.only(top: 20),
@@ -128,6 +135,13 @@ class _MeetView extends State<MeetView> {
                             });
                       }).toList()
                     ])),
+                      if (_currentSelection == 1 && _ownerMeets.length == 0 && loading == false) Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(top: 50),
+          child: Text('No data',  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 18))),
               if (_currentSelection == 1)
                 Container(
                     margin: EdgeInsets.only(top: 20),

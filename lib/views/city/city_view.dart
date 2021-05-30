@@ -170,7 +170,7 @@ class _CityViewState extends State<CityView> {
         return AlertDialog(
           title: Text("Demande reçue", style: TextStyle(color: Colors.white)),
           content: Text(
-              "Merci pour votre demande, nous vous contacterons dans le plus rapidement possible.",
+              "Merci pour votre demande, nous vous contacteron dans le plus rapidement possible.",
               style: TextStyle(color: Colors.white)),
           actions: [
             FlatButton(

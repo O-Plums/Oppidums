@@ -41,6 +41,8 @@ class _PlaceViewViewState extends State<PlaceView>
   int numberOfApproval = 0;
   bool loading = false;
   List<dynamic> _comments = [];
+  String userId = '';
+
   Map<String, dynamic> _place = null;
 
   void startStopAudio() async {
@@ -66,9 +68,10 @@ class _PlaceViewViewState extends State<PlaceView>
         isStarted = true;
       });
       Timer.periodic(new Duration(seconds: 1), (timer) {
-      setState(() {
-        _currentPos = assetsAudioPlayer.currentPosition.value.toString().split('.')[0];
-      });  
+        setState(() {
+          _currentPos =
+              assetsAudioPlayer.currentPosition.value.toString().split('.')[0];
+        });
       });
     }
     if (!isPlaying) {
@@ -87,16 +90,26 @@ class _PlaceViewViewState extends State<PlaceView>
   }
 
   void _setApproval() async {
-    final SharedPreferences prefs = await _prefs;
+    bool tmpApprove = false;
+    List<dynamic> approval = [
+      ..._place['approval'].map((p) {
+        return p['_id'];
+      })
+    ];
+    if (approval.indexOf(userId) == -1) {
+      approval.add(userId);
+      tmpApprove = true;
+    } else {
+      tmpApprove = false;
+      approval.remove(userId);
+    }
 
-    final token = prefs.getString('googlePYMP');
-
-    Map<String, dynamic> payload = JwtDecoder.decode(token);
-
-    await CarcassonneUserApi.updateApproval(payload['_id'], _place['_id']);
-    setState(() {
-      isApprove = !isApprove;
-    });
+    await CarcassonnePlaceApi.updateApproval(_place['_id'], approval);
+    if (mounted) {
+      setState(() {
+        isApprove = tmpApprove;
+      });
+    }
   }
 
   void _checkLocalStorage(context) async {
@@ -104,13 +117,20 @@ class _PlaceViewViewState extends State<PlaceView>
     final token = prefs.getString('googlePYMP');
 
     if (token != null) {
+      Map<String, dynamic> payload = JwtDecoder.decode(token);
+
       setState(() {
         isLogin = true;
+        userId = payload['_id'];
+        isApprove = 
+            _place['approval'].indexWhere((e) => e['_id'] == userId) == -1
+                ? false
+                : true;
       });
     }
   }
 
-  void fetchPlace(context) async {
+  Future<void> fetchPlace(context) async {
     if (mounted) {
       setState(() {
         loading = true;
@@ -122,7 +142,7 @@ class _PlaceViewViewState extends State<PlaceView>
     if (mounted) {
       setState(() {
         _place = place;
-        numberOfApproval = place['numberOfApproval'];
+        numberOfApproval = place['approval']?.length ?? 0;
         loading = false;
         _comments = comments;
       });
@@ -132,8 +152,8 @@ class _PlaceViewViewState extends State<PlaceView>
   @override
   void initState() {
     new Future.delayed(Duration.zero, () async {
-      fetchPlace(context);
-      await _checkLocalStorage(context);
+      await fetchPlace(context);
+       _checkLocalStorage(context);
       _controller = AnimationController(vsync: this);
     });
     super.initState();
@@ -346,7 +366,7 @@ class _PlaceViewViewState extends State<PlaceView>
                 Divider(color: Colors.white),
                 ..._comments.map((comment) {
                   return (Container(
-                      margin: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(5),
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Color(0xff101519),
@@ -361,7 +381,7 @@ class _PlaceViewViewState extends State<PlaceView>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 CircleAvatar(
-                                    radius: 20.0,
+                                    radius: 15.0,
                                     backgroundImage: NetworkImage(
                                         comment['app_user']['picture'])),
                                 Padding(
@@ -380,13 +400,13 @@ class _PlaceViewViewState extends State<PlaceView>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                      width: 210,
-                                      child: 
-                                  Text(comment['title'],
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white)),
+                                    width: 210,
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    child: Text(comment['title'],
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white)),
                                   ),
                                   Container(
                                       width: 210,
@@ -395,7 +415,22 @@ class _PlaceViewViewState extends State<PlaceView>
                                           style:
                                               TextStyle(color: Colors.white)))
                                 ],
-                              ))
+                              )),
+                          if (comment['app_user']['_id'] == userId)
+                            CustomInkWell(
+                                onTap: () async {
+                                  await CarcassonneCommentApi.deleteCommentById(
+                                      comment['_id']);
+                                  _comments.removeWhere(
+                                      (c) => c['_id'] == comment['_id']);
+                                  setState(() {
+                                    _comments = _comments;
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.grey,
+                                )),
                         ],
                       )));
                 }).toList()

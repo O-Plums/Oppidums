@@ -24,4 +24,10 @@ static Future<List<dynamic>> getCommentByPlace(String placeId) async {
       );
   return res.data;
 }
+
+    static Future<Map<String, dynamic>> deleteCommentById(String commentId) async {
+    var res = await _client.delete('comments/$commentId'
+        );
+    return res.data;
+  }
 }

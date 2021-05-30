@@ -18,7 +18,7 @@ class CustomAppDrawer extends StatefulWidget {
 
 class _CustomAppDrawerState extends State<CustomAppDrawer> {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
- 
+
   String name;
   String picture;
   bool isSubscribe = false;
@@ -26,7 +26,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
 
   Map<String, dynamic> _citie = null;
 
-void _checkLocalStorage(context) async {
+  void _checkLocalStorage(context) async {
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
 
@@ -34,14 +34,19 @@ void _checkLocalStorage(context) async {
       setState(() {
         isLogin = true;
       });
+    } else {
+      setState(() {
+        isLogin = false;
+      });
     }
   }
+
   @override
   void initState() {
     super.initState();
     new Future.delayed(Duration.zero, () async {
       _checkLocalStorage(context);
-     
+
       if (mounted) {
         var cityModel = Provider.of<CityModel>(context, listen: false);
 
@@ -131,16 +136,15 @@ void _checkLocalStorage(context) async {
               ListTile(
                   onTap: () {
                     if (isLogin == false) {
-                           showMaterialModalBottomSheet(
-                                      backgroundColor: Colors.transparent,
-                                      context: context,
-                                      expand: false,
-                                      builder: (context) => AuthWidget(
-                                            onValidate: () {
-                                              _checkLocalStorage(context);
-                                            },
-                                          ));
-                   
+                      showMaterialModalBottomSheet(
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          expand: false,
+                          builder: (context) => AuthWidget(
+                                onValidate: () {
+                                  _checkLocalStorage(context);
+                                },
+                              ));
                     } else {
                       AppRouter.router.navigateTo(context, 'meet',
                           replace: false,
@@ -149,9 +153,19 @@ void _checkLocalStorage(context) async {
                   },
                   leading: Icon(Icons.people, color: Color(0xfff6ac65)),
                   title:
-                      Text('Rencontre', style: TextStyle(color: Colors.white))),
+                      Text('Visite', style: TextStyle(color: Colors.white))),
               Expanded(child: Container()),
-              Divider(),
+              Divider(color: Colors.grey),
+              if (isLogin)
+                ListTile(
+                    onTap: () async {
+                      final SharedPreferences prefs = await _prefs;
+                      prefs.setString('googlePYMP', null);
+                      _checkLocalStorage(context);
+                    },
+                    leading: Icon(Icons.exit_to_app, color: Color(0xfff6ac65)),
+                    title:
+                        Text('Log out', style: TextStyle(color: Colors.white))),
               ListTile(
                   onTap: () {
                     AppRouter.router.navigateTo(context, 'city',

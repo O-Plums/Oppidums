@@ -34,5 +34,13 @@ class CarcassonnePlaceApi {
         );
     return res.data;
   }
+
+   static Future<Map<String, dynamic>> updateApproval(String placeId, List<dynamic> approval) async {
+    var res = await _client.put('places/$placeId', data: {
+      "approval": approval,
+    });
+
+    return res.data;
+  }
 }
 

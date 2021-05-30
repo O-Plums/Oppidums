@@ -72,8 +72,7 @@ class _PlaceCard extends State<PlaceCard>{
                               Row(
                                 children: [
                                   Text(
-                                      widget.place['numberOfApproval']
-                                          .toString(),
+                                      widget.place['approval']?.length.toString() ?? '0',
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
