@@ -52,6 +52,7 @@ dependencies:
   flutter_search_bar: ^2.1.0
   material_segmented_control: ^3.1.2
   assets_audio_player: ^2.0.15
+  flutter_datetime_picker: ^1.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

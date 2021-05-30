@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/app_flat_button.dart';
-import 'package:carcassonne/views/widgets/app_inkwell.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:carcassonne/views/widgets/input_text.dart';
 import 'package:carcassonne/net/comment_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +26,6 @@ class _CommentWidget extends State<CommentWidget> {
   String _description;
 
   void _handleChange(String type, String value) {
-    print('$type $value');
     if (type == 'title') {
       setState(() {
         _title = value;
