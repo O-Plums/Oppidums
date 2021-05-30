@@ -6,11 +6,12 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:carcassonne/views/widgets/loading_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:carcassonne/net/user_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:carcassonne/net/meet_api.dart';
 import 'package:carcassonne/views/widgets/app_bottom_navigation_action.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:intl/intl.dart';
 
 
 class OneMeetView extends StatefulWidget {
@@ -25,31 +26,43 @@ class _OneMeetViewState extends State<OneMeetView> {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   bool isLogin = false;
+  String userId = '';
   bool isApprove = false;
   int numberOfApproval = 0;
   bool loading = false;
+  bool _loadingButton = false;
+  bool _didjoin = false;
   Map<String, dynamic> _meet = null;
 
-  void _setApproval() async {
-    final SharedPreferences prefs = await _prefs;
-
-    final token = prefs.getString('googlePYMP');
-
-    Map<String, dynamic> payload = JwtDecoder.decode(token);
-
-    await CarcassonneUserApi.updateApproval(payload['_id'], _meet['_id']);
-    setState(() {
-      isApprove = !isApprove;
-    });
-  }
-
-  void _checkLocalStorage(context) async {
-    final SharedPreferences prefs = await _prefs;
-    final token = prefs.getString('googlePYMP');
-
-    if (token != null) {
+  void updateMeet() async {
+    if (mounted) {
       setState(() {
-        isLogin = true;
+        _loadingButton = true;
+      });
+    }
+    print(_meet['participens']);
+    List<dynamic> participens = [
+      ..._meet['participens'].map((p) {
+        return p['_id'];
+      })
+    ];
+    if (participens.indexOf(userId) == -1) {
+      participens.add(userId);
+      print("ADD");
+    } else {
+      print("DELETE");
+      participens.remove(userId);
+    }
+
+    var meet = await CarcassonneMeetApi.joinMeet(_meet['_id'], participens);
+    if (mounted) {
+      setState(() {
+        _meet = meet;
+        _loadingButton = false;
+        _didjoin =
+            meet['participens'].indexWhere((e) => e['_id'] == userId) == -1
+                ? false
+                : true;
       });
     }
   }
@@ -60,14 +73,17 @@ class _OneMeetViewState extends State<OneMeetView> {
         loading = true;
       });
     }
-    // print('Toto =>${widget.meetId}');
 
     var meet = await CarcassonneMeetApi.getMeetById(widget.meetId);
-    // print(meet);
+    print(meet['participens']);
     if (mounted) {
       setState(() {
         _meet = meet;
         loading = false;
+        _didjoin =
+            meet['participens'].indexWhere((e) => e['_id'] == userId) == -1
+                ? false
+                : true;
       });
     }
   }
@@ -76,28 +92,30 @@ class _OneMeetViewState extends State<OneMeetView> {
   void initState() {
     new Future.delayed(Duration.zero, () async {
       fetchOneMeet(context);
-      await _checkLocalStorage(context);
+      final SharedPreferences prefs = await _prefs;
+      final token = prefs.getString('googlePYMP');
+      Map<String, dynamic> payload = JwtDecoder.decode(token);
+
+      if (mounted) {
+        setState(() {
+          userId = payload['_id'];
+        });
+      }
     });
     super.initState();
   }
 
   Widget build(BuildContext context) {
+    print(_didjoin);
     return Scaffold(
-        appBar: CustomAppBar(title: 'Ma rencontre'),
+        appBar: CustomAppBar(title: 'Visite'),
         bottomNavigationBar: AppBottomNavigationAction(
-            title: 'Rejoindre cette rencontre',
-            loading: false,
+            title: !_didjoin
+                ? 'Rejoindre cette visite'
+                : 'Quitter cette visite',
+            loading: _loadingButton,
             onPressed: () {
-              showMaterialModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                context: context,
-                expand: false,
-                // builder: (context) => AddCityWidget(
-                //   onValidate: () {
-                //     _showDialog(context);
-                //   },
-                // ),
-              );
+              updateMeet();
             }),
         body: Stack(children: [
           Container(decoration: new BoxDecoration(color: Color(0xff101519))),
@@ -159,6 +177,39 @@ class _OneMeetViewState extends State<OneMeetView> {
                                         ),
                                       ]))
                             ]))),
+                Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Text(
+                      'Organisateur: ',
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                  ),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: CircleAvatar(
+                                radius: 20.0,
+                                backgroundImage:
+                                    NetworkImage(_meet['owner']['picture']))),
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text(_meet['owner']['name'],
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.white)))
+                      ])
+                ]),
+                Divider(color: Colors.grey),
+                Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Text(
+                    'Debute: ${DateFormat('dd/MM/yyyy').format(DateTime.parse(_meet['startDate']))} a ${DateFormat('hh:mm').format(DateTime.parse(_meet['startDate']))}',
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                ),
+                Divider(color: Colors.grey),
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: MarkdownBody(

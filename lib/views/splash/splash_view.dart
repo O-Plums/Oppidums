@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:carcassonne/router.dart';
-
+import 'package:carcassonne/models/city_model.dart';
+import 'package:provider/provider.dart';
 import 'package:carcassonne/views/widgets/loading_widget.dart';
-
 
 class SplashView extends StatefulWidget {
   @override
@@ -18,15 +18,22 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
     //Check local storage for token if user already connect
     new Future.delayed(Duration.zero, () async {
-          AppRouter.router.navigateTo(context, 'city', replace: true);
-
+      final SharedPreferences prefs = await _prefs;
+      final String cityId = prefs.getString('cityId');
+      final String cityUrl = prefs.getString('cityUrl');
+      final String cityName = prefs.getString('cityName');
+      if (cityId != null && cityId != '') {
+        var cityModel = Provider.of<CityModel>(context, listen: false);
+        cityModel.setCityBasicInfo(cityId, cityUrl, cityName);
+        AppRouter.router.navigateTo(context, 'home', replace: true);
+      } else {
+        AppRouter.router.navigateTo(context, 'city', replace: true);
+      }
     });
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-          backgroundColor: Color(0xff101519),
-      body: LoadingAnnimation()
-    );
+        backgroundColor: Color(0xff101519), body: LoadingAnnimation());
   }
 }

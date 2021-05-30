@@ -11,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:carcassonne/net/meet_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:carcassonne/views/widgets/loading_widget.dart';
+
 
 class CreatingMeetingView extends StatefulWidget {
   final Function onCreate;
@@ -52,7 +54,6 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
       _description,
       _startDate,
     );
-    print('END');
     if (mounted) {
       setState(() {
         loadingButton = false;
@@ -113,6 +114,10 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
   }
 
   Widget build(BuildContext context) {
+        if (loading == true) {
+      return Center(
+          child: LoadingAnnimation());
+    }
     return Column(crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -151,7 +156,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
                   child: Text(
                     _startDate == null
                         ? 'Choissier une date pour la visite'
-                        : (DateFormat('kk:mm -  dd-MM-yyyy')
+                        : (DateFormat('hh:mm -  dd-MM-yyyy')
                             .format(_startDate)),
                     style: TextStyle(color: Colors.white),
                   ))),

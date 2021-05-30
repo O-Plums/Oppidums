@@ -4,6 +4,10 @@ import 'package:fluro/fluro.dart';
 import 'package:carcassonne/views/widgets/app_flat_button.dart';
 import 'package:provider/provider.dart';
 import 'package:carcassonne/models/city_model.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:carcassonne/views/widgets/auth_widget.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomAppDrawer extends StatefulWidget {
   final String dateToGet;
@@ -13,118 +17,149 @@ class CustomAppDrawer extends StatefulWidget {
 }
 
 class _CustomAppDrawerState extends State<CustomAppDrawer> {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+ 
   String name;
   String picture;
   bool isSubscribe = false;
+  bool isLogin = false;
 
   Map<String, dynamic> _citie = null;
 
+void _checkLocalStorage(context) async {
+    final SharedPreferences prefs = await _prefs;
+    final token = prefs.getString('googlePYMP');
 
-
+    if (token != null) {
+      setState(() {
+        isLogin = true;
+      });
+    }
+  }
   @override
   void initState() {
     super.initState();
     new Future.delayed(Duration.zero, () async {
+      _checkLocalStorage(context);
+     
+      if (mounted) {
+        var cityModel = Provider.of<CityModel>(context, listen: false);
 
-        if (mounted) {
-    var cityModel = Provider.of<CityModel>(context, listen: false);
-
-      setState(() {
+        setState(() {
           picture = cityModel.url;
           name = cityModel.name;
-      });
-    }
+        });
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Container(
-        color: Color(0xff101519),
-        child: Column(children: [
-      Container(
-        height: 125,
-        child: DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              image: DecorationImage(
-                colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.dstATop),
-                image: NetworkImage(picture ?? 'assets/image_loading.gif'),
-                fit: BoxFit.cover),
-    //  borderRadius: BorderRadius.only(
-    //     bottomRight: Radius.circular(40),
-    //   ),
-
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (name != null)
-                  Flexible(
-                    child: Container(
-                      
-                      padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 170,
-                            child: Text(
-                              name,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+        child: Container(
+            color: Color(0xff101519),
+            child: Column(children: [
+              Container(
+                height: 125,
+                child: DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      image: DecorationImage(
+                          colorFilter: new ColorFilter.mode(
+                              Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                          image: NetworkImage(
+                              picture ?? 'assets/image_loading.gif'),
+                          fit: BoxFit.cover),
+                      //  borderRadius: BorderRadius.only(
+                      //     bottomRight: Radius.circular(40),
+                      //   ),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (name != null)
+                          Flexible(
+                            child: Container(
+                              padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: 170,
+                                    child: Text(
+                                      name,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  CustomFlatButton(
+                                    loadingColor: Colors.white,
+                                    color: Colors.transparent,
+                                    borderWidth: 2,
+                                    borderColor: Colors.white,
+                                    textColor: Colors.white,
+                                    onPressed: () {
+                                      AppRouter.router.navigateTo(
+                                          context, 'city/info',
+                                          replace: false,
+                                          transition:
+                                              TransitionType.inFromRight);
+                                    },
+                                    fontSize: 12,
+                                    label: 'Voir la ville',
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                           CustomFlatButton(
-        loadingColor: Colors.white,
-        color: Colors.transparent,
-        borderWidth: 2,
-        borderColor: Colors.white,
-        textColor: Colors.white,
-        onPressed: () {
-           AppRouter.router.navigateTo(context, 'city/info',
-                                  replace: false,
-                                  transition: TransitionType.inFromRight);
-        },
-        fontSize: 12,
-        label: 'Voir la ville',
-      ),
-          
-                        ],
-                      ),
-                    ),
-                  )
-              ],
-            )),
-      ),
-      ListTile(
-          onTap: () {
-            AppRouter.router.navigateTo(context, 'calendar',
-                replace: false, transition: TransitionType.inFromRight);
-          },
-          leading: Icon(Icons.calendar_today, color: Color(0xfff6ac65)),
-          title: Text('Calendar', style: TextStyle(color: Colors.white))),
-          ListTile(
-          onTap: () {
-            AppRouter.router.navigateTo(context, 'meet',
-                replace: false, transition: TransitionType.inFromRight);
-          },
-          leading: Icon(Icons.people, color: Color(0xfff6ac65)),
-          title: Text('Rencontre', style: TextStyle(color: Colors.white))),
-      Expanded(child: Container()),
-      Divider(),
-      ListTile(
-          onTap: () {
-            AppRouter.router.navigateTo(context, 'city',
-                replace: true, transition: TransitionType.inFromLeft);
-          },
-          leading: Icon(Icons.swap_calls, color: Color(0xfff6ac65)),
-          title: Text('Changer de ville', style: TextStyle(color: Colors.white))),
-    ])));
+                          )
+                      ],
+                    )),
+              ),
+              ListTile(
+                  onTap: () {
+                    AppRouter.router.navigateTo(context, 'calendar',
+                        replace: false, transition: TransitionType.inFromRight);
+                  },
+                  leading: Icon(Icons.calendar_today, color: Color(0xfff6ac65)),
+                  title:
+                      Text('Calendar', style: TextStyle(color: Colors.white))),
+              ListTile(
+                  onTap: () {
+                    if (isLogin == false) {
+                           showMaterialModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      expand: false,
+                                      builder: (context) => AuthWidget(
+                                            onValidate: () {
+                                              _checkLocalStorage(context);
+                                            },
+                                          ));
+                   
+                    } else {
+                      AppRouter.router.navigateTo(context, 'meet',
+                          replace: false,
+                          transition: TransitionType.inFromRight);
+                    }
+                  },
+                  leading: Icon(Icons.people, color: Color(0xfff6ac65)),
+                  title:
+                      Text('Rencontre', style: TextStyle(color: Colors.white))),
+              Expanded(child: Container()),
+              Divider(),
+              ListTile(
+                  onTap: () {
+                    AppRouter.router.navigateTo(context, 'city',
+                        replace: true, transition: TransitionType.inFromLeft);
+                  },
+                  leading: Icon(Icons.swap_calls, color: Color(0xfff6ac65)),
+                  title: Text('Changer de ville',
+                      style: TextStyle(color: Colors.white))),
+            ])));
   }
 }

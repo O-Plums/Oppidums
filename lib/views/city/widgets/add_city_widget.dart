@@ -3,6 +3,7 @@ import 'package:carcassonne/views/widgets/app_flat_button.dart';
 import 'package:carcassonne/views/widgets/app_inkwell.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:carcassonne/views/widgets/input_text.dart';
+import 'package:carcassonne/net/city_api.dart';
 
 class AddCityWidget extends StatefulWidget {
   final Function onValidate;
@@ -17,17 +18,36 @@ class AddCityWidget extends StatefulWidget {
 }
 
 class _AddCityWidgetState extends State<AddCityWidget> {
+  String cityName;
+  String cityRole;
+  String email;
+
   void _handleChange(String type, String value) {
-    print('$type $value');
+    if (type == 'cityName') {
+      setState(() {
+              cityName = value;
+            });
+    }
+
+     if (type == 'cityRole') {
+      setState(() {
+              cityRole = value;
+            });
+    }
+
+     if (type == 'email') {
+      setState(() {
+              email = value;
+            });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(child: Container(
         color: Color(0xff101519),
-        height: 500,
-        child: SingleChildScrollView(
-            child: Column(children: [
+        height: 550,
+        child: Column(children: [
                   Container(
                   margin: EdgeInsets.only(top: 20, bottom: 20),
                   child: Text(
@@ -58,7 +78,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
             child: InputText(
               placeholder: 'Rôle dans la ville',
               border: false,
-              onChange: (value) => _handleChange('cityJob', value),
+              onChange: (value) => _handleChange('cityRole', value),
             ),
           ),
           Container(
@@ -71,7 +91,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
             child: InputText(
               placeholder: 'Email de contact',
               border: false,
-              onChange: (value) => _handleChange('contactEmail', value),
+              onChange: (value) => _handleChange('email', value),
             ),
           ),
           CustomFlatButton(
@@ -80,6 +100,12 @@ class _AddCityWidgetState extends State<AddCityWidget> {
             color: Colors.white,
             onPressed: () {
               Navigator.pop(context);
+              CarcassonneCityApi.requestNewCity(
+              cityName,
+              cityRole,
+              email
+              );
+
               widget.onValidate();
             },
             width: 300,

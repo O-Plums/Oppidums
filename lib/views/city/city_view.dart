@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:carcassonne/models/city_model.dart';
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/app_bottom_navigation_action.dart';
-import 'package:carcassonne/views/widgets/app_bar.dart';
 import 'package:carcassonne/router.dart';
 import 'package:fluro/fluro.dart';
 import 'package:carcassonne/net/city_api.dart';
@@ -11,8 +9,11 @@ import 'package:carcassonne/views/city/widgets/add_city_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Widget renderCityCard(context, city) {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   return (Container(
     height: 150,
     // margin: EdgeInsets.all(10),
@@ -27,7 +28,13 @@ Widget renderCityCard(context, city) {
     ),
 
     child: InkWell(
-        onTap: () {
+        onTap: () async {
+          final SharedPreferences prefs = await _prefs;
+
+             prefs.setString('cityId', city['_id']);
+             prefs.setString('cityUrl', city['image']['url']);
+             prefs.setString('cityName', city['name']);
+          
           var cityModel = Provider.of<CityModel>(context, listen: false);
           cityModel.setCityBasicInfo(
               city['_id'], city['image']['url'], city['name']);
@@ -132,6 +139,7 @@ class _CityViewState extends State<CityView> {
         inBar: false,
         closeOnSubmit: false,
         clearOnSubmit: false,
+        showClearButton: false,
         buildDefaultAppBar: buildAppBar,
         setState: setState,
         onChanged: onSubmitted,
@@ -190,6 +198,7 @@ class _CityViewState extends State<CityView> {
                 expand: false,
                 builder: (context) => AddCityWidget(
                   onValidate: () {
+                    
                     _showDialog(context);
                   },
                 ),

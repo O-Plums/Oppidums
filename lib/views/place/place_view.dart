@@ -379,16 +379,17 @@ class _PlaceViewViewState extends State<PlaceView>
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Container(
+                                      width: 210,
+                                      child: 
                                   Text(comment['title'],
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white)),
-                                  // Divider(color: Colors.red,
-                                  //    thickness: 1.0,
-                                  // ),
+                                  ),
                                   Container(
-                                      width: 225,
+                                      width: 210,
                                       child: Text(comment['description'],
                                           maxLines: 20,
                                           style:
