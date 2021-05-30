@@ -45,6 +45,8 @@ class _CommentWidget extends State<CommentWidget> {
         color: Color(0xff101519),
         height: 550,
         child: SingleChildScrollView(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+  
             child: Column(children: [
           Container(
             margin: EdgeInsets.only(top: 20, bottom: 20),

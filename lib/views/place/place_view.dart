@@ -310,18 +310,18 @@ class _PlaceViewViewState extends State<PlaceView>
                               child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Icon(Icons.check_circle,
+                                    Icon(Icons.favorite_border_outlined,
                                         size: 20,
                                         color: !isApprove
                                             ? Colors.white
                                             : Colors.green),
                                     Padding(
                                         padding: EdgeInsets.only(left: 10),
-                                        child: Text('Approuver',
+                                        child: Text('Aimer',
                                             style: TextStyle(
                                                 color: Colors.white))),
                                   ]))),
-                      Text('|'),
+                      Text('|', style: TextStyle(color: Colors.grey)),
                       CustomInkWell(
                           onTap: isLogin == false
                               ? () {

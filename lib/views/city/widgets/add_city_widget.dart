@@ -44,10 +44,12 @@ class _AddCityWidgetState extends State<AddCityWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child: Container(
+    return  Container(
         color: Color(0xff101519),
-        height: 550,
-        child: Column(children: [
+        height: 500,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Column(children: [
                   Container(
                   margin: EdgeInsets.only(top: 20, bottom: 20),
                   child: Text(
