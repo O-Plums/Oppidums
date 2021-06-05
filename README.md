@@ -21,7 +21,7 @@ The application consists of three main parts: "History", "Tourism" and "Culture"
 # Getting Started
 
 ```
-git clone url repo
+git clone https://github.com/O-Plums/Oppidum
 flutter pub get
 flutter run
 ```
