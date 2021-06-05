@@ -71,4 +71,4 @@ Please read our [Contributing Guide](https://github.com/O-Plums/Oppidum/blob/mai
 
 # License
 
-Oppidum is [MIT](https://github.com/O-Plums/Oppidum/blob/main/LICENSE.md) licensed.
+Oppidum is [MIT](https://github.com/O-Plums/Oppidum/blob/main/LICENSE) licensed.
