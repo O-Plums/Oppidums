@@ -67,8 +67,8 @@ Tools • Dart 2.12.0
 
 # Contributing
 
-Please read our Contributing Guide before submitting a Pull Request to the project.
+Please read our [Contributing Guide](https://github.com/O-Plums/Oppidum/blob/main/CONTRIBUTING.md) before submitting a Pull Request to the project.
 
 # License
-- URL LINK
-Oppidum is MIT licensed.
+
+Oppidum is [MIT](https://github.com/O-Plums/Oppidum/blob/main/LICENSE.md) licensed.
