@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:oppidum/views/widgets/app_flat_button.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidum/net/meet_api.dart';
 
 class MeetCard extends StatelessWidget {
@@ -53,7 +54,7 @@ class MeetCard extends StatelessWidget {
                           alignment: Alignment.topRight,
                           child: CustomFlatButton(
                             disabledColor: Colors.grey,
-                            label: 'Supprimer',
+                            label: FlutterI18n.translate(context, "common.meet_view.deleteVisit"),
                             textColor: Colors.black,
                             color: Colors.red,
                             onPressed: () async  {
