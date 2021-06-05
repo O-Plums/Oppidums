@@ -2,7 +2,10 @@
   "common_word": {
     "appName": "Oppidum",
     "noData" : "No data",
-    "like" : "Like"
+    "like" : "Like",
+    "connect": "Connection",
+    "comment": "Add a comment",
+    "placeholderComment" :"Comment"
   },
   "calendar": {
     "titleCalendar" : "Calendar"
@@ -41,7 +44,8 @@
     "exitVisit" : "Leave this visit",
     "creator" : "Organisator : ",
     "debut" : "Start",
-    "at" : "at"
+    "at" : "at",
+    "deleteVisit" : "Delete"
   },
   "place_view":{
     "titlePlace" : "Place",
