@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:carcassonne/net/client.dart';
+import 'package:oppidum/net/client.dart';
 
-class CarcassonnePlaceApi {
-  static Dio _client = createCarcassonneDioClient();
+class OppidumPlaceApi {
+  static Dio _client = createOppidumDioClient();
 
 
   static Future<List<dynamic>> getAllPlaceOfCity(

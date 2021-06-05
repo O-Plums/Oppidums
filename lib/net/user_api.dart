@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:carcassonne/net/realm_client.dart';
+import 'package:oppidum/net/realm_client.dart';
 
-class CarcassonneUserApi {
-  static Dio _client = createCarcassonneRealmDioClient();
+class OppidumUserApi {
+  static Dio _client = createOppidumRealmDioClient();
 
   static Future<Map<String, dynamic>> googleSignIn(String accessToken) async {
     var res = await _client.get(

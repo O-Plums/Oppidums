@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:carcassonne/views/widgets/app_inkwell.dart';
+import 'package:oppidum/views/widgets/app_inkwell.dart';
 import 'package:lottie/lottie.dart';
 
 class PlaceCard extends StatefulWidget {

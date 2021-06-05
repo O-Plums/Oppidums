@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:carcassonne/router.dart';
-import 'package:carcassonne/models/city_model.dart';
+import 'package:oppidum/router.dart';
+import 'package:oppidum/models/city_model.dart';
 import 'package:provider/provider.dart';
-import 'package:carcassonne/views/widgets/loading_widget.dart';
+import 'package:oppidum/views/widgets/loading_widget.dart';
 
 class SplashView extends StatefulWidget {
   @override

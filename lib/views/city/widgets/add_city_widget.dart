@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:carcassonne/views/widgets/app_flat_button.dart';
-import 'package:carcassonne/views/widgets/app_inkwell.dart';
+import 'package:oppidum/views/widgets/app_flat_button.dart';
+import 'package:oppidum/views/widgets/app_inkwell.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:carcassonne/views/widgets/input_text.dart';
-import 'package:carcassonne/net/city_api.dart';
+import 'package:oppidum/views/widgets/input_text.dart';
+import 'package:oppidum/net/city_api.dart';
 
 class AddCityWidget extends StatefulWidget {
   final Function onValidate;
@@ -102,7 +102,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
             color: Colors.white,
             onPressed: () {
               Navigator.pop(context);
-              CarcassonneCityApi.requestNewCity(
+              OppidumCityApi.requestNewCity(
               cityName,
               cityRole,
               email

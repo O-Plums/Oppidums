@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:carcassonne/net/client.dart';
+import 'package:oppidum/net/client.dart';
 
-class CarcassonneMeetApi {
-  static Dio _client = createCarcassonneDioClient();
+class OppidumMeetApi {
+  static Dio _client = createOppidumDioClient();
 
   static Future<List<dynamic>> getMeetCity(String cityId) async {
     var res = await _client.get(

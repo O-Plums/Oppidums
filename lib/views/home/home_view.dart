@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:carcassonne/views/widgets/app_bar.dart';
-import 'package:carcassonne/views/home/widgets/navigation_bottom_bar.dart';
-import 'package:carcassonne/views/widgets/app_drawer.dart';
-import 'package:carcassonne/views/home/cult/cult_view.dart';
-import 'package:carcassonne/views/home/history/history_view.dart';
-import 'package:carcassonne/views/home/tourism/tourism_view.dart';
+import 'package:oppidum/views/widgets/app_bar.dart';
+import 'package:oppidum/views/home/widgets/navigation_bottom_bar.dart';
+import 'package:oppidum/views/widgets/app_drawer.dart';
+import 'package:oppidum/views/home/cult/cult_view.dart';
+import 'package:oppidum/views/home/history/history_view.dart';
+import 'package:oppidum/views/home/tourism/tourism_view.dart';
 
 class HomeView extends StatefulWidget {
   final bool showReminder;

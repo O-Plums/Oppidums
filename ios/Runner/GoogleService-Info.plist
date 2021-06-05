@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>197425120863-ubcecfq4ibshqqgoo2gatmvtjs4ad50v.apps.googleusercontent.com</string>
+	<string>197425120863-npudqcm04o83o51r2rogts6hf7bcus00.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.197425120863-ubcecfq4ibshqqgoo2gatmvtjs4ad50v</string>
+	<string>com.googleusercontent.apps.197425120863-npudqcm04o83o51r2rogts6hf7bcus00</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>197425120863-v00un4jpd4rkkjoseb3q12ipa9jdl10k.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.carcassonne.app</string>
+	<string>com.oppidum.app</string>
 	<key>PROJECT_ID</key>
 	<string>carcassonne-376c7</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:197425120863:ios:89d51e8be99df327f2bdea</string>
+	<string>1:197425120863:ios:02c6d46708f6592af2bdea</string>
 </dict>
 </plist>

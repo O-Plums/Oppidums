@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:carcassonne/router.dart';
+import 'package:oppidum/router.dart';
 import 'package:fluro/fluro.dart';
-import 'package:carcassonne/views/widgets/app_flat_button.dart';
+import 'package:oppidum/views/widgets/app_flat_button.dart';
 import 'package:provider/provider.dart';
-import 'package:carcassonne/models/city_model.dart';
+import 'package:oppidum/models/city_model.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:carcassonne/views/widgets/auth_widget.dart';
+import 'package:oppidum/views/widgets/auth_widget.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 

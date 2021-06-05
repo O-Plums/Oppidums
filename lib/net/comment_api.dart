@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:carcassonne/net/client.dart';
+import 'package:oppidum/net/client.dart';
 
-class CarcassonneCommentApi {
-  static Dio _client = createCarcassonneDioClient();
+class OppidumCommentApi {
+  static Dio _client = createOppidumDioClient();
 
   static Future<Map<String,dynamic>> createComment(
       String title, String description, String placeId, String userId) async {

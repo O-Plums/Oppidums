@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:197425120863:android:29cbb39e3db2bd42f2bdea",
+        "mobilesdk_app_id": "1:197425120863:android:db7d36b28381d6cef2bdea",
         "android_client_info": {
-          "package_name": "com.carcassonne.app"
+          "package_name": "com.oppidum.app"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "197425120863-v00un4jpd4rkkjoseb3q12ipa9jdl10k.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.carcassonne.app",
-            "certificate_hash": "2227f11a3dd5dbc18b19af83b59c3837413d28e5"
-          }
-        },
         {
           "client_id": "197425120863-r8s07e36vvq49o93shqso18oj1s7ht29.apps.googleusercontent.com",
           "client_type": 3
@@ -39,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "197425120863-ubcecfq4ibshqqgoo2gatmvtjs4ad50v.apps.googleusercontent.com",
+              "client_id": "197425120863-npudqcm04o83o51r2rogts6hf7bcus00.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.carcassonne.app"
+                "bundle_id": "com.oppidum.app"
               }
             }
           ]

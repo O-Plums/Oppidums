@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_select/smart_select.dart';
-import 'package:carcassonne/models/city_model.dart';
-import 'package:carcassonne/net/place_api.dart';
-import 'package:carcassonne/views/widgets/simple_select.dart';
-import 'package:carcassonne/views/widgets/input_text.dart';
-import 'package:carcassonne/views/widgets/app_flat_button.dart';
+import 'package:oppidum/models/city_model.dart';
+import 'package:oppidum/net/place_api.dart';
+import 'package:oppidum/views/widgets/simple_select.dart';
+import 'package:oppidum/views/widgets/input_text.dart';
+import 'package:oppidum/views/widgets/app_flat_button.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:carcassonne/net/meet_api.dart';
+import 'package:oppidum/net/meet_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:carcassonne/views/widgets/loading_widget.dart';
+import 'package:oppidum/views/widgets/loading_widget.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class CreatingMeetingView extends StatefulWidget {
@@ -46,7 +46,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
     Map<String, dynamic> payload = JwtDecoder.decode(token);
-    await CarcassonneMeetApi.createMeet(
+    await OppidumMeetApi.createMeet(
       payload['_id'],
       cityModel.id,
       _placeSeleced,
@@ -70,7 +70,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
     }
 
     var cityModel = Provider.of<CityModel>(context, listen: false);
-    var places = await CarcassonnePlaceApi.getAllPlaceOfCity(cityModel.id);
+    var places = await OppidumPlaceApi.getAllPlaceOfCity(cityModel.id);
 
     List<S2Choice<String>> test = [];
 

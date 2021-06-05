@@ -1,11 +1,11 @@
-import 'package:carcassonne/models/city_model.dart';
+import 'package:oppidum/models/city_model.dart';
 import 'package:flutter/material.dart';
-import 'package:carcassonne/views/widgets/app_bottom_navigation_action.dart';
-import 'package:carcassonne/router.dart';
+import 'package:oppidum/views/widgets/app_bottom_navigation_action.dart';
+import 'package:oppidum/router.dart';
 import 'package:fluro/fluro.dart';
-import 'package:carcassonne/net/city_api.dart';
-import 'package:carcassonne/views/widgets/loading_widget.dart';
-import 'package:carcassonne/views/city/widgets/add_city_widget.dart';
+import 'package:oppidum/net/city_api.dart';
+import 'package:oppidum/views/widgets/loading_widget.dart';
+import 'package:oppidum/views/city/widgets/add_city_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
@@ -114,7 +114,7 @@ class _CityViewState extends State<CityView> {
   }
 
   void fetchCities() async {
-    var data = await CarcassonneCityApi.getAllCity(searchName);
+    var data = await OppidumCityApi.getAllCity(searchName);
 
     if (mounted) {
       setState(() {
@@ -124,7 +124,7 @@ class _CityViewState extends State<CityView> {
   }
 
   Future<String> refetchCities() async {
-    var data = await CarcassonneCityApi.getAllCity(searchName);
+    var data = await OppidumCityApi.getAllCity(searchName);
 
     if (mounted) {
       setState(() {

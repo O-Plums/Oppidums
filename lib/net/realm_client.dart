@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:dio_flutter_transformer/dio_flutter_transformer.dart';
-import 'package:carcassonne/app_config.dart';
+import 'package:oppidum/app_config.dart';
 
-Dio createCarcassonneRealmDioClient([BaseOptions options]) {
+Dio createOppidumRealmDioClient([BaseOptions options]) {
   Dio client = new Dio();
   client.options.baseUrl = AppConfig.realmUrl;
   client.options.headers = {

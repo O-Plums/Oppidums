@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:carcassonne/views/widgets/google_login_button.dart';
+import 'package:oppidum/views/widgets/google_login_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:carcassonne/models/user_model.dart';
+import 'package:oppidum/models/user_model.dart';
 import 'package:provider/provider.dart';
-import 'package:carcassonne/router.dart';
+import 'package:oppidum/router.dart';
 
 class AuthWidget extends StatefulWidget {
   final Function onValidate;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:carcassonne/views/widgets/place_card.dart';
+import 'package:oppidum/views/widgets/place_card.dart';
 import 'package:fluro/fluro.dart';
-import 'package:carcassonne/router.dart';
-import 'package:carcassonne/views/widgets/loading_widget.dart';
-import 'package:carcassonne/models/city_model.dart';
+import 'package:oppidum/router.dart';
+import 'package:oppidum/views/widgets/loading_widget.dart';
+import 'package:oppidum/models/city_model.dart';
 import 'package:provider/provider.dart';
-import 'package:carcassonne/net/place_api.dart';
+import 'package:oppidum/net/place_api.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class HistoryView extends StatefulWidget {
@@ -29,7 +29,7 @@ bool loading = false;
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
     var places =
-        await CarcassonnePlaceApi.getPlaceByType('history', cityModel.id);
+        await OppidumPlaceApi.getPlaceByType('history', cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
@@ -41,7 +41,7 @@ bool loading = false;
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
     var places =
-        await CarcassonnePlaceApi.getPlaceByType('history', cityModel.id);
+        await OppidumPlaceApi.getPlaceByType('history', cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;

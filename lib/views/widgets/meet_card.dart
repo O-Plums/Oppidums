@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:carcassonne/views/widgets/app_flat_button.dart';
-import 'package:carcassonne/net/meet_api.dart';
+import 'package:oppidum/views/widgets/app_flat_button.dart';
+import 'package:oppidum/net/meet_api.dart';
 
 class MeetCard extends StatelessWidget {
   final Map<String, dynamic> meet;
@@ -57,7 +57,7 @@ class MeetCard extends StatelessWidget {
                             textColor: Colors.black,
                             color: Colors.red,
                             onPressed: () async  {
-                              await CarcassonneMeetApi.deleteMeetById(meet['_id']);
+                              await OppidumMeetApi.deleteMeetById(meet['_id']);
                               fetchMeet();
                             },
                             width: 100,
