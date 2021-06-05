@@ -46,5 +46,10 @@
   "place_view":{
     "titlePlace" : "Place",
     "comment" : "Commenter"
+  },
+  "app_drawer":{
+    "seeCity": "See the city",
+    "logOut" : "Log out",
+    "changeCity" : "Change of city"
   }
 }

@@ -8,6 +8,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:oppidum/views/widgets/auth_widget.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 class CustomAppDrawer extends StatefulWidget {
   final String dateToGet;
@@ -116,7 +117,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                                               TransitionType.inFromRight);
                                     },
                                     fontSize: 12,
-                                    label: 'Voir la ville',
+                                    label: FlutterI18n.translate(context, "common.app_drawer.seeCity"),
                                   ),
                                 ],
                               ),
@@ -132,7 +133,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                   },
                   leading: Icon(Icons.calendar_today, color: Color(0xfff6ac65)),
                   title:
-                      Text('Calendar', style: TextStyle(color: Colors.white))),
+                      Text(FlutterI18n.translate(context, "common.calendar.titleCalendar"), style: TextStyle(color: Colors.white))),
               ListTile(
                   onTap: () {
                     if (isLogin == false) {
@@ -153,7 +154,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                   },
                   leading: Icon(Icons.people, color: Color(0xfff6ac65)),
                   title:
-                      Text('Visite', style: TextStyle(color: Colors.white))),
+                      Text(FlutterI18n.translate(context, "common.meet_view.titlePageVisit"), style: TextStyle(color: Colors.white))),
               Expanded(child: Container()),
               Divider(color: Colors.grey),
               if (isLogin)
@@ -165,14 +166,14 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                     },
                     leading: Icon(Icons.exit_to_app, color: Color(0xfff6ac65)),
                     title:
-                        Text('Log out', style: TextStyle(color: Colors.white))),
+                        Text(FlutterI18n.translate(context, "common.app_drawer.logOut"), style: TextStyle(color: Colors.white))),
               ListTile(
                   onTap: () {
                     AppRouter.router.navigateTo(context, 'city',
                         replace: true, transition: TransitionType.inFromLeft);
                   },
                   leading: Icon(Icons.swap_calls, color: Color(0xfff6ac65)),
-                  title: Text('Changer de ville',
+                  title: Text(FlutterI18n.translate(context, "common.app_drawer.changeCity"),
                       style: TextStyle(color: Colors.white))),
             ])));
   }
