@@ -1,5 +1,50 @@
 {
   "common_word": {
-    "appName": "Carcassonne"
+    "appName": "Carcassonne",
+    "noData" : "No data",
+    "like" : "Like"
+  },
+  "calendar": {
+    "titleCalendar" : "Calendar"
+  },
+  "add_city_widget": {
+    "contactForm" : "Contact Form",
+    "placeHolderNameCity" : "Name of the city",
+    "placeHolderRoleCity" : "Rule in the city",
+    "placeHolderEmail" : "Email contact",
+    "buttonSend" : "Send"
+  },
+  "city_view": {
+    "searchCity" : "Search a city",
+    "validContact" : "Your request has been send",
+    "thanksMessage" : "Thank you for your request, we will contact you as soon as possible",
+    "addMyCity" : "Add my city"
+  },
+  "navigation_bottom_bar": {
+    "labelTourism" : "Tourism",
+    "labelHistory" : "History",
+    "labelCulture" : "Culture"
+  },
+  "create_meeting": {
+    "labelLieu" : "Choose a place",
+    "titleVisit" : "Place to visit",
+    "dateChoose" : "Choose a date for the visit",
+    "placeholderTitle" : "Title",
+    "placeholderDescription" : "Description",
+    "labelSend" : "Send"
+  },
+  "meet_view" : {
+    "titlePageVisit" : "Visit",
+    "textMyVisite" : "My visits",
+    "newVisite" : "New visit",
+    "joinVisit" : "Join this visit",
+    "exitVisit" : "Leave this visit",
+    "creator" : "Organisator : ",
+    "debut" : "Start",
+    "at" : "at"
+  },
+  "place_view":{
+    "titlePlace" : "Place",
+    "comment" : "Comment"
   }
 }

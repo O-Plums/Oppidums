@@ -23,15 +23,15 @@ class _NavigationBottomBarState extends State<NavigationBottomBar> {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.location_city),
-          label: 'Tourisme',
+          label: FlutterI18n.translate(context, "common.navigation_bottom_bar.labelTourism"),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.wb_shade),
-          label: 'Histoire',
+          label: FlutterI18n.translate(context, "common.navigation_bottom_bar.labelHistory"),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.auto_stories),
-          label: 'Culture',
+          label: FlutterI18n.translate(context, "common.navigation_bottom_bar.labelCulture"),
         ),
       ],
       selectedItemColor: Color(0xfff6ac65),

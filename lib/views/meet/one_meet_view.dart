@@ -12,7 +12,7 @@ import 'package:carcassonne/net/meet_api.dart';
 import 'package:carcassonne/views/widgets/app_bottom_navigation_action.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:intl/intl.dart';
-
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 class OneMeetView extends StatefulWidget {
   final String id;
@@ -105,11 +105,11 @@ class _OneMeetViewState extends State<OneMeetView> {
   Widget build(BuildContext context) {
     print(_didjoin);
     return Scaffold(
-        appBar: CustomAppBar(title: 'Visite'),
+        appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.meet_view.titlePageVisit")),
         bottomNavigationBar: AppBottomNavigationAction(
             title: !_didjoin
-                ? 'Rejoindre cette visite'
-                : 'Quitter cette visite',
+                ? FlutterI18n.translate(context, "common.meet_view.joinVisit")
+                : FlutterI18n.translate(context, "common.meet_view.exitVisit"),
             loading: _loadingButton,
             onPressed: () {
               updateMeet();
@@ -178,7 +178,7 @@ class _OneMeetViewState extends State<OneMeetView> {
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: Text(
-                      'Organisateur: ',
+                      FlutterI18n.translate(context, "common.meet_view.creator") ,
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ),
@@ -202,7 +202,7 @@ class _OneMeetViewState extends State<OneMeetView> {
                 Padding(
                   padding: EdgeInsets.all(15),
                   child: Text(
-                    'Debute: ${DateFormat('dd/MM/yyyy').format(DateTime.parse(_meet['startDate']))} a ${DateFormat('hh:mm').format(DateTime.parse(_meet['startDate']))}',
+                    '${FlutterI18n.translate(context, "common.meet_view.debut")}: ${DateFormat('dd/MM/yyyy').format(DateTime.parse(_meet['startDate']))} ${FlutterI18n.translate(context, "common.meet_view.at")} ${DateFormat('hh:mm').format(DateTime.parse(_meet['startDate']))}',
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ),

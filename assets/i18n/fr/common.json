@@ -1,5 +1,50 @@
 {
   "common_word": {
-    "appName": "Carcassonne"
+    "appName": "Carcassonne",
+    "noData" : "Pas de donées",
+    "like" : "Aimer"
+  },
+  "calendar": {
+    "titleCalendar" : "Calendrier"
+  },
+  "add_city_widget": {
+    "contactForm" : "Formulaire de contact",
+    "placeHolderNameCity" : "Nom de la ville",
+    "placeHolderRoleCity" : "Rôle dans la ville",
+    "placeHolderEmail" : "Email de contact",
+    "buttonSend" : "Envoyer"
+  },
+  "city_view": {
+    "searchCity" : "Trouver une ville",
+    "validContact" : "Votre demande a été envoyée",
+    "thanksMessage" : "Merci pour votre demande, nous vous contacterons le plus rapidement possible.",
+    "addMyCity" : "Ajouter ma ville"
+  },
+  "navigation_bottom_bar": {
+    "labelTourism" : "Tourisme",
+    "labelHistory" : "Histoire",
+    "labelCulture" : "Culture"
+  },
+  "create_meeting": {
+    "labelLieu" : "Choisissez un lieu",
+    "titleVisit" : "Lieu à visiter",
+    "dateChoose" : "Choisissez une date pour votre visite",
+    "placeholderTitle" : "Titre",
+    "placeholderDescription" : "Description",
+    "labelSend" : "Envoyer"
+  },
+  "meet_view" : {
+    "titlePageVisit" : "Visite",
+    "textMyVisite" : "Mes visites",
+    "newVisite" : "Créer une visite",
+    "joinVisit" : "Rejoindre cette visite",
+    "exitVisit" : "Quitter cette visite",
+    "creator" : "Organisateur : ",
+    "debut" : "Débute",
+    "at" : "à"
+  },
+  "place_view":{
+    "titlePlace" : "Place",
+    "comment" : "Commenter"
   }
 }
