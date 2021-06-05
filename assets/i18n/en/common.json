@@ -18,7 +18,7 @@
     "buttonSend" : "Send"
   },
   "city_view": {
-    "searchCity" : "Search a city",
+    "searchCity" : "Search",
     "validContact" : "Your request has been send",
     "thanksMessage" : "Thank you for your request, we will contact you as soon as possible",
     "addMyCity" : "Add my city"
@@ -52,8 +52,8 @@
     "comment" : "Comment"
   },
   "app_drawer":{
-    "seeCity": "See the city",
+    "seeCity": "See city",
     "logOut" : "Log out",
-    "changeCity" : "Change of city"
+    "changeCity" : "Change city"
   }
 }

@@ -33,7 +33,6 @@ class _CityInfoViewState extends State<CityInfoView> {
       });
     }
     var citie = await OppidumCityApi.getCitieById(cityModel.id);
-    print('Citie =>$citie');
     if (mounted) {
       setState(() {
         _citie = citie;

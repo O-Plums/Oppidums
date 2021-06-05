@@ -1,6 +1,7 @@
 import 'package:oppidum/models/city_model.dart';
 import 'package:flutter/material.dart';
 import 'package:oppidum/views/widgets/app_bottom_navigation_action.dart';
+import 'package:oppidum/views/widgets/search_bar.dart';
 import 'package:oppidum/router.dart';
 import 'package:fluro/fluro.dart';
 import 'package:oppidum/net/city_api.dart';
@@ -8,7 +9,6 @@ import 'package:oppidum/views/widgets/loading_widget.dart';
 import 'package:oppidum/views/city/widgets/add_city_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
@@ -91,19 +91,10 @@ class CityView extends StatefulWidget {
 }
 
 class _CityViewState extends State<CityView> {
-  SearchBar searchBar;
   String searchName = '';
   List<dynamic> _allCity = null;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  AppBar buildAppBar(BuildContext context) {
-    return new AppBar(
-        brightness: Brightness.dark, // status bar brightness
-        backgroundColor: Color(0xff101519),
-        title: new Text(FlutterI18n.translate(context, "common.city_view.searchCity")),
-        actions: [searchBar.getSearchAction(context)]);
-  }
 
   void onSubmitted(String value) {
     setState(() {
@@ -133,27 +124,6 @@ class _CityViewState extends State<CityView> {
       return 'success';
     }
     return 'success';
-  }
-
-  _CityViewState() {
-    searchBar = new SearchBar(
-        inBar: false,
-        closeOnSubmit: false,
-        clearOnSubmit: false,
-        showClearButton: false,
-        buildDefaultAppBar: buildAppBar,
-        setState: setState,
-        onChanged: onSubmitted,
-        onCleared: () {
-           setState(() {
-            searchName = '';
-            _allCity = null;
-          });
-          fetchCities();
-        },
-        onClosed: () {
-          print("closed");
-        });
   }
 
   @override
@@ -188,7 +158,7 @@ class _CityViewState extends State<CityView> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xff101519),
-        appBar: searchBar.build(context),
+        appBar: CustomSearchBar(onChange: onSubmitted),
         bottomNavigationBar: AppBottomNavigationAction(
             title: FlutterI18n.translate(context, "common.city_view.addMyCity"),
             loading: false,

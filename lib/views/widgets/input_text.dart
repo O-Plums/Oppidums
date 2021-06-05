@@ -9,12 +9,14 @@ class InputText extends StatefulWidget {
   final bool password;
   final TextInputType keyboardType;
   final int maxLines;
+  final InputDecoration customDecoration;
 
   InputText(
       {Key key,
       this.label,
       this.placeholder,
       this.defaultValue,
+      this.customDecoration,
       this.onChange,
       this.border = true,
       this.password = false,
@@ -40,11 +42,13 @@ class _InputTextState extends State<InputText> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.label != null)
-          (Text(widget.label, style: TextStyle(fontSize: 16, color: Colors.white))),
+          (Text(widget.label,
+              style: TextStyle(fontSize: 16, color: Colors.white))),
         TextField(
           onChanged: widget.onChange,
           controller: _controller,
-          decoration: InputDecoration(
+          decoration: widget.customDecoration ?? InputDecoration(
+            
             hintStyle: TextStyle(color: Colors.white),
             hintText: widget.placeholder,
             border: widget.border
@@ -52,7 +56,8 @@ class _InputTextState extends State<InputText> {
                     borderSide: BorderSide(color: Colors.white))
                 : InputBorder.none,
           ),
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
           obscureText: widget.password,
           enableSuggestions: widget.password,
           autocorrect: widget.password,

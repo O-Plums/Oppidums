@@ -156,6 +156,14 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                   title:
                       Text(FlutterI18n.translate(context, "common.meet_view.titlePageVisit"), style: TextStyle(color: Colors.white))),
               Expanded(child: Container()),
+                //  ListTile(
+                //     onTap: () async {
+                //       final SharedPreferences prefs = await _prefs;
+                //       prefs.setString('googlePYMP', null);
+                //       _checkLocalStorage(context);
+                //     },
+                //     leading: Icon(Icons.code, color: Color(0xfff6ac65)),
+                //     title:Text('Git hub', style: TextStyle(color: Colors.white))),
               Divider(color: Colors.grey),
               if (isLogin)
                 ListTile(
@@ -167,6 +175,8 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                     leading: Icon(Icons.exit_to_app, color: Color(0xfff6ac65)),
                     title:
                         Text(FlutterI18n.translate(context, "common.app_drawer.logOut"), style: TextStyle(color: Colors.white))),
+             
+             
               ListTile(
                   onTap: () {
                     AppRouter.router.navigateTo(context, 'city',
