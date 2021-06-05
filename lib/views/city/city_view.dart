@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 Widget renderCityCard(context, city) {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -100,7 +101,7 @@ class _CityViewState extends State<CityView> {
     return new AppBar(
         brightness: Brightness.dark, // status bar brightness
         backgroundColor: Color(0xff101519),
-        title: new Text('Trouver une ville'),
+        title: new Text(FlutterI18n.translate(context, "common.city_view.searchCity")),
         actions: [searchBar.getSearchAction(context)]);
   }
 
@@ -168,9 +169,9 @@ class _CityViewState extends State<CityView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Demande reçue", style: TextStyle(color: Colors.white)),
+          title: Text(FlutterI18n.translate(context, "common.city_view.validContact"), style: TextStyle(color: Colors.white)),
           content: Text(
-              "Merci pour votre demande, nous vous contacteron dans le plus rapidement possible.",
+              FlutterI18n.translate(context, "common.city_view.thanksMessage"),
               style: TextStyle(color: Colors.white)),
           actions: [
             FlatButton(
@@ -189,7 +190,7 @@ class _CityViewState extends State<CityView> {
         backgroundColor: Color(0xff101519),
         appBar: searchBar.build(context),
         bottomNavigationBar: AppBottomNavigationAction(
-            title: 'Ajouter ma ville',
+            title: FlutterI18n.translate(context, "common.city_view.addMyCity"),
             loading: false,
             onPressed: () {
               showMaterialModalBottomSheet(
@@ -215,7 +216,7 @@ class _CityViewState extends State<CityView> {
                 Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 50),
-                    child: Text('No data',
+                    child: Text(FlutterI18n.translate(context, "common.common_word.noData"),
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,

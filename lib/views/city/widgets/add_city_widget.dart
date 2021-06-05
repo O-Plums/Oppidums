@@ -53,7 +53,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
                   Container(
                   margin: EdgeInsets.only(top: 20, bottom: 20),
                   child: Text(
-                    'Formulaire de contact',
+                    FlutterI18n.translate(context, "common.add_city_widget.contactForm"),
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
                 ),
@@ -65,7 +65,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.grey)),
             child: InputText(
-              placeholder: 'Nom de la ville',
+              placeholder: FlutterI18n.translate(context, "common.add_city_widget.placeHolderNameCity"),
               border: false,
               onChange: (value) => _handleChange('cityName', value),
             ),
@@ -78,7 +78,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.grey)),
             child: InputText(
-              placeholder: 'Rôle dans la ville',
+              placeholder: FlutterI18n.translate(context, "common.add_city_widget.placeHolderRoleCity"),
               border: false,
               onChange: (value) => _handleChange('cityRole', value),
             ),
@@ -91,13 +91,13 @@ class _AddCityWidgetState extends State<AddCityWidget> {
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.grey)),
             child: InputText(
-              placeholder: 'Email de contact',
+              placeholder: FlutterI18n.translate(context, "common.add_city_widget.placeHolderEmail"),
               border: false,
               onChange: (value) => _handleChange('email', value),
             ),
           ),
           CustomFlatButton(
-            label: 'Envoyer',
+            label: FlutterI18n.translate(context, "common.add_city_widget.buttonSend"),
             textColor: Colors.black,
             color: Colors.white,
             onPressed: () {

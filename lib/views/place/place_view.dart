@@ -19,6 +19,8 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
+import 'package:flutter_i18n/flutter_i18n.dart';
+
 
 class PlaceView extends StatefulWidget {
   final String id;
@@ -169,7 +171,7 @@ class _PlaceViewViewState extends State<PlaceView>
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(title: 'Place'),
+        appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.place_view.titlePlace")),
         body: Stack(children: [
           Container(decoration: new BoxDecoration(color: Color(0xff101519))),
           SingleChildScrollView(
@@ -317,7 +319,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                             : Colors.green),
                                     Padding(
                                         padding: EdgeInsets.only(left: 10),
-                                        child: Text('Aimer',
+                                        child: Text(FlutterI18n.translate(context, "common.common_word.like"),
                                             style: TextStyle(
                                                 color: Colors.white))),
                                   ]))),
@@ -359,7 +361,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                     size: 20, color: Colors.white),
                                 Padding(
                                     padding: EdgeInsets.only(left: 10),
-                                    child: Text('Commenter',
+                                    child: Text(FlutterI18n.translate(context, "common.place_view.comment"),
                                         style: TextStyle(color: Colors.white))),
                               ])))
                     ]),

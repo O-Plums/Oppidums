@@ -6,6 +6,7 @@ import 'package:carcassonne/views/widgets/loading_widget.dart';
 import 'package:carcassonne/models/city_model.dart';
 import 'package:provider/provider.dart';
 import 'package:carcassonne/net/place_api.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 class CultView extends StatefulWidget {
   final bool showReminder;
@@ -76,7 +77,7 @@ bool loading = false;
          if (_places.length == 0 && loading == false) Container(
           alignment: Alignment.center,
           margin: EdgeInsets.only(top: 50),
-          child: Text('No data',  style: TextStyle(
+          child: Text(FlutterI18n.translate(context, "common.common_word.noData"),  style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 18))),

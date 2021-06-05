@@ -12,7 +12,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:carcassonne/net/meet_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:carcassonne/views/widgets/loading_widget.dart';
-
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 class CreatingMeetingView extends StatefulWidget {
   final Function onCreate;
@@ -125,8 +125,8 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
           if (!loading) 
           Container(
             child: SimpleSelect(
-              label: 'Choissier un lieux',
-              title: 'Lieux a visiter',
+              label: FlutterI18n.translate(context, "common.create_meeting.labelLieu"),
+              title: FlutterI18n.translate(context, "common.create_meeting.titleVisit"),
               list: _places,
               onChange: (value) => _handleChange('place', value),
             ),
@@ -155,7 +155,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
                   },
                   child: Text(
                     _startDate == null
-                        ? 'Choissier une date pour la visite'
+                        ? FlutterI18n.translate(context, "common.create_meeting.dateChoose")
                         : (DateFormat('hh:mm -  dd-MM-yyyy')
                             .format(_startDate)),
                     style: TextStyle(color: Colors.white),
@@ -167,7 +167,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(color: Colors.grey)),
             child: InputText(
-              placeholder: 'Titre',
+              placeholder: FlutterI18n.translate(context, "common.create_meeting.placeholderTitle"),
               border: false,
               onChange: (value) => _handleChange('title', value),
             ),
@@ -181,7 +181,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
             child: InputText(
               keyboardType: TextInputType.multiline,
               maxLines: 5,
-              placeholder: 'Description',
+              placeholder: FlutterI18n.translate(context, "common.create_meeting.placeholderDescription"),
               border: false,
               onChange: (value) => _handleChange('description', value),
             ),
@@ -190,7 +190,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
             margin: EdgeInsets.only(top: 20),
             child: CustomFlatButton(
               disabledColor: Colors.grey,
-              label: 'Envoyer',
+              label: FlutterI18n.translate(context, "common.create_meeting.labelSend"),
               loading: loadingButton,
               textColor: Colors.black,
               color: Colors.white,

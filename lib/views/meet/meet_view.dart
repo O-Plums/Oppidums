@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carcassonne/views/widgets/meet_card.dart';
 import 'package:carcassonne/views/meet/widgets/create_meeting.dart';
-
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:carcassonne/views/widgets/app_bar.dart';
 import 'package:carcassonne/views/widgets/loading_widget.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
@@ -66,13 +66,13 @@ class _MeetView extends State<MeetView> {
     if (loading == true) {
       return Scaffold(
           backgroundColor: Color(0xff101519),
-          appBar: CustomAppBar(title: 'Visite'),
+          appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.meet_view.titlePageVisit")),
           body: LoadingAnnimation());
     }
 
     return Scaffold(
         backgroundColor: Color(0xff101519),
-        appBar: CustomAppBar(title: 'Visite'),
+        appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.meet_view.titlePageVisit")),
         body: SingleChildScrollView(
             child: Column(crossAxisAlignment: CrossAxisAlignment.center,
                 // mainAxisAlignment: MainAxisAlignment.center,
@@ -84,15 +84,15 @@ class _MeetView extends State<MeetView> {
                 children: {
                   0: Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
-                      child: Text('Visite',
+                      child: Text(FlutterI18n.translate(context, "common.meet_view.titlePageVisit"),
                           style: TextStyle(fontSize: 12, color: Colors.black))),
                   1: Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
-                      child: Text('Mes visite',
+                      child: Text(FlutterI18n.translate(context, "common.meet_view.textMyVisite"),
                           style: TextStyle(fontSize: 12, color: Colors.black))),
                   2: Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
-                      child: Text('Cree',
+                      child: Text(FlutterI18n.translate(context, "common.meet_view.newVisite"),
                           style: TextStyle(fontSize: 12, color: Colors.black)))
                 },
                 selectionIndex: _currentSelection,
@@ -110,7 +110,7 @@ class _MeetView extends State<MeetView> {
                   if (_currentSelection == 0 && _meets.length == 0 && loading == false) Container(
           alignment: Alignment.center,
           margin: EdgeInsets.only(top: 50),
-          child: Text('No data',  style: TextStyle(
+          child: Text(FlutterI18n.translate(context, "common.common_word.noData"),  style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 18))),
@@ -138,7 +138,7 @@ class _MeetView extends State<MeetView> {
                       if (_currentSelection == 1 && _ownerMeets.length == 0 && loading == false) Container(
           alignment: Alignment.center,
           margin: EdgeInsets.only(top: 50),
-          child: Text('No data',  style: TextStyle(
+          child: Text(FlutterI18n.translate(context, "common.common_word.noData"),  style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 18))),

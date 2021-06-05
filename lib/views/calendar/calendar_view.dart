@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:carcassonne/models/city_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:carcassonne/net/city_api.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 class CustomCalendarView extends StatefulWidget {
   final String id;
@@ -64,13 +65,13 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
       return Scaffold(
           backgroundColor: Color(0xff101519),
 
-          appBar: CustomAppBar(title: 'Calendar'), body: LoadingAnnimation());
+          appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.calendar.titleCalendar")), body: LoadingAnnimation());
     }
 
     return Scaffold(
           backgroundColor: Color(0xff101519),
 
-        appBar: CustomAppBar(title: 'Calendar'),
+        appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.calendar.titleCalendar")),
         body:  SfCalendar(
           backgroundColor: Color(0xff101519),
          
