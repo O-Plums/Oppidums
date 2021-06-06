@@ -52,8 +52,8 @@
     "comment" : "Commenter"
   },
   "app_drawer":{
-    "seeCity": "See the city",
-    "logOut" : "Log out",
-    "changeCity" : "Change of city"
+    "seeCity": "Voir la ville",
+    "logOut" : "Déconnexion",
+    "changeCity" : "Changer de ville"
   }
 }
