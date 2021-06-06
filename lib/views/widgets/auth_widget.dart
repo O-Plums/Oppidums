@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:oppidum/views/widgets/google_login_button.dart';
+import 'package:oppidum/views/widgets/apple_login_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:oppidum/models/user_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidum/router.dart';
+import 'dart:io';
 
 class AuthWidget extends StatefulWidget {
   final Function onValidate;
@@ -57,7 +59,7 @@ class _AuthWidgetState extends State<AuthWidget> {
   Widget build(BuildContext context) {
     return Container(
         color: Color(0xff101519),
-        height: 100,
+        height: 150,
         child: SingleChildScrollView(
             child: Column(children: [
           Container(
@@ -70,6 +72,11 @@ class _AuthWidgetState extends State<AuthWidget> {
           ),
           if (!isLoading)
             GoogleLoginButton(
+                onLogin: (Map<String, dynamic> userData) =>
+                    _handleLogin(context, userData)),
+
+                          if (!isLoading && (Platform.isIOS || Platform.isMacOS))
+            AppleLoginButton(
                 onLogin: (Map<String, dynamic> userData) =>
                     _handleLogin(context, userData)),
           if (isLoading)

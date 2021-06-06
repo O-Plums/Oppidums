@@ -12,5 +12,10 @@ class OppidumUserApi {
     );
     return res.data;
   }
+  
+  static Future<Map<String, dynamic>> appleSignIn(var credentials) {
+    print(credentials);
+
+  }
 
 }

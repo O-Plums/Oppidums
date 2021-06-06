@@ -112,6 +112,8 @@ PODS:
     - Sentry (~> 6.1.4)
   - shared_preferences (0.0.1):
     - Flutter
+  - sign_in_with_apple (0.0.1):
+    - Flutter
   - uni_links (0.0.1):
     - Flutter
   - url_launcher (0.0.1):
@@ -131,6 +133,7 @@ DEPENDENCIES:
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - uni_links (from `.symlinks/plugins/uni_links/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
@@ -179,6 +182,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sentry_flutter/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  sign_in_with_apple:
+    :path: ".symlinks/plugins/sign_in_with_apple/ios"
   uni_links:
     :path: ".symlinks/plugins/uni_links/ios"
   url_launcher:
@@ -213,6 +218,7 @@ SPEC CHECKSUMS:
   Sentry: 9d055e2de30a77685e86b219acf02e59b82091fc
   sentry_flutter: 8b2b2e1c0101ef562106b5d272d3c0c741512c01
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  sign_in_with_apple: 34f3f5456a45fd7ac5fb42905e2ad31dae061b4a
   uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
 
