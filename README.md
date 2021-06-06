@@ -11,7 +11,7 @@ Oppidum aims to provide users with cultural, historical, tourist, or other infor
 </div>
 
 
-# Prenstentation
+# Presentation
 
 The idea of this project came to us for different reasons. 
 
@@ -31,7 +31,7 @@ git clone https://github.com/O-Plums/Oppidum
 flutter pub get
 flutter run
 ```
-* tree of the project
+* Tree of the project
 ```
 lib
 ├── app_config.dart 
