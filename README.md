@@ -15,8 +15,8 @@ Oppidum aims to provide users with cultural, historical, tourist, or other infor
 
 The idea of this project came to us for different reasons. 
 
-Firstly, when we visit certain cities and we find ourselves in front of certain buildings, we would like to find information about them easily and quickly, without having to undertake extensive research. 
-Secondly, when we go to the tourist office, we usually come out with countless flyers and we are not more advanced on what we want to visit and discover. We are even discouraged. 
+Firstly, when we visit certain cities and we find ourselves in front of certain buildings, we would like to find information about them easily and quickly, without having to undertake extensive research. \
+Secondly, when we go to the tourist office, we usually come out with countless flyers and we are not more advanced on what we want to visit and discover. We are even discouraged. \
 Thirdly, when we visit well-known monuments in a city, the explanatory "posters" on them are often taken over by the crowd. These become, then, difficult to access. The inaccessibility of this information motivates us to create this application. 
 
 The application aims to respond to these disadvantages by making historical, tourist and cultural information more accessible and centralized.
