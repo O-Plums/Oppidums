@@ -15,7 +15,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:oppidum/models/city_model.dart';
 
-
 void main(List<String> args, {String env}) async {
 //Remove this method to stop OneSignal Debugging
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,12 +41,11 @@ void main(List<String> args, {String env}) async {
     appRunner: () => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserModel()),
-             ChangeNotifierProvider(create: (context) => CityModel()),
+        ChangeNotifierProvider(create: (context) => CityModel()),
       ],
       child: MyApp(flutterI18nDelegate),
     )),
   );
-
 }
 
 class MyApp extends StatelessWidget {
@@ -55,8 +53,7 @@ class MyApp extends StatelessWidget {
   MyApp(this.flutterI18nDelegate);
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
-  FirebaseAnalyticsObserver(analytics: analytics);
-
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +68,7 @@ class MyApp extends StatelessWidget {
         initialRoute: 'splash',
         theme: ThemeData(
             textTheme:
-              GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)),
+                GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)),
         // GoogleFonts.barlowTextTheme(Theme.of(context).textTheme)),
         // GoogleFonts.ptSansTextTheme(Theme.of(context).textTheme)),
         // GoogleFonts.gorditasTextTheme(Theme.of(context).textTheme)),
