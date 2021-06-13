@@ -1,6 +1,6 @@
 {
   "appVersion": "0.0.1",
-  "apiUrl": "https://carcasonneapi.herokuapp.com/",
+  "apiUrl": "https://api.oppidums.com/",
   "realmUrl": "https://eu-central-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/staging-cadmy/",
   "apiVersion": "0.0.1",
   "sentry": {
