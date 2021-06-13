@@ -11,6 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:bordered_text/bordered_text.dart';
+
 
 Widget renderCityCard(context, city) {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -53,18 +55,25 @@ Widget renderCityCard(context, city) {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          width: 300,
-                          child: Text(
-                            '${city['name']} (${city['countryCode']})',
+                          // width: 300,
+                          child: BorderedText(
+            strokeWidth: 2,
+            strokeColor: Colors.black,
+              child: Text('${city['name']} (${city['countryCode']})',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,
+                                 decoration: TextDecoration.none,
+                decorationColor: Colors.red,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold),
-                          )),
+                          ))),
                       Container(
                           width: 300,
-                          child: Text(
+                          child: BorderedText(
+            strokeWidth: 2,
+            strokeColor: Colors.black,
+              child: Text(
                             city['shortDescription'],
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
@@ -72,9 +81,13 @@ Widget renderCityCard(context, city) {
                               fontSize: 12,
                               color: Colors.white,
                             ),
-                          )),
+                          ))),
+                          BorderedText(
+            strokeWidth: 2,
+            strokeColor: Colors.black,
+              child: 
                       Text('Population: ${city['population']}',
-                          style: TextStyle(fontSize: 12, color: Colors.white))
+                          style: TextStyle(fontSize: 12, color: Colors.white)))
                     ],
                   )),
             ])),

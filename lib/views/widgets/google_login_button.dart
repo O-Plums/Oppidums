@@ -63,7 +63,7 @@ class GoogleLoginButton extends StatelessWidget {
           onPressed: () => _handleSignIn(context),
           width: 300,
           textColor: Colors.black,
-          label: FlutterI18n.translate(context, 'Google')),
+          label: 'Google'),
     );
   }
 }

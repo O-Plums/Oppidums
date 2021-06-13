@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:oppidum/views/widgets/app_inkwell.dart';
 import 'package:lottie/lottie.dart';
+import 'package:bordered_text/bordered_text.dart';
+
 
 class PlaceCard extends StatefulWidget {
   final Map<String, dynamic> place;
@@ -55,12 +57,15 @@ class _PlaceCard extends State<PlaceCard>{
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(widget.place['name'],
+                             BorderedText(
+                              strokeWidth: 2,
+                              strokeColor: Colors.black,
+                              child: Text(widget.place['name'],
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
-                                      fontSize: 16)),
+                                      fontSize: 16))),
                               Row(
                                 children: [
                                   Text(
@@ -78,11 +83,15 @@ class _PlaceCard extends State<PlaceCard>{
                       Padding(
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child:
+                        BorderedText(
+                        strokeWidth: 2,
+                        strokeColor: Colors.black,
+                        child:
                          Text(widget.place['shortDescription'],
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style:
-                                TextStyle(color: Colors.white, fontSize: 12)),
+                                TextStyle(color: Colors.white, fontSize: 12))),
                       ),
                     Container(
                       margin: EdgeInsets.only(top: 5),

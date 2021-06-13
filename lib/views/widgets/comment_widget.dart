@@ -96,6 +96,7 @@ class _CommentWidget extends State<CommentWidget> {
               Map<String, dynamic> payload = JwtDecoder.decode(token);
               Navigator.pop(context);
               var newComment = await OppidumCommentApi.createComment(
+                token,
                   _title, _description, widget.placeId, payload['_id']);
               widget.onValidate(newComment);
             },
