@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:oppidum/net/realm_client.dart';
+import 'package:oppidum/net/client.dart';
 
 class OppidumUserApi {
   static Dio _client = createOppidumRealmDioClient();
+  static Dio _clientStrapi = createOppidumDioClient();
+
 
   static Future<Map<String, dynamic>> googleSignIn(String accessToken) async {
     var res = await _client.get(
@@ -15,7 +18,7 @@ class OppidumUserApi {
   
   static Future<Map<String, dynamic>> appleSignIn(var credential) async {
   
-      var res = await _client.post('service/User/incoming_webhook/iosLogin',
+      var res = await _clientStrapi.post('app-users/ios/login',
         data: {
           "authorizationCode": credential.authorizationCode,
           "user": credential.userIdentifier,

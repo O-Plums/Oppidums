@@ -66,7 +66,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
             color: Color(0xff101519),
             child: Column(children: [
               Container(
-                height: 125,
+                height: 155,
                 child: DrawerHeader(
                     decoration: BoxDecoration(
                       color: Colors.black,

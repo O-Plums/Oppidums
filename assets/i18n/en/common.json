@@ -49,7 +49,8 @@
   },
   "place_view":{
     "titlePlace" : "Place",
-    "comment" : "Comment"
+    "comment" : "Comment",
+    "meetTitle": "Discover this place"
   },
   "app_drawer":{
     "seeCity": "See city",

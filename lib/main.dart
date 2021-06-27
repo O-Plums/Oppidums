@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
+       debugShowCheckedModeBanner: false,
         navigatorObservers: <NavigatorObserver>[observer],
         color: Color.fromARGB(255, 255, 255, 255),
         title: 'Oppidum',

@@ -7,20 +7,18 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:oppidum/views/widgets/auth_widget.dart';
 import 'package:oppidum/views/widgets/comment_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
 import 'package:oppidum/views/widgets/loading_widget.dart';
 import 'package:oppidum/net/place_api.dart';
 import 'package:oppidum/net/comment_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:oppidum/net/user_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
+import 'package:oppidum/router.dart';
+import 'package:fluro/fluro.dart';
 
 class PlaceView extends StatefulWidget {
   final String id;
@@ -124,7 +122,7 @@ class _PlaceViewViewState extends State<PlaceView>
       setState(() {
         isLogin = true;
         userId = payload['_id'];
-        isApprove = 
+        isApprove =
             _place['approval'].indexWhere((e) => e['_id'] == userId) == -1
                 ? false
                 : true;
@@ -139,8 +137,7 @@ class _PlaceViewViewState extends State<PlaceView>
       });
     }
     var place = await OppidumPlaceApi.getPlaceById(widget.placeId);
-    var comments =
-        await OppidumCommentApi.getCommentByPlace(widget.placeId);
+    var comments = await OppidumCommentApi.getCommentByPlace(widget.placeId);
     if (mounted) {
       setState(() {
         _place = place;
@@ -155,7 +152,7 @@ class _PlaceViewViewState extends State<PlaceView>
   void initState() {
     new Future.delayed(Duration.zero, () async {
       await fetchPlace(context);
-       _checkLocalStorage(context);
+      _checkLocalStorage(context);
       _controller = AnimationController(vsync: this);
     });
     super.initState();
@@ -171,7 +168,9 @@ class _PlaceViewViewState extends State<PlaceView>
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.place_view.titlePlace")),
+        appBar: CustomAppBar(
+            title:
+                FlutterI18n.translate(context, "common.place_view.titlePlace")),
         body: Stack(children: [
           Container(decoration: new BoxDecoration(color: Color(0xff101519))),
           SingleChildScrollView(
@@ -319,7 +318,9 @@ class _PlaceViewViewState extends State<PlaceView>
                                             : Colors.green),
                                     Padding(
                                         padding: EdgeInsets.only(left: 10),
-                                        child: Text(FlutterI18n.translate(context, "common.common_word.like"),
+                                        child: Text(
+                                            FlutterI18n.translate(context,
+                                                "common.common_word.like"),
                                             style: TextStyle(
                                                 color: Colors.white))),
                                   ]))),
@@ -361,10 +362,33 @@ class _PlaceViewViewState extends State<PlaceView>
                                     size: 20, color: Colors.white),
                                 Padding(
                                     padding: EdgeInsets.only(left: 10),
-                                    child: Text(FlutterI18n.translate(context, "common.place_view.comment"),
+                                    child: Text(
+                                        FlutterI18n.translate(context,
+                                            "common.place_view.comment"),
                                         style: TextStyle(color: Colors.white))),
                               ])))
                     ]),
+                Divider(color: Colors.white),
+                CustomInkWell(
+                    onTap: () {
+                      AppRouter.router.navigateTo(context, 'meet',
+                          replace: false,
+                          transition: TransitionType.inFromRight);
+                    },
+                    child: Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.all(10),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.people, color: Colors.white),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 10),
+                                  child: Text(
+                                      FlutterI18n.translate(context,
+                                          "common.place_view.meetTitle"),
+                                      style: TextStyle(color: Colors.white))),
+                            ]))),
                 Divider(color: Colors.white),
                 ..._comments.map((comment) {
                   return (Container(
@@ -385,7 +409,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                 CircleAvatar(
                                     radius: 15.0,
                                     backgroundImage: NetworkImage(
-                                        comment['app_user']['picture'])),
+                                        comment['app_user']['picture'] ?? '')),
                                 Padding(
                                     padding: EdgeInsets.only(top: 10),
                                     child: Text(comment['app_user']['name'],

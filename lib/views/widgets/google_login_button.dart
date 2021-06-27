@@ -4,6 +4,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oppidum/views/widgets/app_flat_button.dart';
 import 'package:oppidum/net/user_api.dart';
+import 'package:oppidum/views/widgets/app_inkwell.dart';
+
 // import 'package:jim/net/jim/social_auth_api.dart';
 // import 'package:jim/views/widgets/amplitude_flat_button.dart';
 
@@ -57,13 +59,33 @@ class GoogleLoginButton extends StatelessWidget {
       width: 300,
       height: 36,
       margin: EdgeInsets.only(top: 5, bottom: 5),
-      child: CustomFlatButton(
-          eventName: 'Action_google_login',
-          color: Colors.white,
-          onPressed: () => _handleSignIn(context),
-          width: 300,
-          textColor: Colors.black,
-          label: 'Google'),
+      child:   CustomInkWell(
+              
+                      onTap: () async {
+                        _handleSignIn(context);
+                      },
+                      child:  Container(
+       decoration: BoxDecoration(
+  color:           Color(0xFF397AF3),
+                borderRadius: BorderRadius.circular(5)),
+      width: 300,
+    child: Padding(
+      padding: EdgeInsets.all(6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+      
+        children: [
+          Image.asset('assets/google-logo.webp', width: 30), // <-- Use 'Image.asset(...)' here
+          // SizedBox(width: 12),
+          Text('Sign in with Google', style: TextStyle(color: Colors.white, fontSize: 18)),
+        ],
+      ),
+    ),
+  ), 
+                          ),
     );
   }
 }
+
+  

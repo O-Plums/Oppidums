@@ -10,21 +10,43 @@ class AppleLoginButton extends StatelessWidget {
 
   void _handleSignIn(context) async {
     try {
+      print('Start never end');
+
       final credential = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
       );
+      print(credential);
       var token = await OppidumUserApi.appleSignIn(credential);
       if (onLogin != null) {
         onLogin(token);
       }
-    } catch (e) {
+    } catch (error) {
+            _showDialog(context, error);
+
       return;
     }
   }
 
+ void _showDialog(context, error) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error GOOGLE"),
+          content: Text("Error => $error"),
+          actions: [
+            FlatButton(
+              child: Text("OK"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Container(

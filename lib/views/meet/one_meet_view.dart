@@ -190,7 +190,7 @@ class _OneMeetViewState extends State<OneMeetView> {
                             child: CircleAvatar(
                                 radius: 20.0,
                                 backgroundImage:
-                                    NetworkImage(_meet['owner']['picture']))),
+                                    NetworkImage(_meet['owner']['picture'] ?? ''))),
                         Padding(
                             padding: EdgeInsets.all(10),
                             child: Text(_meet['owner']['name'],

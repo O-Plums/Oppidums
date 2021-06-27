@@ -85,15 +85,15 @@ class _MeetView extends State<MeetView> {
                   0: Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: Text(FlutterI18n.translate(context, "common.meet_view.titlePageVisit"),
-                          style: TextStyle(fontSize: 12, color: Colors.black))),
+                          style: TextStyle(fontSize: 11, color: Colors.black))),
                   1: Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: Text(FlutterI18n.translate(context, "common.meet_view.textMyVisite"),
-                          style: TextStyle(fontSize: 12, color: Colors.black))),
+                          style: TextStyle(fontSize: 11, color: Colors.black))),
                   2: Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: Text(FlutterI18n.translate(context, "common.meet_view.newVisite"),
-                          style: TextStyle(fontSize: 12, color: Colors.black)))
+                          style: TextStyle(fontSize: 11, color: Colors.black)))
                 },
                 selectionIndex: _currentSelection,
                 borderColor: Colors.grey,
