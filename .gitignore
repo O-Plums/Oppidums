@@ -30,6 +30,7 @@
 .pub-cache/
 .pub/
 /build/
+deployment_cert.der
 
 # Web related
 lib/generated_plugin_registrant.dart
