@@ -3,7 +3,7 @@
 Oppidum aims to provide users with cultural, historical, tourist, or other information on the cities offered in the application.
 
 
-* [ReadME French version] (https://github.com/O-Plums/Oppidum/blob/main/ReadmeFR.md)
+* [French version](https://github.com/O-Plums/Oppidum/blob/main/ReadmeFR.md)
 
 <div style='display:flex;flex-direction:row'>
 <img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/cities_view.png" width="175" height="auto" />
