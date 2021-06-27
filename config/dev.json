@@ -1,9 +1,9 @@
 {
-  "appVersion": "0.0.1",
+  "appVersion": "1.0.0",
   "apiUrl": "https://api.oppidums.com/",
   "realmUrl": "https://eu-central-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/staging-cadmy/",
   "apiVersion": "0.0.1",
   "sentry": {
-    "dns": "https//toto.com"
+    "dns": "https://53edb4c2dd644e809460609d6392cb64@o881608.ingest.sentry.io/5836032"
   }
 }
