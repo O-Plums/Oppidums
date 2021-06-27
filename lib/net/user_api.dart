@@ -13,9 +13,18 @@ class OppidumUserApi {
     return res.data;
   }
   
-  static Future<Map<String, dynamic>> appleSignIn(var credentials) {
-    print(credentials);
-
+  static Future<Map<String, dynamic>> appleSignIn(var credential) async {
+  
+      var res = await _client.post('service/User/incoming_webhook/iosLogin',
+        data: {
+          "authorizationCode": credential.authorizationCode,
+          "user": credential.userIdentifier,
+          "fullName": {
+            "givenName": credential.givenName,
+            "familyName": credential.familyName
+          },
+    });
+    return res.data;
   }
 
 }

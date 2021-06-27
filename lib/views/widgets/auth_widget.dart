@@ -59,7 +59,7 @@ class _AuthWidgetState extends State<AuthWidget> {
   Widget build(BuildContext context) {
     return Container(
         color: Color(0xff101519),
-        height: 150,
+        height: Platform.isIOS || Platform.isMacOS ? 150 : 100,
         child: SingleChildScrollView(
             child: Column(children: [
           Container(

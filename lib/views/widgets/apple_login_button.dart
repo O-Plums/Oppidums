@@ -3,7 +3,6 @@ import 'package:oppidum/net/user_api.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:io';
 
-//TODO NEED TO BE FINISH
 class AppleLoginButton extends StatelessWidget {
   final Function onLogin;
 
@@ -17,13 +16,10 @@ class AppleLoginButton extends StatelessWidget {
           AppleIDAuthorizationScopes.fullName,
         ],
       );
-      final lng = Localizations.localeOf(context).languageCode;
-      final plateforme = Platform.operatingSystem;
-      var token =
-          await OppidumUserApi.appleSignIn(credential);
-      // if (onLogin != null) {
-      //   onLogin(token);
-      // }
+      var token = await OppidumUserApi.appleSignIn(credential);
+      if (onLogin != null) {
+        onLogin(token);
+      }
     } catch (e) {
       return;
     }
@@ -36,8 +32,8 @@ class AppleLoginButton extends StatelessWidget {
       height: 36,
       margin: EdgeInsets.only(top: 5, bottom: 5),
       child: SignInWithAppleButton(
-          onPressed: () => _handleSignIn(context),
-        ),
+        onPressed: () => _handleSignIn(context),
+      ),
     );
   }
 }
