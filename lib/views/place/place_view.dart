@@ -370,7 +370,19 @@ class _PlaceViewViewState extends State<PlaceView>
                     ]),
                 Divider(color: Colors.white),
                 CustomInkWell(
-                    onTap: () {
+                    onTap: isLogin == false
+                              ? () {
+                                  showMaterialModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      context: context,
+                                      expand: false,
+                                      builder: (context) => AuthWidget(
+                                            onValidate: () {
+                                              _checkLocalStorage(context);
+                                            },
+                                          ));
+                                }
+                              :  () {
                       AppRouter.router.navigateTo(context, 'meet',
                           replace: false,
                           transition: TransitionType.inFromRight);
