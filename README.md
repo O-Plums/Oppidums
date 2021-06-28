@@ -2,7 +2,8 @@
 
 Oppidum aims to provide users with cultural, historical, tourist, or other information on the cities offered in the application.
 
-* [ReadME French version] (https://github.com/O-Plums/Oppidum/blob/main/ReadmeFR.md)
+
+* [French version](https://github.com/O-Plums/Oppidum/blob/main/ReadmeFR.md)
 
 <div style='display:flex;flex-direction:row'>
 <img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/cities_view.png" width="175" height="auto" />
@@ -12,6 +13,15 @@ Oppidum aims to provide users with cultural, historical, tourist, or other infor
 <img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/place_view.png" width="175" height="auto" />
 </div>
 
+# Download the app
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.oppidum.app">
+    <img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/playstore.png" width="318px" alt="android logo" />
+  </a>
+     <a href="https://apps.apple.com/us/app/oppidum/id1574072581">
+    <img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/appstore.png" width="300px" alt="ios logo" />
+  </a>
+</p>
 
 # Presentation
 
