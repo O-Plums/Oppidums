@@ -91,6 +91,9 @@ Framework • revision c5a4b4029c (3 months ago) • 2021-03-04 09:47:48 -0800
 Engine • revision 40441def69
 Tools • Dart 2.12.0
 ```
+# Back-end
+
+* to power the app we use [Strapi](https://github.com/strapi/strapi) as are web server, we will shortly share the code on github, we need to ajust some feauture first.
 
 # Contributing
 
