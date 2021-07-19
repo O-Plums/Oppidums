@@ -16,6 +16,16 @@ class OppidumPlaceApi {
     return res.data;
   }
 
+
+  static Future<List<dynamic>> getAllPlace(String cityId) async {
+    var res = await _client.get(
+      'places',
+      // 'service/GetPlaces/incoming_webhook/webhook0',
+      queryParameters: {"city": cityId},
+    );
+    return res.data;
+  }
+
   static Future<List<dynamic>> getPlaceByType(
       String type, String cityId) async {
     var res = await _client.get(
