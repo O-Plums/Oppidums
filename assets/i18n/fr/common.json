@@ -6,9 +6,9 @@
     "connect": "Connexion",
     "comment": "Ajouter un commentaire",
     "placeholderComment" :"Commentaire",
-    "tourism": "Tourism",
-    "history": "History",
-    "cult": "Cultural"
+    "tourism": "Tourisme",
+    "history": "Histoire",
+    "cult": "Culturel"
   },
   "calendar": {
     "titleCalendar" : "Calendrier"

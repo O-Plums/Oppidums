@@ -114,7 +114,7 @@ class _CityInfoViewState extends State<CityInfoView> {
                               Container(
                                 alignment: Alignment.topLeft,
                                 child: Icon(Icons.location_on,
-                                    size: 30, color: Color(0xfff6ac65)),
+                                    size: 30, color: Color(0xff8ec6f5)),
                               ),
                             ]))
                   ],

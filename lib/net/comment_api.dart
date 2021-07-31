@@ -4,10 +4,8 @@ import 'package:oppidum/net/client.dart';
 class OppidumCommentApi {
   static Dio _client = createOppidumDioClient();
 
-  static Future<Map<String, dynamic>> createComment(
-    String accessToken,
+  static Future<Map<String, dynamic>> createComment(String accessToken,
       String title, String description, String placeId, String userId) async {
-
     var res = await _client.post('comments',
         data: {
           'title': title,
@@ -28,8 +26,9 @@ class OppidumCommentApi {
   }
 
   static Future<Map<String, dynamic>> deleteCommentById(
-      String commentId) async {
-    var res = await _client.delete('comments/$commentId');
+      String commentId, String accessToken) async {
+    var res = await _client.delete('comments/$commentId',
+        options: Options(headers: {'x-access-token': accessToken}));
     return res.data;
   }
 }

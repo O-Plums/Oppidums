@@ -66,34 +66,25 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
             color: Color(0xff101519),
             child: Column(children: [
               Container(
-                height: 155,
-                child: DrawerHeader(
+                height: 170,
+                width: double.infinity,
+                child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.black,
-                      image: DecorationImage(
-                          colorFilter: new ColorFilter.mode(
-                              Colors.black.withOpacity(0.7), BlendMode.dstATop),
-                          image: NetworkImage(
-                              picture ?? 'assets/image_loading.gif'),
-                          fit: BoxFit.cover),
-                      //  borderRadius: BorderRadius.only(
-                      //     bottomRight: Radius.circular(40),
-                      //   ),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        if (name != null)
-                          Flexible(
-                            child: Container(
-                              padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                      image: DecorationImage(image: NetworkImage(picture ?? 'assets/image_loading.gif'), fit: BoxFit.cover)),
+                      child: Container(
+                        decoration: new BoxDecoration(
+                        gradient: new LinearGradient(
+                                  colors: [Colors.transparent, Colors.black],
+                                  begin: const FractionalOffset(.1, .4),
+                                  end: const FractionalOffset(.1, 1),
+                                  stops: [0.0, 1.0],
+                                  tileMode: TileMode.clamp)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Container(
-                                    width: 170,
+                                    padding: EdgeInsets.only(left:10),
                                     child: Text(
                                       name,
                                       overflow: TextOverflow.ellipsis,
@@ -103,6 +94,10 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                                       ),
                                     ),
                                   ),
+                                  Container(
+                                    padding: EdgeInsets.only(left:10),
+                                   
+                                    child:
                                   CustomFlatButton(
                                     loadingColor: Colors.white,
                                     color: Colors.transparent,
@@ -118,20 +113,18 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                                     },
                                     fontSize: 12,
                                     label: FlutterI18n.translate(context, "common.app_drawer.seeCity"),
-                                  ),
+                                  )),
                                 ],
                               ),
                             ),
-                          )
-                      ],
-                    )),
+                      ),
               ),
               ListTile(
                   onTap: () {
                     AppRouter.router.navigateTo(context, 'calendar',
                         replace: false, transition: TransitionType.inFromRight);
                   },
-                  leading: Icon(Icons.calendar_today, color: Color(0xfff6ac65)),
+                  leading: Icon(Icons.calendar_today, color: Color(0xff8ec6f5)),
                   title:
                       Text(FlutterI18n.translate(context, "common.calendar.titleCalendar"), style: TextStyle(color: Colors.white))),
               ListTile(
@@ -152,7 +145,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                           transition: TransitionType.inFromRight);
                     }
                   },
-                  leading: Icon(Icons.people, color: Color(0xfff6ac65)),
+                  leading: Icon(Icons.people, color: Color(0xff8ec6f5)),
                   title:
                       Text(FlutterI18n.translate(context, "common.meet_view.titlePageVisit"), style: TextStyle(color: Colors.white))),
              
@@ -161,11 +154,11 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                     AppRouter.router.navigateTo(context, 'city',
                         replace: true, transition: TransitionType.inFromLeft);
                   },
-                  leading: Icon(Icons.swap_calls, color: Color(0xfff6ac65)),
+                  leading: Icon(Icons.swap_calls, color: Color(0xff8ec6f5)),
                   title: Text(FlutterI18n.translate(context, "common.app_drawer.changeCity"),
                       style: TextStyle(color: Colors.white))),
               Expanded(child: Container()),
-       
+              if (isLogin)
               Divider(color: Colors.grey),
               if (isLogin)
                 ListTile(
@@ -174,19 +167,17 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                       prefs.setString('googlePYMP', null);
                       _checkLocalStorage(context);
                     },
-                    leading: Icon(Icons.exit_to_app, color: Color(0xfff6ac65)),
+                    leading: Icon(Icons.exit_to_app, color: Color(0xff8ec6f5)),
                     title:
                         Text(FlutterI18n.translate(context, "common.app_drawer.logOut"), style: TextStyle(color: Colors.white))),
-             
-             
-                     //  ListTile(
-                //     onTap: () async {
-                //       final SharedPreferences prefs = await _prefs;
-                //       prefs.setString('googlePYMP', null);
-                //       _checkLocalStorage(context);
-                //     },
-                //     leading: Icon(Icons.code, color: Color(0xfff6ac65)),
-                //     title:Text('Git hub', style: TextStyle(color: Colors.white))),
+                  // ListTile(
+                  //   onTap: () async {
+                  //     final SharedPreferences prefs = await _prefs;
+                  //     prefs.setString('googlePYMP', null);
+                  //     _checkLocalStorage(context);
+                  //   },
+                  //   leading: Icon(Icons.code, color: Color(0xff8ec6f5)),
+                  //   title:Text('Fork me on Git_hub', style: TextStyle(color: Colors.white))),
             ])));
   }
 }

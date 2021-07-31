@@ -7,6 +7,8 @@ import 'package:oppidum/router.dart';
 import 'package:oppidum/models/city_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:oppidum/views/widgets/app_bottom_navigation_action.dart';
+
 
 
 class AllPlaces extends StatefulWidget {
@@ -31,7 +33,7 @@ class _TourismeViewState extends State<AllPlaces> {
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
     var places =
-        await OppidumPlaceApi.getAllPlace(cityModel.id);
+        await OppidumPlaceApi.getAllPlaceOfCity(cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
@@ -43,7 +45,7 @@ class _TourismeViewState extends State<AllPlaces> {
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
     var places =
-        await OppidumPlaceApi.getAllPlace(cityModel.id);
+        await OppidumPlaceApi.getAllPlaceOfCity(cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
@@ -99,7 +101,17 @@ class _TourismeViewState extends State<AllPlaces> {
                     );
                   });
             }).toList(),
-          ])))
+               if (loading == false)
+              AppBottomNavigationAction(
+            title: FlutterI18n.translate(context, "common.app_drawer.changeCity"),
+            loading: false,
+            onPressed: () {
+              AppRouter.router.navigateTo(context, 'city',
+                        replace: true, transition: TransitionType.inFromLeft);
+            })
+          ]))),
+
+        
     ]);
   }
 }

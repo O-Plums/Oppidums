@@ -31,7 +31,7 @@ class CustomFlatButton extends StatelessWidget {
     this.disabledColor,
     this.disabled,
     this.loading = false,
-    this.loadingColor = const Color(0xfff6ac65),
+    this.loadingColor = const Color(0xff8ec6f5),
     this.borderColor,
     this.borderWidth,
     this.borderRadius,
