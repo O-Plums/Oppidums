@@ -3,11 +3,10 @@
 Oppidum a pour but d'offrir aux utilisateurs des informations culturelles, historiques, touristiques, ou autres, sur les villes proposées dans l'application.
 
 <div style='display:flex;flex-direction:row'>
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/cities_view.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/tourism_view.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/drawer_view.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/city_view.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/place_view.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot1.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot2.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot3.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot4.png" width="175" height="auto" />
 </div>
 
 # Telecharger l'app
