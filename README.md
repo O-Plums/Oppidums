@@ -6,11 +6,10 @@ Oppidum aims to provide users with cultural, historical, tourist, or other infor
 * [French version](https://github.com/O-Plums/Oppidum/blob/main/ReadmeFR.md)
 
 <div style='display:flex;flex-direction:row'>
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/cities_view.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/tourism_view.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/drawer_view.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/city_view.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/place_view.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot1.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot2.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot3.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot4.png" width="175" height="auto" />
 </div>
 
 # Download the app
