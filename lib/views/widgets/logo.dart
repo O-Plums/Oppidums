@@ -7,6 +7,6 @@ class OppidumLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (Image.asset('assets/icon.png', width: size));
+    return (Image.asset('assets/oppidum_transparent.png', width: size));
   }
 }
