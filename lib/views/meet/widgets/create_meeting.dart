@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:oppidum/net/meet_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class CreatingMeetingView extends StatefulWidget {
@@ -53,6 +52,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
       _title,
       _description,
       _startDate,
+      token
     );
     if (mounted) {
       setState(() {

@@ -12,26 +12,24 @@ class OppidumMeetApi {
     return res.data;
   }
 
-    static Future<List<dynamic>> getOwnerMeet(String owner) async {
+    static Future<List<dynamic>> getOwnerMeet(String owner, String accessToken) async {
     var res = await _client.get(
       'meets',
-/*TODO maibe add city id */
-
       queryParameters: {"owner": owner},
-    );
+      options: Options(headers: {'x-access-token': accessToken}));
+      
     return res.data;
   }
 
-  static Future<Map<String, dynamic>> getMeetById(String meetsId) async {
-    var res = await _client.get('meets/$meetsId'
-        // 'service/GetOnePlace/incoming_webhook/webhook0',
-        // queryParameters: {"placeId": placeId},
-        );
+  static Future<Map<String, dynamic>> getMeetById(String meetsId, String accessToken) async {
+    var res = await _client.get('meets/$meetsId',
+      options: Options(headers: {'x-access-token': accessToken}));
     return res.data;
   }
-    static Future<Map<String, dynamic>> deleteMeetById(String meetsId) async {
-    var res = await _client.delete('meets/$meetsId'
-        );
+  
+  static Future<Map<String, dynamic>> deleteMeetById(String meetsId, String accessToken) async {
+    var res = await _client.delete('meets/$meetsId',
+      options: Options(headers: {'x-access-token': accessToken}));
     return res.data;
   }
 
@@ -42,6 +40,7 @@ class OppidumMeetApi {
     String title,
     String description,
     DateTime startDate,
+    String accessToken,
   ) async {
 
     var res = await _client.post('meets', data: {
@@ -51,15 +50,17 @@ class OppidumMeetApi {
       'title': title,
       'description': description,
       'startDate': startDate.toString()
-    });
+    },
+      options: Options(headers: {'x-access-token': accessToken}));
     return res.data;
   }
 
-  static Future<Map<String, dynamic>>  joinMeet(String meetId, List<dynamic> participens) async {
+  static Future<Map<String, dynamic>>  joinMeet(String meetId, List<dynamic> participens, String accessToken) async {
     var res = await _client.put(
       'meets/${meetId}',
       data: {"participens": participens},
-    );
+      options: Options(headers: {'x-access-token': accessToken}));
+
     return res.data;
   }
 

@@ -50,8 +50,10 @@ class _OneMeetViewState extends State<OneMeetView> {
     } else {
       participens.remove(userId);
     }
-
-    var meet = await OppidumMeetApi.joinMeet(_meet['_id'], participens);
+    final SharedPreferences prefs = await _prefs;
+    final token = prefs.getString('googlePYMP');
+    var meet = await OppidumMeetApi.joinMeet(_meet['_id'], participens, token);
+    
     if (mounted) {
       setState(() {
         _meet = meet;
@@ -70,9 +72,9 @@ class _OneMeetViewState extends State<OneMeetView> {
         loading = true;
       });
     }
-
-    var meet = await OppidumMeetApi.getMeetById(widget.meetId);
-    print(meet['participens']);
+  final SharedPreferences prefs = await _prefs;
+    final token = prefs.getString('googlePYMP');
+    var meet = await OppidumMeetApi.getMeetById(widget.meetId, token);
     if (mounted) {
       setState(() {
         _meet = meet;
@@ -170,7 +172,7 @@ class _OneMeetViewState extends State<OneMeetView> {
                                           alignment: Alignment.topLeft,
                                           child: Icon(Icons.location_on,
                                               size: 30,
-                                              color: Color(0xfff6ac65)),
+                                              color: Color(0xff8ec6f5)),
                                         ),
                                       ]))
                             ]))),

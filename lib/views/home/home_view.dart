@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:oppidum/views/widgets/app_bar.dart';
-import 'package:oppidum/views/home/widgets/navigation_bottom_bar.dart';
 import 'package:oppidum/views/widgets/app_drawer.dart';
 import 'package:oppidum/views/home/cult/cult_view.dart';
 import 'package:oppidum/views/home/history/history_view.dart';
 import 'package:oppidum/views/home/tourism/tourism_view.dart';
+import 'package:oppidum/views/home/allPlaces/all_places.dart';
 
 class HomeView extends StatefulWidget {
   final bool showReminder;
@@ -42,13 +42,11 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
         appBar: CustomAppBar(),
         drawer: CustomAppDrawer(),
-        // if we need to add drawer in the right
-        bottomNavigationBar: NavigationBottomBar(
-            currentIndex: tabIndex, onChangeIndex: _handleChangeIndex),
         body: Container(
           //  color: Colors.black,
 
-          child: bottomBarPages[tabIndex],
+          child: AllPlaces(),//bottomBarPages[tabIndex],
+        
         ));
   }
 }

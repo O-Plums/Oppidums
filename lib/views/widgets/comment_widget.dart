@@ -87,7 +87,7 @@ class _CommentWidget extends State<CommentWidget> {
           ),
           CustomFlatButton(
             label: FlutterI18n.translate(context, "common.add_city_widget.buttonSend"),
-            color: Color(0xfff6ac65),
+            color: Color(0xff8ec6f5),
             onPressed: () async {
               final SharedPreferences prefs = await _prefs;
 

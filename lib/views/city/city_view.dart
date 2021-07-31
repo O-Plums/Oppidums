@@ -18,13 +18,13 @@ Widget renderCityCard(context, city) {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   return (Container(
-    height: 150,
+    height: 200,
+    width: double.infinity,
     // margin: EdgeInsets.all(10),
     decoration: BoxDecoration(
       color: Colors.black,
       image: DecorationImage(
-          colorFilter: new ColorFilter.mode(
-              Colors.black.withOpacity(0.7), BlendMode.dstATop),
+ 
           image:
               NetworkImage(city['image']['url'] ?? 'assets/image_loading.gif'),
           fit: BoxFit.cover),
@@ -44,18 +44,33 @@ Widget renderCityCard(context, city) {
           AppRouter.router.navigateTo(context, 'home',
               replace: true, transition: TransitionType.inFromRight);
         },
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                  padding: EdgeInsets.only(left: 10, top: 5),
+        child: 
+              Container(
+                
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: Container()),
+                    Container(
+                      width: double.infinity,
+                             decoration: new BoxDecoration(
+                          gradient: new LinearGradient(
+                              colors: [Colors.transparent, Colors.black],
+                              begin: const FractionalOffset(.1, 0),
+                              end: const FractionalOffset(.1, 1),
+                              stops: [0.0, 1.0],
+                              tileMode: TileMode.clamp),
+                        ),
+                      child: 
+                      Column(
+                    
+                    mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          // width: 300,
+                      padding: EdgeInsets.all(5),
                           child: BorderedText(
             strokeWidth: 2,
             strokeColor: Colors.black,
@@ -69,28 +84,34 @@ Widget renderCityCard(context, city) {
                                 fontWeight: FontWeight.bold),
                           ))),
                       Container(
-                          width: 300,
+                      padding: EdgeInsets.all(5),
                           child: BorderedText(
             strokeWidth: 2,
             strokeColor: Colors.black,
               child: Text(
                             city['shortDescription'],
-                            maxLines: 3,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
                             ),
                           ))),
-                          BorderedText(
+                           Container(
+                      padding: EdgeInsets.all(5),
+                          child: BorderedText(
             strokeWidth: 2,
             strokeColor: Colors.black,
               child: 
                       Text('Population: ${city['population']}',
                           style: TextStyle(fontSize: 12, color: Colors.white)))
-                    ],
+                    ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                      ),
+                    ]))],
                   )),
-            ])),
+            ),
   ));
 }
 
@@ -158,7 +179,7 @@ class _CityViewState extends State<CityView> {
               style: TextStyle(color: Colors.white)),
           actions: [
             FlatButton(
-              child: Text("OK", style: TextStyle(color: Color(0xfff6ac65))),
+              child: Text("OK", style: TextStyle(color: Color(0xff8ec6f5))),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ],

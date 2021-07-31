@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:oppidum/views/widgets/app_flat_button.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidum/net/meet_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MeetCard extends StatelessWidget {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   final Map<String, dynamic> meet;
   final Function onPressed;
   final Function fetchMeet;
@@ -58,7 +61,9 @@ class MeetCard extends StatelessWidget {
                             textColor: Colors.black,
                             color: Colors.red,
                             onPressed: () async  {
-                              await OppidumMeetApi.deleteMeetById(meet['_id']);
+                              final SharedPreferences prefs = await _prefs;
+                              final token = prefs.getString('googlePYMP');
+                              await OppidumMeetApi.deleteMeetById(meet['_id'], token);
                               fetchMeet();
                             },
                             width: 100,
@@ -84,9 +89,9 @@ class MeetCard extends StatelessWidget {
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: Color(0xfff6ac65),
+                                          color: Color(0xff8ec6f5),
                                           fontSize: 18)),
-                                  Icon(Icons.people, color: Color(0xfff6ac65)),
+                                  Icon(Icons.people, color: Color(0xff8ec6f5)),
                                 ],
                               )
                             ]),

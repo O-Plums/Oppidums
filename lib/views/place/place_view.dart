@@ -103,8 +103,9 @@ class _PlaceViewViewState extends State<PlaceView>
       tmpApprove = false;
       approval.remove(userId);
     }
-
-    await OppidumPlaceApi.updateApproval(_place['_id'], approval);
+    final SharedPreferences prefs = await _prefs;
+    final token = prefs.getString('googlePYMP');
+    await OppidumPlaceApi.updateApproval(_place['_id'], approval, token);
     if (mounted) {
       setState(() {
         isApprove = tmpApprove;
@@ -229,7 +230,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                           alignment: Alignment.topLeft,
                                           child: Icon(Icons.location_on,
                                               size: 30,
-                                              color: Color(0xfff6ac65)),
+                                              color: Color(0xff8ec6f5)),
                                         ),
                                       ]))
                             ]))),
@@ -249,7 +250,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                   !isStarted
                                       ? Icons.play_circle_fill
                                       : Icons.pause_circle_filled,
-                                  color: Color(0xfff6ac65),
+                                  color: Color(0xff8ec6f5),
                                 )),
                             Container(
                                 child: Lottie.asset(
@@ -457,8 +458,10 @@ class _PlaceViewViewState extends State<PlaceView>
                           if (comment['app_user']['_id'] == userId)
                             CustomInkWell(
                                 onTap: () async {
+                                  final SharedPreferences prefs = await _prefs;
+                                  final token = prefs.getString('googlePYMP');
                                   await OppidumCommentApi.deleteCommentById(
-                                      comment['_id']);
+                                    comment['_id'], token);
                                   _comments.removeWhere(
                                       (c) => c['_id'] == comment['_id']);
                                   setState(() {

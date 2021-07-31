@@ -44,7 +44,7 @@ class _MeetView extends State<MeetView> {
 
     var cityModel = Provider.of<CityModel>(context, listen: false);
     var meets = await OppidumMeetApi.getMeetCity(cityModel.id);
-    var ownerMeets = await OppidumMeetApi.getOwnerMeet(payload['_id']);
+    var ownerMeets = await OppidumMeetApi.getOwnerMeet(payload['_id'], token);
     if (mounted) {
       setState(() {
         _ownerMeets = ownerMeets;
@@ -97,7 +97,7 @@ class _MeetView extends State<MeetView> {
                 },
                 selectionIndex: _currentSelection,
                 borderColor: Colors.grey,
-                selectedColor: Color(0xfff6ac65),
+                selectedColor: Color(0xff8ec6f5),
                 unselectedColor: Colors.white,
                 borderRadius: 11.0,
                 disabledChildren: [3],

@@ -30,7 +30,7 @@ implements PreferredSizeWidget {
       child: CustomFlatButton(
         loading: loading,
         width: 200,
-        loadingColor: Color(0xfff6ac65),
+        loadingColor: Color(0xff8ec6f5),
         color: Colors.white,
         textColor: Colors.black,
         onPressed: onPressed,

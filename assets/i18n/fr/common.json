@@ -5,7 +5,10 @@
     "like" : "Aimer",
     "connect": "Connexion",
     "comment": "Ajouter un commentaire",
-    "placeholderComment" :"Commentaire"
+    "placeholderComment" :"Commentaire",
+    "tourism": "Tourisme",
+    "history": "Histoire",
+    "cult": "Culturel"
   },
   "calendar": {
     "titleCalendar" : "Calendrier"
