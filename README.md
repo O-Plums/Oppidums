@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://strapi.io">
+  <a href="https://oppidums.com/">
     <img src="https://github.com/O-Plums/Oppidums/blob/main/assets/oppidums.png" width="318px" alt="Oppidums logo" />
   </a>
   <h1 align='center'>Oppidums</h1>
