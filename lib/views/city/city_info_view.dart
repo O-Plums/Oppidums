@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_bar.dart';
+import 'package:oppidums/views/widgets/app_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:oppidum/views/widgets/app_inkwell.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
-import 'package:oppidum/net/city_api.dart';
+import 'package:oppidums/net/city_api.dart';
 import 'package:provider/provider.dart';
-import 'package:oppidum/models/city_model.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
+import 'package:oppidums/models/city_model.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
 
 
 class CityInfoView extends StatefulWidget {
@@ -32,7 +32,7 @@ class _CityInfoViewState extends State<CityInfoView> {
         loading = true;
       });
     }
-    var citie = await OppidumCityApi.getCitieById(cityModel.id);
+    var citie = await OppidumsCityApi.getCitieById(cityModel.id);
     if (mounted) {
       setState(() {
         _citie = citie;

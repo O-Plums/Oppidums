@@ -1,14 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:fluro/fluro.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:oppidum/views/home/home_view.dart';
-import 'package:oppidum/views/splash/splash_view.dart';
-import 'package:oppidum/views/city/city_view.dart';
-import 'package:oppidum/views/city/city_info_view.dart';
-import 'package:oppidum/views/calendar/calendar_view.dart';
-import 'package:oppidum/views/place/place_view.dart';
-import 'package:oppidum/views/meet/meet_view.dart';
-import 'package:oppidum/views/meet/one_meet_view.dart';
+import 'package:oppidums/views/home/home_view.dart';
+import 'package:oppidums/views/splash/splash_view.dart';
+import 'package:oppidums/views/city/city_view.dart';
+import 'package:oppidums/views/city/city_info_view.dart';
+import 'package:oppidums/views/calendar/calendar_view.dart';
+import 'package:oppidums/views/place/place_view.dart';
+import 'package:oppidums/views/meet/meet_view.dart';
+import 'package:oppidums/views/meet/one_meet_view.dart';
 
 class AppRouter {
   static FluroRouter router = FluroRouter();

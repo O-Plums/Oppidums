@@ -1,9 +1,9 @@
-import 'package:oppidum/app_config.dart';
-import 'package:oppidum/router.dart';
+import 'package:oppidums/app_config.dart';
+import 'package:oppidums/router.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:oppidum/models/user_model.dart';
+import 'package:oppidums/models/user_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,7 +13,7 @@ import 'dart:io';
 import 'package:intl/intl.dart'; //for date format
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
-import 'package:oppidum/models/city_model.dart';
+import 'package:oppidums/models/city_model.dart';
 
 void main(List<String> args, {String env}) async {
 //Remove this method to stop OneSignal Debugging
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
        debugShowCheckedModeBanner: false,
         navigatorObservers: <NavigatorObserver>[observer],
         color: Color.fromARGB(255, 255, 255, 255),
-        title: 'Oppidum',
+        title: 'Oppidums',
         initialRoute: 'splash',
         theme: ThemeData(
             textTheme:

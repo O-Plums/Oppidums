@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_bar.dart';
-import 'package:oppidum/views/widgets/app_inkwell.dart';
+import 'package:oppidums/views/widgets/app_bar.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
-import 'package:oppidum/views/widgets/auth_widget.dart';
-import 'package:oppidum/views/widgets/comment_widget.dart';
+import 'package:oppidums/views/widgets/auth_widget.dart';
+import 'package:oppidums/views/widgets/comment_widget.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
-import 'package:oppidum/net/place_api.dart';
-import 'package:oppidum/net/comment_api.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
+import 'package:oppidums/net/place_api.dart';
+import 'package:oppidums/net/comment_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -17,7 +17,7 @@ import 'package:lottie/lottie.dart';
 import 'dart:async';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:oppidum/router.dart';
+import 'package:oppidums/router.dart';
 import 'package:fluro/fluro.dart';
 
 class PlaceView extends StatefulWidget {
@@ -105,7 +105,7 @@ class _PlaceViewViewState extends State<PlaceView>
     }
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
-    await OppidumPlaceApi.updateApproval(_place['_id'], approval, token);
+    await OppidumsPlaceApi.updateApproval(_place['_id'], approval, token);
     if (mounted) {
       setState(() {
         isApprove = tmpApprove;
@@ -137,8 +137,8 @@ class _PlaceViewViewState extends State<PlaceView>
         loading = true;
       });
     }
-    var place = await OppidumPlaceApi.getPlaceById(widget.placeId);
-    var comments = await OppidumCommentApi.getCommentByPlace(widget.placeId);
+    var place = await OppidumsPlaceApi.getPlaceById(widget.placeId);
+    var comments = await OppidumsCommentApi.getCommentByPlace(widget.placeId);
     if (mounted) {
       setState(() {
         _place = place;
@@ -460,7 +460,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                 onTap: () async {
                                   final SharedPreferences prefs = await _prefs;
                                   final token = prefs.getString('googlePYMP');
-                                  await OppidumCommentApi.deleteCommentById(
+                                  await OppidumsCommentApi.deleteCommentById(
                                     comment['_id'], token);
                                   _comments.removeWhere(
                                       (c) => c['_id'] == comment['_id']);

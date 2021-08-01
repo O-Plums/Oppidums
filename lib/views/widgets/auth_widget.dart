@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/google_login_button.dart';
-import 'package:oppidum/views/widgets/apple_login_button.dart';
+import 'package:oppidums/views/widgets/google_login_button.dart';
+import 'package:oppidums/views/widgets/apple_login_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:oppidum/models/user_model.dart';
+import 'package:oppidums/models/user_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:oppidum/router.dart';
+import 'package:oppidums/router.dart';
 import 'dart:io';
 
 class AuthWidget extends StatefulWidget {

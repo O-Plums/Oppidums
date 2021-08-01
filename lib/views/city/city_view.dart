@@ -1,12 +1,12 @@
-import 'package:oppidum/models/city_model.dart';
+import 'package:oppidums/models/city_model.dart';
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_bottom_navigation_action.dart';
-import 'package:oppidum/views/widgets/search_bar.dart';
-import 'package:oppidum/router.dart';
+import 'package:oppidums/views/widgets/app_bottom_navigation_action.dart';
+import 'package:oppidums/views/widgets/search_bar.dart';
+import 'package:oppidums/router.dart';
 import 'package:fluro/fluro.dart';
-import 'package:oppidum/net/city_api.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
-import 'package:oppidum/views/city/widgets/add_city_widget.dart';
+import 'package:oppidums/net/city_api.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
+import 'package:oppidums/views/city/widgets/add_city_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -139,7 +139,7 @@ class _CityViewState extends State<CityView> {
   }
 
   void fetchCities() async {
-    var data = await OppidumCityApi.getAllCity(searchName);
+    var data = await OppidumsCityApi.getAllCity(searchName);
 
     if (mounted) {
       setState(() {
@@ -149,7 +149,7 @@ class _CityViewState extends State<CityView> {
   }
 
   Future<String> refetchCities() async {
-    var data = await OppidumCityApi.getAllCity(searchName);
+    var data = await OppidumsCityApi.getAllCity(searchName);
 
     if (mounted) {
       setState(() {

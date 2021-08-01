@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/place_card.dart';
+import 'package:oppidums/views/widgets/place_card.dart';
 import 'package:fluro/fluro.dart';
-import 'package:oppidum/net/place_api.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
-import 'package:oppidum/router.dart';
-import 'package:oppidum/models/city_model.dart';
+import 'package:oppidums/net/place_api.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
+import 'package:oppidums/router.dart';
+import 'package:oppidums/models/city_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:oppidum/views/widgets/app_bottom_navigation_action.dart';
+import 'package:oppidums/views/widgets/app_bottom_navigation_action.dart';
 
 
 
@@ -33,7 +33,7 @@ class _TourismeViewState extends State<AllPlaces> {
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
     var places =
-        await OppidumPlaceApi.getAllPlaceOfCity(cityModel.id);
+        await OppidumsPlaceApi.getAllPlaceOfCity(cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
@@ -45,7 +45,7 @@ class _TourismeViewState extends State<AllPlaces> {
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
     var places =
-        await OppidumPlaceApi.getAllPlaceOfCity(cityModel.id);
+        await OppidumsPlaceApi.getAllPlaceOfCity(cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;

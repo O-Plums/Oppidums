@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:oppidum/views/widgets/app_flat_button.dart';
-import 'package:oppidum/net/user_api.dart';
-import 'package:oppidum/views/widgets/app_inkwell.dart';
+import 'package:oppidums/views/widgets/app_flat_button.dart';
+import 'package:oppidums/net/user_api.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 
 // import 'package:jim/net/jim/social_auth_api.dart';
 // import 'package:jim/views/widgets/amplitude_flat_button.dart';
@@ -27,7 +27,7 @@ class GoogleLoginButton extends StatelessWidget {
         var authInstance = await res.authentication;
 
         Map<String, dynamic> userData =
-            await OppidumUserApi.googleSignIn(authInstance.accessToken);
+            await OppidumsUserApi.googleSignIn(authInstance.accessToken);
         onLogin(userData);
       }
     } catch (error) {

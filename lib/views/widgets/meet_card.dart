@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_flat_button.dart';
+import 'package:oppidums/views/widgets/app_flat_button.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:oppidum/net/meet_api.dart';
+import 'package:oppidums/net/meet_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MeetCard extends StatelessWidget {
@@ -63,7 +63,7 @@ class MeetCard extends StatelessWidget {
                             onPressed: () async  {
                               final SharedPreferences prefs = await _prefs;
                               final token = prefs.getString('googlePYMP');
-                              await OppidumMeetApi.deleteMeetById(meet['_id'], token);
+                              await OppidumsMeetApi.deleteMeetById(meet['_id'], token);
                               fetchMeet();
                             },
                             width: 100,

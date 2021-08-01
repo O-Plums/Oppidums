@@ -7,12 +7,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:197425120863:android:db7d36b28381d6cef2bdea",
+        "mobilesdk_app_id": "1:197425120863:android:41f43fe805687a50f2bdea",
         "android_client_info": {
-          "package_name": "com.oppidum.app"
+          "package_name": "com.oppidums.app"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "197425120863-9mjrov1d0mc5pf51v4aie4lmees82aon.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oppidums.app",
+            "certificate_hash": "4f895a963f749fa4393412886458ccb5d1d4c250"
+          }
+        },
+        {
+          "client_id": "197425120863-jis5jha8sq635vt2e7im42ii7dcgscp1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oppidums.app",
+            "certificate_hash": "2227f11a3dd5dbc18b19af83b59c3837413d28e5"
+          }
+        },
         {
           "client_id": "197425120863-r8s07e36vvq49o93shqso18oj1s7ht29.apps.googleusercontent.com",
           "client_type": 3

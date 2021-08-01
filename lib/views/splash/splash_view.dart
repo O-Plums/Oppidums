@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/net/city_api.dart';
+import 'package:oppidums/net/city_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:oppidum/router.dart';
-import 'package:oppidum/models/city_model.dart';
+import 'package:oppidums/router.dart';
+import 'package:oppidums/models/city_model.dart';
 import 'package:provider/provider.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:flutter/services.dart' show PlatformException;
 import 'package:fluro/fluro.dart';
@@ -30,7 +30,7 @@ class _SplashViewState extends State<SplashView> {
       print(splitUri);
 
       final SharedPreferences prefs = await _prefs;
-      final city = await OppidumCityApi.getCitieById(splitUri[1]);
+      final city = await OppidumsCityApi.getCitieById(splitUri[1]);
       prefs.setString('cityId', city['_id']);
       prefs.setString('cityUrl', city['image']['url']);
       prefs.setString('cityName', city['name']);

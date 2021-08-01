@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:oppidum/net/client.dart';
+import 'package:oppidums/net/client.dart';
 
-class OppidumCommentApi {
-  static Dio _client = createOppidumDioClient();
+class OppidumsCommentApi {
+  static Dio _client = createOppidumsDioClient();
 
   static Future<Map<String, dynamic>> createComment(String accessToken,
       String title, String description, String placeId, String userId) async {

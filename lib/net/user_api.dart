@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:oppidum/net/realm_client.dart';
-import 'package:oppidum/net/client.dart';
+import 'package:oppidums/net/realm_client.dart';
+import 'package:oppidums/net/client.dart';
 
-class OppidumUserApi {
-  static Dio _client = createOppidumRealmDioClient();
-  static Dio _clientStrapi = createOppidumDioClient();
+class OppidumsUserApi {
+  static Dio _client = createOppidumsRealmDioClient();
+  static Dio _clientStrapi = createOppidumsDioClient();
 
 
   static Future<Map<String, dynamic>> googleSignIn(String accessToken) async {

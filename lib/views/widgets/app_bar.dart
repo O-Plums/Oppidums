@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/logo.dart';
+import 'package:oppidums/views/widgets/logo.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> actions;
@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: AppBar(
             title: title != null
                 ? Text(title, style: TextStyle(color: Colors.white))
-                : OppidumLogo(size: 45),
+                : OppidumsLogo(size: 45),
             brightness: Brightness.dark, // status bar brightness
             automaticallyImplyLeading: true,
             leading: onBack == null

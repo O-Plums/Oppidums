@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/meet_card.dart';
-import 'package:oppidum/views/meet/widgets/create_meeting.dart';
+import 'package:oppidums/views/widgets/meet_card.dart';
+import 'package:oppidums/views/meet/widgets/create_meeting.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:oppidum/views/widgets/app_bar.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
+import 'package:oppidums/views/widgets/app_bar.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:provider/provider.dart';
-import 'package:oppidum/models/city_model.dart';
-import 'package:oppidum/net/meet_api.dart';
+import 'package:oppidums/models/city_model.dart';
+import 'package:oppidums/net/meet_api.dart';
 import 'package:fluro/fluro.dart';
-import 'package:oppidum/router.dart';
+import 'package:oppidums/router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
@@ -43,8 +43,8 @@ class _MeetView extends State<MeetView> {
     Map<String, dynamic> payload = JwtDecoder.decode(token);
 
     var cityModel = Provider.of<CityModel>(context, listen: false);
-    var meets = await OppidumMeetApi.getMeetCity(cityModel.id);
-    var ownerMeets = await OppidumMeetApi.getOwnerMeet(payload['_id'], token);
+    var meets = await OppidumsMeetApi.getMeetCity(cityModel.id);
+    var ownerMeets = await OppidumsMeetApi.getOwnerMeet(payload['_id'], token);
     if (mounted) {
       setState(() {
         _ownerMeets = ownerMeets;

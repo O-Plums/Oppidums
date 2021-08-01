@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:dio_flutter_transformer/dio_flutter_transformer.dart';
-import 'package:oppidum/app_config.dart';
+import 'package:oppidums/app_config.dart';
 
-Dio createOppidumRealmDioClient([BaseOptions options]) {
+Dio createOppidumsRealmDioClient([BaseOptions options]) {
   Dio client = new Dio();
   client.options.baseUrl = AppConfig.realmUrl;
   client.options.headers = {

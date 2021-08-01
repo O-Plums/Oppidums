@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_bar.dart';
-import 'package:oppidum/views/widgets/app_inkwell.dart';
+import 'package:oppidums/views/widgets/app_bar.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
-import 'package:oppidum/views/widgets/loading_widget.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:oppidum/net/user_api.dart';
+import 'package:oppidums/net/user_api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:oppidum/net/meet_api.dart';
-import 'package:oppidum/views/widgets/app_bottom_navigation_action.dart';
+import 'package:oppidums/net/meet_api.dart';
+import 'package:oppidums/views/widgets/app_bottom_navigation_action.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
@@ -52,7 +52,7 @@ class _OneMeetViewState extends State<OneMeetView> {
     }
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
-    var meet = await OppidumMeetApi.joinMeet(_meet['_id'], participens, token);
+    var meet = await OppidumsMeetApi.joinMeet(_meet['_id'], participens, token);
     
     if (mounted) {
       setState(() {
@@ -74,7 +74,7 @@ class _OneMeetViewState extends State<OneMeetView> {
     }
   final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
-    var meet = await OppidumMeetApi.getMeetById(widget.meetId, token);
+    var meet = await OppidumsMeetApi.getMeetById(widget.meetId, token);
     if (mounted) {
       setState(() {
         _meet = meet;

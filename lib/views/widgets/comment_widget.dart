@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_flat_button.dart';
-import 'package:oppidum/views/widgets/input_text.dart';
-import 'package:oppidum/net/comment_api.dart';
+import 'package:oppidums/views/widgets/app_flat_button.dart';
+import 'package:oppidums/views/widgets/input_text.dart';
+import 'package:oppidums/net/comment_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -95,7 +95,7 @@ class _CommentWidget extends State<CommentWidget> {
 
               Map<String, dynamic> payload = JwtDecoder.decode(token);
               Navigator.pop(context);
-              var newComment = await OppidumCommentApi.createComment(
+              var newComment = await OppidumsCommentApi.createComment(
                 token,
                   _title, _description, widget.placeId, payload['_id']);
               widget.onValidate(newComment);

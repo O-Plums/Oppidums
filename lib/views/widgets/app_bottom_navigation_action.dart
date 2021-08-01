@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_flat_button.dart';
+import 'package:oppidums/views/widgets/app_flat_button.dart';
 
 class AppBottomNavigationAction extends StatelessWidget
 implements PreferredSizeWidget {

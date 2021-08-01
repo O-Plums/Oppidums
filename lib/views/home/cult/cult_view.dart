@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/place_card.dart';
+import 'package:oppidums/views/widgets/place_card.dart';
 import 'package:fluro/fluro.dart';
-import 'package:oppidum/router.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
-import 'package:oppidum/models/city_model.dart';
+import 'package:oppidums/router.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
+import 'package:oppidums/models/city_model.dart';
 import 'package:provider/provider.dart';
-import 'package:oppidum/net/place_api.dart';
+import 'package:oppidums/net/place_api.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class CultView extends StatefulWidget {
@@ -29,7 +29,7 @@ bool loading = false;
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
     var places =
-        await OppidumPlaceApi.getPlaceByType('cult', cityModel.id);
+        await OppidumsPlaceApi.getPlaceByType('cult', cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
@@ -41,7 +41,7 @@ bool loading = false;
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
     var places =
-        await OppidumPlaceApi.getPlaceByType('cult', cityModel.id);
+        await OppidumsPlaceApi.getPlaceByType('cult', cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;

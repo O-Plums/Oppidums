@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>oppidum</string>
+	<string>oppidums</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -32,32 +32,32 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>oppidum.info</string>
+			<string>oppidums.info</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>applinks.oppidum</string>
+				<string>applinks.oppidums</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Oppidum does not access to your phone’s calendar</string>
+	<string>Oppidums does not access to your phone’s calendar</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Oppidum does not access to your phone’s camera</string>
+	<string>Oppidums does not access to your phone’s camera</string>
 	<key>NSContactsUsageDescription</key>
 	<string>This app does not access your contacts.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Oppidum uses the local network to discover Cast-enabled devices on your WiFi
+	<string>Oppidums uses the local network to discover Cast-enabled devices on your WiFi
     network.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app does not access your location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app does not access your location.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Oppidum does not access to your phone’s</string>
+	<string>Oppidums does not access to your phone’s</string>
 	<key>NSMotionUsageDescription</key>
 	<string>This app does not access motion.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

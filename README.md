@@ -1,24 +1,24 @@
-# Oppidum
+# Oppidums
 
-Oppidum aims to provide users with cultural, historical, tourist, or other information on the cities offered in the application.
+Oppidums aims to provide users with cultural, historical, tourist, or other information on the cities offered in the application.
 
 
-* [French version](https://github.com/O-Plums/Oppidum/blob/main/ReadmeFR.md)
+* [French version](https://github.com/O-Plums/Oppidums/blob/main/ReadmeFR.md)
 
 <div style='display:flex;flex-direction:row'>
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot1.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot2.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot3.png" width="175" height="auto" />
-<img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/screenshot4.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidums/blob/main/repo_images/screenshot1.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidums/blob/main/repo_images/screenshot2.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidums/blob/main/repo_images/screenshot3.png" width="175" height="auto" />
+<img src="https://github.com/O-Plums/Oppidums/blob/main/repo_images/screenshot4.png" width="175" height="auto" />
 </div>
 
 # Download the app
 <p align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.oppidum.app">
-    <img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/playstore.png" width="318px" alt="android logo" />
+  <a href="https://play.google.com/store/apps/details?id=com.oppidums.app">
+    <img src="https://github.com/O-Plums/Oppidums/blob/main/repo_images/playstore.png" width="318px" alt="android logo" />
   </a>
-     <a href="https://apps.apple.com/us/app/oppidum/id1574072581">
-    <img src="https://github.com/O-Plums/Oppidum/blob/main/repo_images/appstore.png" width="300px" alt="ios logo" />
+     <a href="https://apps.apple.com/us/app/oppidums/id1574072581">
+    <img src="https://github.com/O-Plums/Oppidums/blob/main/repo_images/appstore.png" width="300px" alt="ios logo" />
   </a>
 </p>
 
@@ -38,7 +38,7 @@ The application consists of three main parts: "History", "Tourism" and "Culture"
 # Getting Started
 
 ```
-git clone https://github.com/O-Plums/Oppidum
+git clone https://github.com/O-Plums/Oppidums
 flutter pub get
 flutter run
 ```
@@ -96,8 +96,8 @@ Tools • Dart 2.12.0
 
 # Contributing
 
-Please read our [Contributing Guide](https://github.com/O-Plums/Oppidum/blob/main/CONTRIBUTING.md) before submitting a Pull Request to the project.
+Please read our [Contributing Guide](https://github.com/O-Plums/Oppidums/blob/main/CONTRIBUTING.md) before submitting a Pull Request to the project.
 
 # License
 
-Oppidum is [MIT](https://github.com/O-Plums/Oppidum/blob/main/LICENSE) licensed.
+Oppidums is [MIT](https://github.com/O-Plums/Oppidums/blob/main/LICENSE) licensed.

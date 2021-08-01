@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/net/user_api.dart';
+import 'package:oppidums/net/user_api.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:io';
 
@@ -19,7 +19,7 @@ class AppleLoginButton extends StatelessWidget {
         ],
       );
       print(credential);
-      var token = await OppidumUserApi.appleSignIn(credential);
+      var token = await OppidumsUserApi.appleSignIn(credential);
       if (onLogin != null) {
         onLogin(token);
       }

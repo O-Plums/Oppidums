@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_bar.dart';
-import 'package:oppidum/views/widgets/loading_widget.dart';
+import 'package:oppidums/views/widgets/app_bar.dart';
+import 'package:oppidums/views/widgets/loading_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:oppidum/models/city_model.dart';
+import 'package:oppidums/models/city_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:oppidum/net/city_api.dart';
+import 'package:oppidums/net/city_api.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class CustomCalendarView extends StatefulWidget {
@@ -43,7 +43,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
     }
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var event = await OppidumCityApi.getEventOfCitie(cityModel.id);
+    var event = await OppidumsCityApi.getEventOfCitie(cityModel.id);
     if (mounted) {
       setState(() {
         _events = event;

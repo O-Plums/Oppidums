@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:oppidum/views/widgets/app_bar.dart';
-import 'package:oppidum/views/widgets/app_drawer.dart';
-import 'package:oppidum/views/home/cult/cult_view.dart';
-import 'package:oppidum/views/home/history/history_view.dart';
-import 'package:oppidum/views/home/tourism/tourism_view.dart';
-import 'package:oppidum/views/home/allPlaces/all_places.dart';
+import 'package:oppidums/views/widgets/app_bar.dart';
+import 'package:oppidums/views/widgets/app_drawer.dart';
+import 'package:oppidums/views/home/cult/cult_view.dart';
+import 'package:oppidums/views/home/history/history_view.dart';
+import 'package:oppidums/views/home/tourism/tourism_view.dart';
+import 'package:oppidums/views/home/allPlaces/all_places.dart';
 
 class HomeView extends StatefulWidget {
   final bool showReminder;

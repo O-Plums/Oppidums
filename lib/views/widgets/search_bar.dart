@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oppidum/views/widgets/logo.dart';
-import 'package:oppidum/views/widgets/input_text.dart';
+import 'package:oppidums/views/widgets/logo.dart';
+import 'package:oppidums/views/widgets/input_text.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 

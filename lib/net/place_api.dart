@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:oppidum/net/client.dart';
+import 'package:oppidums/net/client.dart';
 import 'dart:math';
 
 List shuffle(List items) {
@@ -16,8 +16,8 @@ List shuffle(List items) {
   return items;
 }
 
-class OppidumPlaceApi {
-  static Dio _client = createOppidumDioClient();
+class OppidumsPlaceApi {
+  static Dio _client = createOppidumsDioClient();
 
   static Future<List<dynamic>> getAllPlaceOfCity(
      String cityId) async {
