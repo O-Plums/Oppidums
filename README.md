@@ -1,7 +1,6 @@
 # Oppidums
 
-Oppidums aims to provide users with cultural, historical, tourist, or other information on the cities offered in the application.
-
+Oppidums is open source app that provide cultural, historical and touristic information on different cities.
 
 * [French version](https://github.com/O-Plums/Oppidums/blob/main/ReadmeFR.md)
 
