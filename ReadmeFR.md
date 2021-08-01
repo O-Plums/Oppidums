@@ -1,4 +1,9 @@
-# Oppidums
+<p align="center">
+  <a href="https://strapi.io">
+    <img src="https://github.com/O-Plums/Oppidums/blob/main/assets/oppidums.png" width="318px" alt="Oppidums logo" />
+  </a>
+  <h1 align='center'>Oppidums</h1>
+</p>
 
 Oppidums a pour but d'offrir aux utilisateurs des informations culturelles, historiques, touristiques, ou autres, sur les villes proposées dans l'application.
 
