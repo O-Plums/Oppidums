@@ -4,7 +4,6 @@
   </a>
   <h1 align='center'>Oppidums</h1>
 </p>
-# Oppidums
 
 Oppidums is open source app that provide cultural, historical and touristic information on different cities.
 
