@@ -18,7 +18,7 @@ Oppidums is open source app that provide cultural, historical and touristic info
 
 # Download the app
 <p align="center">
-  <a href="https://play.google.com/store/apps/details?id=com.oppidums.app">
+  <a href="https://play.google.com/store/apps/details?id=com.oppidum.app">
     <img src="https://github.com/O-Plums/Oppidums/blob/main/repo_images/playstore.png" width="318px" alt="android logo" />
   </a>
      <a href="https://apps.apple.com/us/app/oppidums/id1574072581">
