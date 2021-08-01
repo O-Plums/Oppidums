@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://strapi.io">
+    <img src="https://github.com/O-Plums/Oppidums/blob/main/assets/oppidums.png" width="318px" alt="Oppidums logo" />
+  </a>
+  <h1 align='center'>Oppidums</h1>
+</p>
 # Oppidums
 
 Oppidums is open source app that provide cultural, historical and touristic information on different cities.
