@@ -90,7 +90,7 @@ Widget renderCityCard(context, city) {
             strokeColor: Colors.black,
               child: Text(
                             city['shortDescription'],
-                            maxLines: 2,
+                            maxLines: 3,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               fontSize: 12,

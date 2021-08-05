@@ -117,7 +117,7 @@ class _PlaceCard extends State<PlaceCard> {
                             strokeWidth: 2,
                             strokeColor: Colors.black,
                             child: Text(widget.place['shortDescription'],
-                                maxLines: 2,
+                                maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 12))),
