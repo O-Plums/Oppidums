@@ -16,7 +16,8 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
 import 'package:flutter_i18n/flutter_i18n.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:share/share.dart';
 import 'package:oppidums/router.dart';
 import 'package:fluro/fluro.dart';
 
@@ -170,8 +171,21 @@ class _PlaceViewViewState extends State<PlaceView>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
-            title:
-                FlutterI18n.translate(context, "common.place_view.titlePlace")),
+          title: FlutterI18n.translate(context, "common.place_view.titlePlace"),
+          actions: [
+            CustomInkWell(
+                onTap:  () async {
+                  final SharedPreferences prefs = await _prefs;
+                  final String cityId = prefs.getString('cityId');
+
+                  Share.share(
+                      "Decouvre ce lieu sur https://oppidums.com/${cityId}/${_place['_id']}");
+                },
+                child: Container(
+                    margin: EdgeInsets.only(right: 10, top: 10),
+                    child: Icon(Icons.share, size: 25)))
+          ],
+        ),
         body: Stack(children: [
           Container(decoration: new BoxDecoration(color: Color(0xff101519))),
           SingleChildScrollView(
@@ -217,7 +231,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                           MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                            width: 300,
+                                            width: 270,
                                             child: Text(_place['address'],
                                                 textAlign: TextAlign.center,
                                                 overflow: TextOverflow.ellipsis,
@@ -228,9 +242,23 @@ class _PlaceViewViewState extends State<PlaceView>
                                                     fontSize: 14))),
                                         Container(
                                           alignment: Alignment.topLeft,
-                                          child: Icon(Icons.location_on,
-                                              size: 30,
-                                              color: Color(0xff8ec6f5)),
+                                          child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Icon(Icons.location_on,
+                                                    size: 30,
+                                                    color: Color(0xff8ec6f5)),
+                                                Text(
+                                                    FlutterI18n.translate(
+                                                        context,
+                                                        "common.place_view.maps"),
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10)),
+                                              ]),
                                         ),
                                       ]))
                             ]))),
@@ -266,6 +294,28 @@ class _PlaceViewViewState extends State<PlaceView>
                                       fontSize: 10, color: Colors.white)),
                             )
                           ]))),
+                if (_place['imageGallery'] != null &&
+                    _place['imageGallery'].length > 0)
+                  CarouselSlider(
+                    options: CarouselOptions(
+                      height: 200,
+                      aspectRatio: 0.1,
+                      viewportFraction: 0.6,
+                      // initialPage: 0,
+                      enableInfiniteScroll: true,
+                      // reverse: false,
+                      enlargeCenterPage: true,
+                      // scrollDirection: Axis.horizontal,
+                    ),
+                    items: _place['imageGallery'].map<Widget>((i) {
+                      return Container(
+                          child: ClipRRect(
+                              // borderRadius: BorderRadius.all(Radius.circular(5)),
+                              child: FadeInImage.assetNetwork(
+                                  placeholder: 'assets/image_loading.gif',
+                                  image: i['url'])));
+                    }).toList(),
+                  ),
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: MarkdownBody(
@@ -372,22 +422,22 @@ class _PlaceViewViewState extends State<PlaceView>
                 Divider(color: Colors.white),
                 CustomInkWell(
                     onTap: isLogin == false
-                              ? () {
-                                  showMaterialModalBottomSheet(
-                                      backgroundColor: Colors.transparent,
-                                      context: context,
-                                      expand: false,
-                                      builder: (context) => AuthWidget(
-                                            onValidate: () {
-                                              _checkLocalStorage(context);
-                                            },
-                                          ));
-                                }
-                              :  () {
-                      AppRouter.router.navigateTo(context, 'meet',
-                          replace: false,
-                          transition: TransitionType.inFromRight);
-                    },
+                        ? () {
+                            showMaterialModalBottomSheet(
+                                backgroundColor: Colors.transparent,
+                                context: context,
+                                expand: false,
+                                builder: (context) => AuthWidget(
+                                      onValidate: () {
+                                        _checkLocalStorage(context);
+                                      },
+                                    ));
+                          }
+                        : () {
+                            AppRouter.router.navigateTo(context, 'meet',
+                                replace: false,
+                                transition: TransitionType.inFromRight);
+                          },
                     child: Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.all(10),
@@ -461,7 +511,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                   final SharedPreferences prefs = await _prefs;
                                   final token = prefs.getString('googlePYMP');
                                   await OppidumsCommentApi.deleteCommentById(
-                                    comment['_id'], token);
+                                      comment['_id'], token);
                                   _comments.removeWhere(
                                       (c) => c['_id'] == comment['_id']);
                                   setState(() {

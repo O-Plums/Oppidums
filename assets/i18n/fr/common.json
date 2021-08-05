@@ -53,7 +53,8 @@
   "place_view":{
     "titlePlace" : "Place",
     "comment" : "Commenter",
-    "meetTitle": "Visiter ce lieu"
+    "meetTitle": "Visiter ce lieu",
+    "maps": "Ouvrir carte"
   },
   "app_drawer":{
     "seeCity": "Voir la ville",

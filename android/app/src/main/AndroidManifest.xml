@@ -45,8 +45,8 @@
         <category android:name="android.intent.category.BROWSABLE" />
         <!-- Accepts URIs that begin with YOUR_SCHEME://YOUR_HOST -->
         <data
-          android:scheme="applinks.oppidums"
-          android:host="oppidums.info"
+          android:scheme="https"
+          android:host="oppidums.com"
           />
       </intent-filter>
             
