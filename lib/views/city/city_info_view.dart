@@ -9,6 +9,8 @@ import 'package:oppidums/net/city_api.dart';
 import 'package:provider/provider.dart';
 import 'package:oppidums/models/city_model.dart';
 import 'package:oppidums/views/widgets/loading_widget.dart';
+import 'package:share/share.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 
 class CityInfoView extends StatefulWidget {
@@ -23,6 +25,7 @@ class _CityInfoViewState extends State<CityInfoView> {
   bool loading = false;
   List<dynamic> _imageGallery = [];
   Map<String, dynamic> _citie = null;
+
 
   void fetchCitie() async {
     var cityModel = Provider.of<CityModel>(context, listen: false);
@@ -52,7 +55,16 @@ class _CityInfoViewState extends State<CityInfoView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(title: 'City'),
+        appBar: CustomAppBar(title: _citie != null ? _citie['name'] : '...',
+          actions: [
+            CustomInkWell(
+                onTap:  () async {
+                  Share.share( "Decouvre ce lieu sur https://oppidums.com/${_citie['id']}");
+                },
+             child: Container(
+                    margin: EdgeInsets.only(right: 15),
+                    child: Icon(Icons.share, size: 25)))],
+        ),
         body: 
          Stack(
         children: [
@@ -84,41 +96,50 @@ class _CityInfoViewState extends State<CityInfoView> {
                       tileMode: TileMode.clamp),
                 ),
                 padding: EdgeInsets.only(bottom: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(_citie['name'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 22)),
-                    CustomInkWell(
-                        onTap: () {
-                          MapsLauncher.launchQuery(_citie['address']);
-                        },
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                         child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                               Container(
-                                          width: 300,
-                                          child:
-                                        Text(_citie['address'],
-                                            textAlign: TextAlign.center,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                                fontStyle: FontStyle.italic,
-                                                fontSize: 14))),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Icon(Icons.location_on,
-                                    size: 30, color: Color(0xff8ec6f5)),
-                              ),
-                            ]))
-                  ],
-                ),
+                              CustomInkWell(
+                                  onTap: () {
+                                    MapsLauncher.launchQuery(_citie['address']);
+                                  },
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                            width: 250,
+                                            child: Text(_citie['address'],
+                                                textAlign: TextAlign.left,
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 3,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontStyle: FontStyle.italic,
+                                                    fontSize: 14))),
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Icon(Icons.location_on,
+                                                    size: 30,
+                                                    color: Color(0xff8ec6f5)),
+                                                Text(
+                                                    FlutterI18n.translate(
+                                                        context,
+                                                        "common.place_view.maps"),
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 10)),
+                                              ]),
+                                        ),
+                                      ]))
+                            ])
               )),
           Padding(
               padding: EdgeInsets.all(10),

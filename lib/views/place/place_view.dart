@@ -171,25 +171,23 @@ class _PlaceViewViewState extends State<PlaceView>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
-          title: FlutterI18n.translate(context, "common.place_view.titlePlace"),
+          title: _place != null ? _place['name'] : '...',
           actions: [
             CustomInkWell(
                 onTap:  () async {
                   final SharedPreferences prefs = await _prefs;
                   final String cityId = prefs.getString('cityId');
-
-                  Share.share(
-                      "Decouvre ce lieu sur https://oppidums.com/${cityId}/${_place['_id']}");
+                  Share.share( "Decouvre ce lieu sur https://oppidums.com/${cityId}/${_place['_id']}");
                 },
                 child: Container(
-                    margin: EdgeInsets.only(right: 10, top: 10),
-                    child: Icon(Icons.share, size: 25)))
-          ],
+                    margin: EdgeInsets.only(right: 15),
+                    child: Icon(Icons.share, size: 25)))],
         ),
         body: Stack(children: [
           Container(decoration: new BoxDecoration(color: Color(0xff101519))),
           SingleChildScrollView(
-              child: Column(children: [
+              child: Column(
+                children: [
             if (loading == true) LoadingAnnimation(),
             if (_place != null)
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -215,26 +213,20 @@ class _PlaceViewViewState extends State<PlaceView>
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Text(_place['name'],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      height: 3,
-                                      fontSize: 20)),
                               CustomInkWell(
                                   onTap: () {
                                     MapsLauncher.launchQuery(_place['address']);
                                   },
                                   child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Container(
-                                            width: 270,
+                                            width: 250,
                                             child: Text(_place['address'],
-                                                textAlign: TextAlign.center,
+                                                textAlign: TextAlign.left,
                                                 overflow: TextOverflow.ellipsis,
+                                                maxLines: 3,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.white,
@@ -262,6 +254,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                         ),
                                       ]))
                             ]))),
+                      
                 if (_place['audioDescription'] != null &&
                     _place['audioDescription']['url'] != '')
                   CustomInkWell(
@@ -452,6 +445,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                           "common.place_view.meetTitle"),
                                       style: TextStyle(color: Colors.white))),
                             ]))),
+              if(_comments.length > 0)
                 Divider(color: Colors.white),
                 ..._comments.map((comment) {
                   return (Container(
