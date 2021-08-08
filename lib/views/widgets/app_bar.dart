@@ -17,7 +17,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         preferredSize: preferredSize,
         child: AppBar(
             title: title != null
-                ? Text(title, style: TextStyle(color: Colors.white))
+                ? Text(title, 
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 15))
                 : OppidumsLogo(size: 45),
             brightness: Brightness.dark, // status bar brightness
             automaticallyImplyLeading: true,
