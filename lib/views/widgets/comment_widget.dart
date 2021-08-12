@@ -86,6 +86,7 @@ class _CommentWidget extends State<CommentWidget> {
             ),
           ),
           CustomFlatButton(
+            eventName:'place.send_comment',
             label: FlutterI18n.translate(context, "common.add_city_widget.buttonSend"),
             color: Color(0xff8ec6f5),
             onPressed: () async {

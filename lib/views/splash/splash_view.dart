@@ -26,38 +26,48 @@ class _SplashViewState extends State<SplashView> {
 
   Future<void> initUniLinks(Uri uri) async {
     // _sub = getUriLinksStream().listen((Uri uri) async {
-      var splitUri = uri.toString().split('//')[1].split('/');
-      print(splitUri);
+    var splitUri = uri.toString().split('//')[1].split('/');
+    print(splitUri);
 
-      final SharedPreferences prefs = await _prefs;
-      final city = await OppidumsCityApi.getCitieById(splitUri[1]);
-      prefs.setString('cityId', city['_id']);
-      prefs.setString('cityUrl', city['image']['url']);
-      prefs.setString('cityName', city['name']);
-      var cityModel = Provider.of<CityModel>(context, listen: false);
-      cityModel.setCityBasicInfo(
-          city['_id'], city['image']['url'], city['name']);
+    final SharedPreferences prefs = await _prefs;
+    final city = await OppidumsCityApi.getCitieById(splitUri[1]);
+    prefs.setString('cityId', city['_id']);
+    prefs.setString('cityUrl', city['image']['url']);
+    prefs.setString('cityName', city['name']);
+    var cityModel = Provider.of<CityModel>(context, listen: false);
+    cityModel.setCityBasicInfo(city['_id'], city['image']['url'], city['name']);
 
-      if (splitUri.length >= 2) {
-        AppRouter.router.navigateTo(context, 'home',
-            replace: true, transition: TransitionType.inFromRight);
+    if (splitUri.length >= 2) {
+      AppRouter.router.navigateTo(context, 'home',
+          replace: true, transition: TransitionType.inFromRight);
 
-        AppRouter.router.navigateTo(
-          context,
-          'place',
-          replace: false,
-          transition: TransitionType.inFromRight,
-          routeSettings: RouteSettings(arguments: {
-            'placeId': splitUri[2],
-          }),
-        );
-        return;
-      }
-      if (splitUri.length >= 1) {
-        AppRouter.router.navigateTo(context, 'home',
-            replace: true, transition: TransitionType.inFromRight);
-      }
+      AppRouter.router.navigateTo(
+        context,
+        'place',
+        replace: false,
+        transition: TransitionType.inFromRight,
+        routeSettings: RouteSettings(arguments: {
+          'placeId': splitUri[2],
+        }),
+      );
+      return;
+    }
+    if (splitUri.length >= 1) {
+      AppRouter.router.navigateTo(context, 'home',
+          replace: true, transition: TransitionType.inFromRight);
+    }
     // });
+  }
+
+  //TODO populate user ? and need to add amplitude
+  void _checkLocalStorage() async {
+
+    final SharedPreferences prefs = await _prefs;
+    final token = prefs.getString('googlePYMP');
+
+    if (token != null) {
+  
+    }
   }
 
   @override
@@ -65,6 +75,7 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
     //Check local storage for token if user already connect
     new Future.delayed(Duration.zero, () async {
+      _checkLocalStorage();
       Uri initialUri = await getInitialUri();
       if (initialUri == null) {
         final SharedPreferences prefs = await _prefs;
@@ -79,7 +90,7 @@ class _SplashViewState extends State<SplashView> {
           AppRouter.router.navigateTo(context, 'city', replace: true);
         }
       } else {
-      initUniLinks(initialUri);
+        initUniLinks(initialUri);
       }
     });
   }

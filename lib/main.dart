@@ -14,6 +14,8 @@ import 'package:intl/intl.dart'; //for date format
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:oppidums/models/city_model.dart';
+import 'package:oppidums/analytics.dart';
+
 
 void main(List<String> args, {String env}) async {
 //Remove this method to stop OneSignal Debugging
@@ -35,7 +37,7 @@ void main(List<String> args, {String env}) async {
 
   // Add this here to initialize the routes
   AppRouter.setupRouter();
-
+  OppidumsAnalytics.setup();
   await SentryFlutter.init(
     (options) => options.dsn = AppConfig.sentryDns,
     appRunner: () => runApp(MultiProvider(
@@ -62,7 +64,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-       debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         navigatorObservers: <NavigatorObserver>[observer],
         color: Color.fromARGB(255, 255, 255, 255),
         title: 'Oppidums',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_select/smart_select.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 
 class SimpleSelect extends StatefulWidget {
   final String title;
@@ -49,7 +50,9 @@ class _SimpleSelectState extends State<SimpleSelect> {
           (Text(widget.label, style: TextStyle(fontSize: 16, color: Colors.white))),
         SmartSelect.single(
             tileBuilder: (context, state) {
-              return InkWell(
+              return CustomInkWell(
+                eventName: 'select_click_in_meet',
+
                 onTap: state.showModal,
                 child: Container(
                   margin: EdgeInsets.only(top: 10),

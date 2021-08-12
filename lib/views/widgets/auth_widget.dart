@@ -6,6 +6,8 @@ import 'package:oppidums/models/user_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidums/router.dart';
+import 'package:oppidums/analytics.dart';
+
 import 'dart:io';
 
 class AuthWidget extends StatefulWidget {
@@ -37,6 +39,7 @@ class _AuthWidgetState extends State<AuthWidget> {
       userModel.auth(userData['token']);
       prefs.setString('googlePYMP', userData['token']);
       await userModel.populate(userData);
+      OppidumsAnalytics.analytics.setUserId(userModel.id);
       widget.onValidate();
       AppRouter.router.pop(context);
       if (mounted) {
@@ -64,7 +67,8 @@ class _AuthWidgetState extends State<AuthWidget> {
             child: Column(children: [
           Container(
             margin: EdgeInsets.only(top: 10, bottom: 10),
-            child: Text(FlutterI18n.translate(context, "common.common_word.connect"),
+            child: Text(
+                FlutterI18n.translate(context, "common.common_word.connect"),
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -74,8 +78,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             GoogleLoginButton(
                 onLogin: (Map<String, dynamic> userData) =>
                     _handleLogin(context, userData)),
-
-                          if (!isLoading && (Platform.isIOS || Platform.isMacOS))
+          if (!isLoading && (Platform.isIOS || Platform.isMacOS))
             AppleLoginButton(
                 onLogin: (Map<String, dynamic> userData) =>
                     _handleLogin(context, userData)),

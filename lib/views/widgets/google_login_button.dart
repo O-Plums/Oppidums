@@ -43,7 +43,7 @@ class GoogleLoginButton extends StatelessWidget {
           title: Text("Error GOOGLE"),
           content: Text("Error => $error"),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text("OK"),
               onPressed: () => Navigator.of(context).pop(),
             ),
@@ -60,14 +60,10 @@ class GoogleLoginButton extends StatelessWidget {
       height: 36,
       margin: EdgeInsets.only(top: 5, bottom: 5),
       child:   CustomInkWell(
-              
-                      onTap: () async {
-                        _handleSignIn(context);
-                      },
-                      child:  Container(
-       decoration: BoxDecoration(
-  color:           Color(0xFF397AF3),
-                borderRadius: BorderRadius.circular(5)),
+        eventName: 'google_login_button',
+        onTap: () async { _handleSignIn(context); },
+       child:  Container(
+       decoration: BoxDecoration(color: Color(0xFF397AF3), borderRadius: BorderRadius.circular(5)),
       width: 300,
     child: Padding(
       padding: EdgeInsets.all(6),

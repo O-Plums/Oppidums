@@ -189,6 +189,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
           Container(
             margin: EdgeInsets.only(top: 20),
             child: CustomFlatButton(
+              eventName:'create_meeting.labelSend',
               disabledColor: Colors.grey,
               label: FlutterI18n.translate(context, "common.create_meeting.labelSend"),
               loading: loadingButton,

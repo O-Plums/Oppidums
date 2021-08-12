@@ -12,7 +12,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:bordered_text/bordered_text.dart';
-
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 
 Widget renderCityCard(context, city) {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -30,7 +30,8 @@ Widget renderCityCard(context, city) {
           fit: BoxFit.cover),
     ),
 
-    child: InkWell(
+    child: CustomInkWell(
+        eventName: 'open_city_info_${city != null ? city['id'] : ''}',
         onTap: () async {
           final SharedPreferences prefs = await _prefs;
 
@@ -178,7 +179,7 @@ class _CityViewState extends State<CityView> {
               FlutterI18n.translate(context, "common.city_view.thanksMessage"),
               style: TextStyle(color: Colors.white)),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text("OK", style: TextStyle(color: Color(0xff8ec6f5))),
               onPressed: () => Navigator.of(context).pop(),
             ),

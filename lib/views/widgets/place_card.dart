@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 
 
 class PlaceCard extends StatefulWidget {
@@ -31,7 +32,8 @@ class _PlaceCard extends State<PlaceCard> {
     return Container(
         height: 250,
         width: double.infinity,
-        child: InkWell(
+        child: CustomInkWell(
+          eventName: 'open_place_card_${widget.place['id']}',
           onTap: widget.onPressed,
           child: Container(
               decoration: BoxDecoration(

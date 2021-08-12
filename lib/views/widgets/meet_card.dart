@@ -4,6 +4,7 @@ import 'package:oppidums/views/widgets/app_flat_button.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidums/net/meet_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 
 class MeetCard extends StatelessWidget {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -21,7 +22,8 @@ class MeetCard extends StatelessWidget {
     return Container(
         height: 200,
         width: double.infinity,
-        child: InkWell(
+        child: CustomInkWell(
+          eventName: 'open_meet_card_${meet['id']}',
           onTap: onPressed,
           child: Container(
               decoration: BoxDecoration(
@@ -56,14 +58,17 @@ class MeetCard extends StatelessWidget {
                           width: double.infinity,
                           alignment: Alignment.topRight,
                           child: CustomFlatButton(
+                            eventName: 'meet_view.deleteVisit',
                             disabledColor: Colors.grey,
-                            label: FlutterI18n.translate(context, "common.meet_view.deleteVisit"),
+                            label: FlutterI18n.translate(
+                                context, "common.meet_view.deleteVisit"),
                             textColor: Colors.black,
                             color: Colors.red,
-                            onPressed: () async  {
+                            onPressed: () async {
                               final SharedPreferences prefs = await _prefs;
                               final token = prefs.getString('googlePYMP');
-                              await OppidumsMeetApi.deleteMeetById(meet['_id'], token);
+                              await OppidumsMeetApi.deleteMeetById(
+                                  meet['_id'], token);
                               fetchMeet();
                             },
                             width: 100,

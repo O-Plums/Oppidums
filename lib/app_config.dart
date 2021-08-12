@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:oppidums/app_config.dart';
 
 class AppConfig {
   static String appVersion;
@@ -7,6 +8,7 @@ class AppConfig {
   static String apiUrl;
   static String realmUrl;
   static String apiVersion;
+  static String amplitude;
   static String sentryDns;
 
   static Future<void> load(String e) async {
@@ -20,6 +22,7 @@ class AppConfig {
     apiUrl = json['apiUrl'];
     realmUrl = json['realmUrl'];
     apiVersion = json['apiVersion'];
+    amplitude = json['amplitude'];
     sentryDns = json['sentry']['dns'];
   }
 }

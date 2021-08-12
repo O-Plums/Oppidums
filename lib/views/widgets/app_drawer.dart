@@ -95,10 +95,10 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.only(left:10),
-                                   
-                                    child:
+                                  padding: EdgeInsets.only(left:10),
+                                  child:
                                   CustomFlatButton(
+                                    eventName:'app_drawer.seeCity',
                                     loadingColor: Colors.white,
                                     color: Colors.transparent,
                                     borderWidth: 2,

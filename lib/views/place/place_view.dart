@@ -174,20 +174,22 @@ class _PlaceViewViewState extends State<PlaceView>
           title: _place != null ? _place['name'] : '...',
           actions: [
             CustomInkWell(
-                onTap:  () async {
+                eventName: 'share_place_${_place != null ? _place['id'] : ''}',
+                onTap: () async {
                   final SharedPreferences prefs = await _prefs;
                   final String cityId = prefs.getString('cityId');
-                  Share.share( "Decouvre ce lieu sur https://oppidums.com/${cityId}/${_place['_id']}");
+                  Share.share(
+                      "Decouvre ce lieu sur https://oppidums.com/${cityId}/${_place['_id']}");
                 },
                 child: Container(
                     margin: EdgeInsets.only(right: 15),
-                    child: Icon(Icons.share, size: 25)))],
+                    child: Icon(Icons.share, size: 25)))
+          ],
         ),
         body: Stack(children: [
           Container(decoration: new BoxDecoration(color: Color(0xff101519))),
           SingleChildScrollView(
-              child: Column(
-                children: [
+              child: Column(children: [
             if (loading == true) LoadingAnnimation(),
             if (_place != null)
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -254,10 +256,10 @@ class _PlaceViewViewState extends State<PlaceView>
                                         ),
                                       ]))
                             ]))),
-                      
                 if (_place['audioDescription'] != null &&
                     _place['audioDescription']['url'] != '')
                   CustomInkWell(
+                      eventName: 'star_audioDescription_${_place['id']}',
                       onTap: () async {
                         startStopAudio();
                       },
@@ -334,6 +336,7 @@ class _PlaceViewViewState extends State<PlaceView>
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomInkWell(
+                          eventName: 'click_on_approval_${_place['id']}',
                           onTap: isLogin == false
                               ? () {
                                   showMaterialModalBottomSheet(
@@ -370,6 +373,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                   ]))),
                       Text('|', style: TextStyle(color: Colors.grey)),
                       CustomInkWell(
+                          eventName: 'click_on_add_comment_${_place['id']}',
                           onTap: isLogin == false
                               ? () {
                                   showMaterialModalBottomSheet(
@@ -414,6 +418,7 @@ class _PlaceViewViewState extends State<PlaceView>
                     ]),
                 Divider(color: Colors.white),
                 CustomInkWell(
+                    eventName: 'click_on_go_to_meet_${_place['id']}',
                     onTap: isLogin == false
                         ? () {
                             showMaterialModalBottomSheet(
@@ -445,8 +450,7 @@ class _PlaceViewViewState extends State<PlaceView>
                                           "common.place_view.meetTitle"),
                                       style: TextStyle(color: Colors.white))),
                             ]))),
-              if(_comments.length > 0)
-                Divider(color: Colors.white),
+                if (_comments.length > 0) Divider(color: Colors.white),
                 ..._comments.map((comment) {
                   return (Container(
                       margin: EdgeInsets.all(5),
@@ -501,6 +505,7 @@ class _PlaceViewViewState extends State<PlaceView>
                               )),
                           if (comment['app_user']['_id'] == userId)
                             CustomInkWell(
+                                eventName: 'click_delete_comment_${_place['id']}',
                                 onTap: () async {
                                   final SharedPreferences prefs = await _prefs;
                                   final token = prefs.getString('googlePYMP');

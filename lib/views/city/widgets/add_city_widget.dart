@@ -97,6 +97,7 @@ class _AddCityWidgetState extends State<AddCityWidget> {
             ),
           ),
           CustomFlatButton(
+            eventName:'add_city_widget.buttonSend',
             label: FlutterI18n.translate(context, "common.add_city_widget.buttonSend"),
             textColor: Colors.black,
             color: Colors.white,

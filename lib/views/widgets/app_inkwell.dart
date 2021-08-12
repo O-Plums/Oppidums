@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:oppidums/analytics.dart';
+import 'package:oppidums/app_config.dart';
 
 class CustomInkWell extends StatelessWidget {
   final Function() onTap;
@@ -25,7 +27,12 @@ class CustomInkWell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: onTap,
+        onTap: () {
+          if (AppConfig.env == 'production') {
+            OppidumsAnalytics.analytics.logEvent(eventName ?? 'need_to_add_eventName_inkWell');
+          }
+          onTap();
+        },
         child: Stack(
           alignment: Alignment.center,
           children: [

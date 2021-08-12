@@ -53,7 +53,7 @@ class _OneMeetViewState extends State<OneMeetView> {
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
     var meet = await OppidumsMeetApi.joinMeet(_meet['_id'], participens, token);
-    
+
     if (mounted) {
       setState(() {
         _meet = meet;
@@ -72,7 +72,7 @@ class _OneMeetViewState extends State<OneMeetView> {
         loading = true;
       });
     }
-  final SharedPreferences prefs = await _prefs;
+    final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
     var meet = await OppidumsMeetApi.getMeetById(widget.meetId, token);
     if (mounted) {
@@ -107,7 +107,9 @@ class _OneMeetViewState extends State<OneMeetView> {
   Widget build(BuildContext context) {
     print(_didjoin);
     return Scaffold(
-        appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.meet_view.titlePageVisit")),
+        appBar: CustomAppBar(
+            title: FlutterI18n.translate(
+                context, "common.meet_view.titlePageVisit")),
         bottomNavigationBar: AppBottomNavigationAction(
             title: !_didjoin
                 ? FlutterI18n.translate(context, "common.meet_view.joinVisit")
@@ -153,6 +155,7 @@ class _OneMeetViewState extends State<OneMeetView> {
                                       height: 3,
                                       fontSize: 20)),
                               CustomInkWell(
+                                  eventName: 'open_meet_${_meet['id']}',
                                   onTap: () {
                                     MapsLauncher.launchQuery(
                                         _meet['place']['address']);
@@ -180,7 +183,8 @@ class _OneMeetViewState extends State<OneMeetView> {
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: Text(
-                      FlutterI18n.translate(context, "common.meet_view.creator") ,
+                      FlutterI18n.translate(
+                          context, "common.meet_view.creator"),
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ),
@@ -191,8 +195,8 @@ class _OneMeetViewState extends State<OneMeetView> {
                             padding: EdgeInsets.only(top: 10),
                             child: CircleAvatar(
                                 radius: 20.0,
-                                backgroundImage:
-                                    NetworkImage(_meet['owner']['picture'] ?? ''))),
+                                backgroundImage: NetworkImage(
+                                    _meet['owner']['picture'] ?? ''))),
                         Padding(
                             padding: EdgeInsets.all(10),
                             child: Text(_meet['owner']['name'],

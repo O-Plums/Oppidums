@@ -28,6 +28,7 @@ implements PreferredSizeWidget {
       height: 50,
       alignment: Alignment.bottomCenter,
       child: CustomFlatButton(
+        eventName:'bottom_navigation_action',
         loading: loading,
         width: 200,
         loadingColor: Color(0xff8ec6f5),
