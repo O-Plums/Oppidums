@@ -9,8 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidums/views/widgets/app_bottom_navigation_action.dart';
 
-
-
 class AllPlaces extends StatefulWidget {
   final bool showReminder;
 
@@ -32,8 +30,7 @@ class _TourismeViewState extends State<AllPlaces> {
     }
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var places =
-        await OppidumsPlaceApi.getAllPlaceOfCity(cityModel.id);
+    var places = await OppidumsPlaceApi.getAllPlaceOfCity(cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
@@ -41,25 +38,24 @@ class _TourismeViewState extends State<AllPlaces> {
       });
     }
   }
-  Future<String>  refetchPlace(context) async {
+
+  Future<String> refetchPlace(context) async {
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var places =
-        await OppidumsPlaceApi.getAllPlaceOfCity(cityModel.id);
+    var places = await OppidumsPlaceApi.getAllPlaceOfCity(cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
       });
       return 'success';
     }
-      return 'success';
-
+    return 'success';
   }
 
   @override
   void initState() {
     new Future.delayed(Duration.zero, () {
-       fetchPlace(context);
+      fetchPlace(context);
     });
     super.initState();
   }
@@ -72,7 +68,7 @@ class _TourismeViewState extends State<AllPlaces> {
       )),
       RefreshIndicator(
           onRefresh: () {
-           return refetchPlace(context);
+            return refetchPlace(context);
           },
           child: SingleChildScrollView(
               child: Column(children: [
@@ -82,10 +78,7 @@ class _TourismeViewState extends State<AllPlaces> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(top: 50),
                   child: Text(FlutterI18n.translate(context, "common.common_word.noData"),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 18))),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18))),
             ..._places.map((place) {
               return PlaceCard(
                   place: place,
@@ -101,17 +94,14 @@ class _TourismeViewState extends State<AllPlaces> {
                     );
                   });
             }).toList(),
-               if (loading == false)
+            if (loading == false)
               AppBottomNavigationAction(
-            title: FlutterI18n.translate(context, "common.app_drawer.changeCity"),
-            loading: false,
-            onPressed: () {
-              AppRouter.router.navigateTo(context, 'city',
-                        replace: true, transition: TransitionType.inFromLeft);
-            })
+                  title: FlutterI18n.translate(context, "common.app_drawer.changeCity"),
+                  loading: false,
+                  onPressed: () {
+                    AppRouter.router.navigateTo(context, 'city', replace: true, transition: TransitionType.inFromLeft);
+                  })
           ]))),
-
-        
     ]);
   }
 }

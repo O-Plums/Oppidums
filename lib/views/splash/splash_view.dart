@@ -6,11 +6,11 @@ import 'package:oppidums/models/city_model.dart';
 import 'package:provider/provider.dart';
 import 'package:oppidums/views/widgets/loading_widget.dart';
 import 'package:uni_links/uni_links.dart';
-import 'package:flutter/services.dart' show PlatformException;
 import 'package:fluro/fluro.dart';
-import 'package:provider/provider.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:oppidums/models/user_model.dart';
+import 'package:oppidums/analytics.dart';
+
+import 'package:oppidums/net/user_api.dart';
 
 import 'dart:async';
 import 'dart:io';
@@ -38,8 +38,7 @@ class _SplashViewState extends State<SplashView> {
     cityModel.setCityBasicInfo(city['_id'], city['image']['url'], city['name']);
 
     if (splitUri.length >= 2) {
-      AppRouter.router.navigateTo(context, 'home',
-          replace: true, transition: TransitionType.inFromRight);
+      AppRouter.router.navigateTo(context, 'home', replace: true, transition: TransitionType.inFromRight);
 
       AppRouter.router.navigateTo(
         context,
@@ -53,20 +52,23 @@ class _SplashViewState extends State<SplashView> {
       return;
     }
     if (splitUri.length >= 1) {
-      AppRouter.router.navigateTo(context, 'home',
-          replace: true, transition: TransitionType.inFromRight);
+      AppRouter.router.navigateTo(context, 'home', replace: true, transition: TransitionType.inFromRight);
     }
     // });
   }
 
   //TODO populate user ? and need to add amplitude
-  void _checkLocalStorage() async {
-
+  void _checkLocalStorage(context) async {
+    var userModel = Provider.of<UserModel>(context, listen: false);
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
-
+    print(token);
     if (token != null) {
-  
+      Map<String, dynamic> userData = await OppidumsUserApi.populateUser(token);
+      userModel.auth(userData['token']);
+      prefs.setString('googlePYMP', userData['token']);
+      await userModel.populate(userData);
+      OppidumsAnalytics.analytics.setUserId(userModel.id);
     }
   }
 
@@ -75,7 +77,7 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
     //Check local storage for token if user already connect
     new Future.delayed(Duration.zero, () async {
-      _checkLocalStorage();
+      await _checkLocalStorage(context);
       Uri initialUri = await getInitialUri();
       if (initialUri == null) {
         final SharedPreferences prefs = await _prefs;
@@ -96,7 +98,6 @@ class _SplashViewState extends State<SplashView> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xff101519), body: LoadingAnnimation());
+    return Scaffold(backgroundColor: Color(0xff101519), body: LoadingAnnimation());
   }
 }

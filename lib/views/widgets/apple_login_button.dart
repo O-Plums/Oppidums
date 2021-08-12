@@ -24,13 +24,13 @@ class AppleLoginButton extends StatelessWidget {
         onLogin(token);
       }
     } catch (error) {
-            _showDialog(context, error);
+      _showDialog(context, error);
 
       return;
     }
   }
 
- void _showDialog(context, error) {
+  void _showDialog(context, error) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -47,6 +47,7 @@ class AppleLoginButton extends StatelessWidget {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(

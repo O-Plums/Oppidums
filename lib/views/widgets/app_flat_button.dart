@@ -44,7 +44,7 @@ class CustomFlatButton extends StatelessWidget {
     return TextButton(
       onPressed: () {
         if (AppConfig.env == 'production') {
-            OppidumsAnalytics.analytics.logEvent(eventName ?? 'need_to_add_eventName_button');
+          OppidumsAnalytics.analytics.logEvent(eventName ?? 'need_to_add_eventName_button');
         }
         onPressed();
       },
@@ -52,15 +52,15 @@ class CustomFlatButton extends StatelessWidget {
       // textColor: textColor,
       child: loading == false
           ? (Container(
-               padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-               decoration: ShapeDecoration(
+              padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+              decoration: ShapeDecoration(
                   color: color != null ? color : Colors.black,
                   shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(borderRadius ?? 15.0),
-                  side: BorderSide(
-                  color: borderColor ?? Colors.transparent,
-                  width: borderWidth ?? 0,
-                  style: BorderStyle.solid))),
+                      borderRadius: new BorderRadius.circular(borderRadius ?? 15.0),
+                      side: BorderSide(
+                          color: borderColor ?? Colors.transparent,
+                          width: borderWidth ?? 0,
+                          style: BorderStyle.solid))),
               child: Text(
                 label,
                 style: TextStyle(

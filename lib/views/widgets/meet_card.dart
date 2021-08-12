@@ -42,10 +42,8 @@ class MeetCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.black,
                     image: DecorationImage(
-                        colorFilter: new ColorFilter.mode(
-                            Colors.black.withOpacity(0.7), BlendMode.dstATop),
-                        image: NetworkImage(meet['place']['image']['url'] ??
-                            'assets/image_loading.gif'),
+                        colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                        image: NetworkImage(meet['place']['image']['url'] ?? 'assets/image_loading.gif'),
                         fit: BoxFit.cover),
                   ),
                   child: Column(
@@ -60,15 +58,13 @@ class MeetCard extends StatelessWidget {
                           child: CustomFlatButton(
                             eventName: 'meet_view.deleteVisit',
                             disabledColor: Colors.grey,
-                            label: FlutterI18n.translate(
-                                context, "common.meet_view.deleteVisit"),
+                            label: FlutterI18n.translate(context, "common.meet_view.deleteVisit"),
                             textColor: Colors.black,
                             color: Colors.red,
                             onPressed: () async {
                               final SharedPreferences prefs = await _prefs;
                               final token = prefs.getString('googlePYMP');
-                              await OppidumsMeetApi.deleteMeetById(
-                                  meet['_id'], token);
+                              await OppidumsMeetApi.deleteMeetById(meet['_id'], token);
                               fetchMeet();
                             },
                             width: 100,
@@ -77,37 +73,27 @@ class MeetCard extends StatelessWidget {
                       Expanded(child: Container()),
                       Padding(
                         padding: EdgeInsets.all(10),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                          Text(meet['title'],
+                              textAlign: TextAlign.left,
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18)),
+                          Row(
                             children: [
-                              Text(meet['title'],
+                              Text(meet['participens'].length.toString() + ' ',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 18)),
-                              Row(
-                                children: [
-                                  Text(
-                                      meet['participens'].length.toString() +
-                                          ' ',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff8ec6f5),
-                                          fontSize: 18)),
-                                  Icon(Icons.people, color: Color(0xff8ec6f5)),
-                                ],
-                              )
-                            ]),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold, color: Color(0xff8ec6f5), fontSize: 18)),
+                              Icon(Icons.people, color: Color(0xff8ec6f5)),
+                            ],
+                          )
+                        ]),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: Text(meet['description'],
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 14)),
+                            style: TextStyle(color: Colors.white, fontSize: 14)),
                       ),
                       Divider()
                     ],

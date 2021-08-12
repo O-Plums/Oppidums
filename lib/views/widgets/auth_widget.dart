@@ -67,24 +67,14 @@ class _AuthWidgetState extends State<AuthWidget> {
             child: Column(children: [
           Container(
             margin: EdgeInsets.only(top: 10, bottom: 10),
-            child: Text(
-                FlutterI18n.translate(context, "common.common_word.connect"),
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)),
+            child: Text(FlutterI18n.translate(context, "common.common_word.connect"),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
           ),
           if (!isLoading)
-            GoogleLoginButton(
-                onLogin: (Map<String, dynamic> userData) =>
-                    _handleLogin(context, userData)),
+            GoogleLoginButton(onLogin: (Map<String, dynamic> userData) => _handleLogin(context, userData)),
           if (!isLoading && (Platform.isIOS || Platform.isMacOS))
-            AppleLoginButton(
-                onLogin: (Map<String, dynamic> userData) =>
-                    _handleLogin(context, userData)),
-          if (isLoading)
-            CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xffEA178C)))
+            AppleLoginButton(onLogin: (Map<String, dynamic> userData) => _handleLogin(context, userData)),
+          if (isLoading) CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xffEA178C)))
         ])));
   }
 }

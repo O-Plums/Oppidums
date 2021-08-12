@@ -12,12 +12,10 @@ class CityModel extends ChangeNotifier {
   String get name => _name;
   String get url => _url;
 
-
   void setCityBasicInfo(String id, String url, String name) {
     _id = id;
     _name = name;
     _url = url;
     notifyListeners();
   }
-
 }

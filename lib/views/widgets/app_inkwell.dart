@@ -43,10 +43,7 @@ class CustomInkWell extends StatelessWidget {
                   left: lockIconPositionLeft,
                   bottom: lockIconPositionBottom,
                   right: lockIconPositionRight,
-                  child: Icon(Icons.lock,
-                      color: lockIconColor != null
-                          ? lockIconColor
-                          : Colors.black)))
+                  child: Icon(Icons.lock, color: lockIconColor != null ? lockIconColor : Colors.black)))
           ],
         ));
   }

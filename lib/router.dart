@@ -13,56 +13,48 @@ import 'package:oppidums/views/meet/one_meet_view.dart';
 class AppRouter {
   static FluroRouter router = FluroRouter();
 
-  static Handler _splashHandler =
-      Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  static Handler _splashHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
     return SplashView();
   });
 
-  static Handler _cityHandler =
-      Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  static Handler _cityHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
     return CityView();
   });
 
-  static Handler _cityInfoHandler =
-      Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  static Handler _cityInfoHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
     return CityInfoView();
   });
 
-  static Handler _placeHandler =
-      Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  static Handler _placeHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
     final args = context.settings.arguments as Map<String, dynamic>;
     final String placeId = args != null ? args['placeId'] : null;
     return PlaceView(placeId: placeId);
   });
 
-  static Handler _calendarHandler =
-  Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-        FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
-     return CustomCalendarView();
+  static Handler _calendarHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
+    return CustomCalendarView();
   });
 
-  static Handler _meetHandler =
-  Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-        FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
-     return MeetView();
+  static Handler _meetHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
+    return MeetView();
   });
-  
-  static Handler _oneMeetHandler = 
-   Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-        FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
+
+  static Handler _oneMeetHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
     final args = context.settings.arguments as Map<String, dynamic>;
-   
+
     final String meetId = args != null ? args['meetId'] : null;
 
-     return OneMeetView(meetId: meetId);
+    return OneMeetView(meetId: meetId);
   });
 
-  static Handler _homeHandler =
-      Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+  static Handler _homeHandler = Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     FirebaseAnalytics().setCurrentScreen(screenName: context.settings.name);
     return HomeView();
   });

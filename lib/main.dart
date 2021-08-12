@@ -16,7 +16,7 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:oppidums/models/city_model.dart';
 import 'package:oppidums/analytics.dart';
 
-
+// flutter format . -l 120
 void main(List<String> args, {String env}) async {
 //Remove this method to stop OneSignal Debugging
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,8 +54,7 @@ class MyApp extends StatelessWidget {
   final FlutterI18nDelegate flutterI18nDelegate;
   MyApp(this.flutterI18nDelegate);
   static FirebaseAnalytics analytics = FirebaseAnalytics();
-  static FirebaseAnalyticsObserver observer =
-      FirebaseAnalyticsObserver(analytics: analytics);
+  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +68,7 @@ class MyApp extends StatelessWidget {
         color: Color.fromARGB(255, 255, 255, 255),
         title: 'Oppidums',
         initialRoute: 'splash',
-        theme: ThemeData(
-            textTheme:
-                GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)),
+        theme: ThemeData(textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme)),
         // GoogleFonts.barlowTextTheme(Theme.of(context).textTheme)),
         // GoogleFonts.ptSansTextTheme(Theme.of(context).textTheme)),
         // GoogleFonts.gorditasTextTheme(Theme.of(context).textTheme)),

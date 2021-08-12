@@ -4,7 +4,6 @@ import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidums/views/widgets/app_inkwell.dart';
 
-
 class PlaceCard extends StatefulWidget {
   final Map<String, dynamic> place;
   final Function onPressed;
@@ -24,10 +23,15 @@ class _PlaceCard extends State<PlaceCard> {
 
   @override
   Widget build(BuildContext context) {
-    
-    if (widget.place['type'] == 'tourism') { titleColor = Color(0xfff6ac65); }
-    if (widget.place['type'] == 'history') { titleColor = Color(0xffd4c5fc); }
-    if (widget.place['type'] == 'cult') { titleColor = Color(0xfffee895); }
+    if (widget.place['type'] == 'tourism') {
+      titleColor = Color(0xfff6ac65);
+    }
+    if (widget.place['type'] == 'history') {
+      titleColor = Color(0xffd4c5fc);
+    }
+    if (widget.place['type'] == 'cult') {
+      titleColor = Color(0xfffee895);
+    }
 
     return Container(
         height: 250,
@@ -44,8 +48,7 @@ class _PlaceCard extends State<PlaceCard> {
                   decoration: BoxDecoration(
                     color: Colors.black,
                     image: DecorationImage(
-                        image: NetworkImage(widget.place['image']['url'] ??
-                            'assets/image_loading.gif'),
+                        image: NetworkImage(widget.place['image']['url'] ?? 'assets/image_loading.gif'),
                         fit: BoxFit.cover),
                   ),
                   child: Column(
@@ -61,73 +64,57 @@ class _PlaceCard extends State<PlaceCard> {
                                 color: titleColor,
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Text(
-                                 FlutterI18n.translate(context, "common.common_word.${widget.place['type']}"),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                      fontSize: 12)))),
+                              child: Text(FlutterI18n.translate(context, "common.common_word.${widget.place['type']}"),
+                                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 12)))),
                       Expanded(child: Container()),
                       Container(
-                             decoration: new BoxDecoration(
-                          gradient: new LinearGradient(
-                              colors: [Colors.transparent, Colors.black],
-                              begin: const FractionalOffset(.1, 0),
-                              end: const FractionalOffset(.1, 1),
-                              stops: [0.0, 1.0],
-                              tileMode: TileMode.clamp),
-                        ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BorderedText(
+                          decoration: new BoxDecoration(
+                            gradient: new LinearGradient(
+                                colors: [Colors.transparent, Colors.black],
+                                begin: const FractionalOffset(.1, 0),
+                                end: const FractionalOffset(.1, 1),
+                                stops: [0.0, 1.0],
+                                tileMode: TileMode.clamp),
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                    BorderedText(
+                                        strokeWidth: 2,
+                                        strokeColor: Colors.black,
+                                        child: Text(widget.place['name'],
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16))),
+                                    Row(
+                                      children: [
+                                        Text(widget.place['approval']?.length.toString() ?? '0',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold, color: Color(0xff8ec6f5), fontSize: 16)),
+                                        Icon(Icons.favorite_border_outlined, color: Color(0xff8ec6f5)),
+                                      ],
+                                    ),
+                                  ]),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  child: BorderedText(
                                       strokeWidth: 2,
                                       strokeColor: Colors.black,
-                                      child: Text(widget.place['name'],
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 16))),
-                                  Row(
-                                    children: [
-                                      Text(
-                                          widget.place['approval']?.length
-                                                  .toString() ??
-                                              '0',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xff8ec6f5),
-                                              fontSize: 16)),
-                                      Icon(Icons.favorite_border_outlined,
-                                          color: Color(0xff8ec6f5)),
-                                    ],
-                                  ),
-                                ]),
-                          ),
-                        
-                      Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        child: BorderedText(
-                            strokeWidth: 2,
-                            strokeColor: Colors.black,
-                            child: Text(widget.place['shortDescription'],
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 12))),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 10),
-                      ),
-                      ])),
+                                      child: Text(widget.place['shortDescription'],
+                                          maxLines: 3,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(color: Colors.white, fontSize: 12))),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                ),
+                              ])),
                     ],
                   ))),
         ));

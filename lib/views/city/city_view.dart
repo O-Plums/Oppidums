@@ -23,96 +23,86 @@ Widget renderCityCard(context, city) {
     // margin: EdgeInsets.all(10),
     decoration: BoxDecoration(
       color: Colors.black,
-      image: DecorationImage(
- 
-          image:
-              NetworkImage(city['image']['url'] ?? 'assets/image_loading.gif'),
-          fit: BoxFit.cover),
+      image:
+          DecorationImage(image: NetworkImage(city['image']['url'] ?? 'assets/image_loading.gif'), fit: BoxFit.cover),
     ),
 
     child: CustomInkWell(
-        eventName: 'open_city_info_${city != null ? city['id'] : ''}',
-        onTap: () async {
-          final SharedPreferences prefs = await _prefs;
+      eventName: 'open_city_info_${city != null ? city['id'] : ''}',
+      onTap: () async {
+        final SharedPreferences prefs = await _prefs;
 
-             prefs.setString('cityId', city['_id']);
-             prefs.setString('cityUrl', city['image']['url']);
-             prefs.setString('cityName', city['name']);
-          
-          var cityModel = Provider.of<CityModel>(context, listen: false);
-          cityModel.setCityBasicInfo(
-              city['_id'], city['image']['url'], city['name']);
-          AppRouter.router.navigateTo(context, 'home',
-              replace: true, transition: TransitionType.inFromRight);
-        },
-        child: 
-              Container(
-                
-                  child: Column(
-                    
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(child: Container()),
+        prefs.setString('cityId', city['_id']);
+        prefs.setString('cityUrl', city['image']['url']);
+        prefs.setString('cityName', city['name']);
+
+        var cityModel = Provider.of<CityModel>(context, listen: false);
+        cityModel.setCityBasicInfo(city['_id'], city['image']['url'], city['name']);
+        AppRouter.router.navigateTo(context, 'home', replace: true, transition: TransitionType.inFromRight);
+      },
+      child: Container(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(child: Container()),
+          Container(
+              width: double.infinity,
+              decoration: new BoxDecoration(
+                gradient: new LinearGradient(
+                    colors: [Colors.transparent, Colors.black],
+                    begin: const FractionalOffset(.1, 0),
+                    end: const FractionalOffset(.1, 1),
+                    stops: [0.0, 1.0],
+                    tileMode: TileMode.clamp),
+              ),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Container(
-                      width: double.infinity,
-                             decoration: new BoxDecoration(
-                          gradient: new LinearGradient(
-                              colors: [Colors.transparent, Colors.black],
-                              begin: const FractionalOffset(.1, 0),
-                              end: const FractionalOffset(.1, 1),
-                              stops: [0.0, 1.0],
-                              tileMode: TileMode.clamp),
-                        ),
-                      child: 
-                      Column(
-                    
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                      padding: EdgeInsets.all(5),
-                          child: BorderedText(
-            strokeWidth: 2,
-            strokeColor: Colors.black,
-              child: Text('${city['name']} (${city['countryCode']})',
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                        padding: EdgeInsets.all(5),
+                        child: BorderedText(
+                            strokeWidth: 2,
+                            strokeColor: Colors.black,
+                            child: Text(
+                              '${city['name']} (${city['countryCode']})',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  decoration: TextDecoration.none,
+                                  decorationColor: Colors.red,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                            ))),
+                    Container(
+                        padding: EdgeInsets.all(5),
+                        child: BorderedText(
+                            strokeWidth: 2,
+                            strokeColor: Colors.black,
+                            child: Text(
+                              city['shortDescription'],
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 12,
                                 color: Colors.white,
-                                 decoration: TextDecoration.none,
-                decorationColor: Colors.red,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          ))),
-                      Container(
-                      padding: EdgeInsets.all(5),
-                          child: BorderedText(
-            strokeWidth: 2,
-            strokeColor: Colors.black,
-              child: Text(
-                            city['shortDescription'],
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                            ),
-                          ))),
-                           Container(
-                      padding: EdgeInsets.all(5),
-                          child: BorderedText(
-            strokeWidth: 2,
-            strokeColor: Colors.black,
-              child: 
-                      Text('Population: ${city['population']}',
-                          style: TextStyle(fontSize: 12, color: Colors.white)))
+                              ),
+                            ))),
+                    Container(
+                        padding: EdgeInsets.all(5),
+                        child: BorderedText(
+                            strokeWidth: 2,
+                            strokeColor: Colors.black,
+                            child: Text('Population: ${city['population']}',
+                                style: TextStyle(fontSize: 12, color: Colors.white)))),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
                     ),
-                      Container(
-                        margin: EdgeInsets.only(top: 10),
-                      ),
-                    ]))],
-                  )),
-            ),
+                  ]))
+        ],
+      )),
+    ),
   ));
 }
 
@@ -174,9 +164,9 @@ class _CityViewState extends State<CityView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(FlutterI18n.translate(context, "common.city_view.validContact"), style: TextStyle(color: Colors.white)),
-          content: Text(
-              FlutterI18n.translate(context, "common.city_view.thanksMessage"),
+          title: Text(FlutterI18n.translate(context, "common.city_view.validContact"),
+              style: TextStyle(color: Colors.white)),
+          content: Text(FlutterI18n.translate(context, "common.city_view.thanksMessage"),
               style: TextStyle(color: Colors.white)),
           actions: [
             TextButton(
@@ -204,7 +194,6 @@ class _CityViewState extends State<CityView> {
                 expand: false,
                 builder: (context) => AddCityWidget(
                   onValidate: () {
-                    
                     _showDialog(context);
                   },
                 ),
@@ -222,10 +211,7 @@ class _CityViewState extends State<CityView> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 50),
                     child: Text(FlutterI18n.translate(context, "common.common_word.noData"),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 18))),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18))),
               if (_allCity != null && _allCity.length > 0)
                 ..._allCity.map((city) {
                   return renderCityCard(context, city);

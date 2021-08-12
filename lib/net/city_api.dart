@@ -5,9 +5,9 @@ class OppidumsCityApi {
   static Dio _client = createOppidumsDioClient();
 
   static Future<List<dynamic>> getAllCity(String searchName) async {
-    var res = await _client.get('cities',
-        queryParameters: {"_q": searchName},
-    
+    var res = await _client.get(
+      'cities',
+      queryParameters: {"_q": searchName},
     );
     return res.data;
   }
@@ -31,18 +31,16 @@ class OppidumsCityApi {
     return res.data;
   }
 
-   static Future<List<dynamic>> requestNewCity(String cityName, String cityRole, String email) async {
+  static Future<List<dynamic>> requestNewCity(String cityName, String cityRole, String email) async {
     var res = await _client.post(
       'ask-contacts',
       data: {
         "cityName": cityName,
         "cityRole": cityRole,
         "email": email,
-        },
+      },
     );
     print(res.data);
     return res.data;
   }
-
-  
 }
