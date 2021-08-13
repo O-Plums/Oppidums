@@ -142,7 +142,7 @@ class _OneMeetViewState extends State<OneMeetView> {
                               style:
                                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white, height: 3, fontSize: 20)),
                           CustomInkWell(
-                              eventName: 'open_meet_${_meet['id']}',
+                              eventName: 'open_map_of_meet_${_meet['id']}',
                               onTap: () {
                                 MapsLauncher.launchQuery(_meet['place']['address']);
                               },

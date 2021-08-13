@@ -201,6 +201,7 @@ class _PlaceViewViewState extends State<PlaceView> with TickerProviderStateMixin
                         padding: EdgeInsets.only(bottom: 10),
                         child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
                           CustomInkWell(
+                              eventName: 'open_map_of_place_${_place['id']}',
                               onTap: () {
                                 MapsLauncher.launchQuery(_place['address']);
                               },
