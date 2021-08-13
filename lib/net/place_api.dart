@@ -42,10 +42,10 @@ class OppidumsPlaceApi {
     return res.data;
   }
 
-  static Future<Map<String, dynamic>> updateApproval(String placeId, List<dynamic> approval, String accessToken) async {
-    var res = await _client.put('places/$placeId',
+  static Future<Map<String, dynamic>> updateApproval(String placeId, String userId, String accessToken) async {
+    var res = await _client.put('places/approve/$placeId',
         data: {
-          "approval": approval,
+          "userId": userId,
         },
         options: Options(headers: {'x-access-token': accessToken}));
 

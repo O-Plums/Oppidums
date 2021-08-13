@@ -52,7 +52,7 @@ class _OneMeetViewState extends State<OneMeetView> {
     }
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
-    var meet = await OppidumsMeetApi.joinMeet(_meet['_id'], participens, token);
+    var meet = await OppidumsMeetApi.joinMeet(_meet['_id'], userId, token);
 
     if (mounted) {
       setState(() {

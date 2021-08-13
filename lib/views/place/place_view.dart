@@ -95,15 +95,13 @@ class _PlaceViewViewState extends State<PlaceView> with TickerProviderStateMixin
       })
     ];
     if (approval.indexOf(userId) == -1) {
-      approval.add(userId);
       tmpApprove = true;
     } else {
       tmpApprove = false;
-      approval.remove(userId);
     }
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
-    await OppidumsPlaceApi.updateApproval(_place['_id'], approval, token);
+    await OppidumsPlaceApi.updateApproval(_place['_id'], userId, token);
     if (mounted) {
       setState(() {
         isApprove = tmpApprove;

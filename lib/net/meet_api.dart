@@ -51,9 +51,9 @@ class OppidumsMeetApi {
     return res.data;
   }
 
-  static Future<Map<String, dynamic>> joinMeet(String meetId, List<dynamic> participens, String accessToken) async {
-    var res = await _client.put('meets/${meetId}',
-        data: {"participens": participens}, options: Options(headers: {'x-access-token': accessToken}));
+  static Future<Map<String, dynamic>> joinMeet(String meetId, String userId, String accessToken) async {
+    var res = await _client.put('meets/join/${meetId}',
+        data: { "userId": userId }, options: Options(headers: {'x-access-token': accessToken}));
 
     return res.data;
   }
