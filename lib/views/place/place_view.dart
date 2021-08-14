@@ -29,8 +29,7 @@ class PlaceView extends StatefulWidget {
   _PlaceViewViewState createState() => _PlaceViewViewState();
 }
 
-class _PlaceViewViewState extends State<PlaceView>
-    with TickerProviderStateMixin {
+class _PlaceViewViewState extends State<PlaceView> with TickerProviderStateMixin {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   final assetsAudioPlayer = AssetsAudioPlayer();
@@ -50,8 +49,7 @@ class _PlaceViewViewState extends State<PlaceView>
     bool isPlaying = assetsAudioPlayer?.isPlaying?.value;
     final Playing playing = assetsAudioPlayer?.current?.valueOrNull;
     if (playing == null) {
-      await assetsAudioPlayer
-          .open(Audio.network(_place['audioDescription']['url']));
+      await assetsAudioPlayer.open(Audio.network(_place['audioDescription']['url']));
       assetsAudioPlayer.playlistFinished.listen((finished) {
         if (finished) {
           setState(() {
@@ -70,8 +68,7 @@ class _PlaceViewViewState extends State<PlaceView>
       });
       Timer.periodic(new Duration(seconds: 1), (timer) {
         setState(() {
-          _currentPos =
-              assetsAudioPlayer.currentPosition.value.toString().split('.')[0];
+          _currentPos = assetsAudioPlayer.currentPosition.value.toString().split('.')[0];
         });
       });
     }
@@ -122,10 +119,7 @@ class _PlaceViewViewState extends State<PlaceView>
       setState(() {
         isLogin = true;
         userId = payload['_id'];
-        isApprove =
-            _place['approval'].indexWhere((e) => e['_id'] == userId) == -1
-                ? false
-                : true;
+        isApprove = _place['approval'].indexWhere((e) => e['_id'] == userId) == -1 ? false : true;
       });
     }
   }
@@ -176,12 +170,9 @@ class _PlaceViewViewState extends State<PlaceView>
                 onTap: () async {
                   final SharedPreferences prefs = await _prefs;
                   final String cityId = prefs.getString('cityId');
-                  Share.share(
-                      "Decouvre ce lieu sur https://oppidums.com/${cityId}/${_place['_id']}");
+                  Share.share("Decouvre ce lieu sur https://oppidums.com/${cityId}/${_place['_id']}");
                 },
-                child: Container(
-                    margin: EdgeInsets.only(right: 15),
-                    child: Icon(Icons.share, size: 25)))
+                child: Container(margin: EdgeInsets.only(right: 15), child: Icon(Icons.share, size: 25)))
           ],
         ),
         body: Stack(children: [
@@ -194,9 +185,7 @@ class _PlaceViewViewState extends State<PlaceView>
                 Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          alignment: Alignment(-.2, 0),
-                          image: NetworkImage(_place['image']['url']),
-                          fit: BoxFit.cover),
+                          alignment: Alignment(-.2, 0), image: NetworkImage(_place['image']['url']), fit: BoxFit.cover),
                     ),
                     child: Container(
                         height: 200,
@@ -210,54 +199,38 @@ class _PlaceViewViewState extends State<PlaceView>
                               tileMode: TileMode.clamp),
                         ),
                         padding: EdgeInsets.only(bottom: 10),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              CustomInkWell(
-                                  eventName:
-                                      'open_map_of_place_${_place['id']}',
-                                  onTap: () {
-                                    MapsLauncher.launchQuery(_place['address']);
-                                  },
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                        child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                          CustomInkWell(
+                              eventName: 'open_map_of_place_${_place['id']}',
+                              onTap: () {
+                                MapsLauncher.launchQuery(_place['address']);
+                              },
+                              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                                Container(
+                                    width: 250,
+                                    child: Text(_place['address'],
+                                        textAlign: TextAlign.left,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 3,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontStyle: FontStyle.italic,
+                                            fontSize: 14))),
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Container(
-                                            width: 250,
-                                            child: Text(_place['address'],
-                                                textAlign: TextAlign.left,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 3,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
-                                                    fontStyle: FontStyle.italic,
-                                                    fontSize: 14))),
-                                        Container(
-                                          alignment: Alignment.topLeft,
-                                          child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Icon(Icons.location_on,
-                                                    size: 30,
-                                                    color: Color(0xff8ec6f5)),
-                                                Text(
-                                                    FlutterI18n.translate(
-                                                        context,
-                                                        "common.place_view.maps"),
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 10)),
-                                              ]),
-                                        ),
-                                      ]))
-                            ]))),
-                if (_place['audioDescription'] != null &&
-                    _place['audioDescription']['url'] != '')
+                                        Icon(Icons.location_on, size: 30, color: Color(0xff8ec6f5)),
+                                        Text(FlutterI18n.translate(context, "common.place_view.maps"),
+                                            style: TextStyle(color: Colors.white, fontSize: 10)),
+                                      ]),
+                                ),
+                              ]))
+                        ]))),
+                if (_place['audioDescription'] != null && _place['audioDescription']['url'] != '')
                   CustomInkWell(
                       eventName: 'star_audioDescription_${_place['id']}',
                       onTap: () async {
@@ -270,9 +243,7 @@ class _PlaceViewViewState extends State<PlaceView>
                             Padding(
                                 padding: EdgeInsets.all(5),
                                 child: Icon(
-                                  !isStarted
-                                      ? Icons.play_circle_fill
-                                      : Icons.pause_circle_filled,
+                                  !isStarted ? Icons.play_circle_fill : Icons.pause_circle_filled,
                                   color: Color(0xff8ec6f5),
                                 )),
                             Container(
@@ -284,13 +255,10 @@ class _PlaceViewViewState extends State<PlaceView>
                               repeat: false,
                             )),
                             Container(
-                              child: Text(_currentPos,
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.white)),
+                              child: Text(_currentPos, style: TextStyle(fontSize: 10, color: Colors.white)),
                             )
                           ]))),
-                if (_place['imageGallery'] != null &&
-                    _place['imageGallery'].length > 0)
+                if (_place['imageGallery'] != null && _place['imageGallery'].length > 0)
                   CarouselSlider(
                     options: CarouselOptions(
                       height: 200,
@@ -306,9 +274,8 @@ class _PlaceViewViewState extends State<PlaceView>
                       return Container(
                           child: ClipRRect(
                               // borderRadius: BorderRadius.all(Radius.circular(5)),
-                              child: FadeInImage.assetNetwork(
-                                  placeholder: 'assets/image_loading.gif',
-                                  image: i['url'])));
+                              child:
+                                  FadeInImage.assetNetwork(placeholder: 'assets/image_loading.gif', image: i['url'])));
                     }).toList(),
                   ),
                 Padding(
@@ -316,106 +283,91 @@ class _PlaceViewViewState extends State<PlaceView>
                     child: MarkdownBody(
                       data: _place['description'] ?? '',
                       extensionSet: md.ExtensionSet.gitHubWeb,
-                      styleSheet:
-                          MarkdownStyleSheet.fromTheme(Theme.of(context))
-                              .copyWith(
-                                  p: TextStyle(color: Colors.white),
-                                  checkbox: TextStyle(color: Colors.white),
-                                  blockquote: TextStyle(color: Colors.white),
-                                  tableBody: TextStyle(color: Colors.white),
-                                  h1: TextStyle(color: Colors.white),
-                                  h2: TextStyle(color: Colors.white),
-                                  h3: TextStyle(color: Colors.white),
-                                  h4: TextStyle(color: Colors.white),
-                                  h5: TextStyle(color: Colors.white),
-                                  h6: TextStyle(color: Colors.white),
-                                  listBullet: TextStyle(color: Colors.white)),
+                      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                          p: TextStyle(color: Colors.white),
+                          checkbox: TextStyle(color: Colors.white),
+                          blockquote: TextStyle(color: Colors.white),
+                          tableBody: TextStyle(color: Colors.white),
+                          h1: TextStyle(color: Colors.white),
+                          h2: TextStyle(color: Colors.white),
+                          h3: TextStyle(color: Colors.white),
+                          h4: TextStyle(color: Colors.white),
+                          h5: TextStyle(color: Colors.white),
+                          h6: TextStyle(color: Colors.white),
+                          listBullet: TextStyle(color: Colors.white)),
                     )),
                 Divider(),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomInkWell(
-                          eventName: 'click_on_approval_${_place['id']}',
-                          onTap: isLogin == false
-                              ? () {
-                                  showMaterialModalBottomSheet(
-                                      backgroundColor: Colors.transparent,
-                                      context: context,
-                                      expand: false,
-                                      builder: (context) => AuthWidget(
-                                            onValidate: () {
-                                              _checkLocalStorage(context);
-                                            },
-                                          ));
-                                }
-                              : () {
-                                  _setApproval();
-                                },
-                          child: Container(
-                              width: 150,
-                              margin: EdgeInsets.all(10),
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Icon(Icons.favorite_border_outlined,
-                                        size: 20,
-                                        color: !isApprove
-                                            ? Colors.white
-                                            : Colors.green),
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: Text(
-                                            FlutterI18n.translate(context,
-                                                "common.common_word.like"),
-                                            style: TextStyle(
-                                                color: Colors.white))),
-                                  ]))),
-                      Text('|', style: TextStyle(color: Colors.grey)),
-                      CustomInkWell(
-                          eventName: 'click_on_add_comment_${_place['id']}',
-                          onTap: isLogin == false
-                              ? () {
-                                  showMaterialModalBottomSheet(
-                                      backgroundColor: Colors.transparent,
-                                      context: context,
-                                      expand: false,
-                                      builder: (context) => AuthWidget(
-                                            onValidate: () {
-                                              _checkLocalStorage(context);
-                                            },
-                                          ));
-                                }
-                              : () async {
-                                  showMaterialModalBottomSheet(
-                                      backgroundColor: Colors.transparent,
-                                      context: context,
-                                      expand: false,
-                                      builder: (context) => CommentWidget(
-                                            onValidate: (comment) {
-                                              _comments.insert(0, comment);
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                  CustomInkWell(
+                      eventName: 'click_on_approval_${_place['id']}',
+                      onTap: isLogin == false
+                          ? () {
+                              showMaterialModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  expand: false,
+                                  builder: (context) => AuthWidget(
+                                        onValidate: () {
+                                          _checkLocalStorage(context);
+                                        },
+                                      ));
+                            }
+                          : () {
+                              _setApproval();
+                            },
+                      child: Container(
+                          width: 150,
+                          margin: EdgeInsets.all(10),
+                          child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                            Icon(Icons.favorite_border_outlined,
+                                size: 20, color: !isApprove ? Colors.white : Colors.green),
+                            Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(FlutterI18n.translate(context, "common.common_word.like"),
+                                    style: TextStyle(color: Colors.white))),
+                          ]))),
+                  Text('|', style: TextStyle(color: Colors.grey)),
+                  CustomInkWell(
+                      eventName: 'click_on_add_comment_${_place['id']}',
+                      onTap: isLogin == false
+                          ? () {
+                              showMaterialModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  expand: false,
+                                  builder: (context) => AuthWidget(
+                                        onValidate: () {
+                                          _checkLocalStorage(context);
+                                        },
+                                      ));
+                            }
+                          : () async {
+                              showMaterialModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  expand: false,
+                                  builder: (context) => CommentWidget(
+                                        onValidate: (comment) {
+                                          _comments.insert(0, comment);
 
-                                              setState(() {
-                                                _comments = _comments;
-                                              });
-                                            },
-                                            placeId: widget.placeId,
-                                          ));
-                                },
-                          child: Container(
-                              width: 150,
-                              margin: EdgeInsets.all(10),
-                              child: Row(children: [
-                                Icon(Icons.chat_bubble_outline,
-                                    size: 20, color: Colors.white),
-                                Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Text(
-                                        FlutterI18n.translate(context,
-                                            "common.place_view.comment"),
-                                        style: TextStyle(color: Colors.white))),
-                              ])))
-                    ]),
+                                          setState(() {
+                                            _comments = _comments;
+                                          });
+                                        },
+                                        placeId: widget.placeId,
+                                      ));
+                            },
+                      child: Container(
+                          width: 150,
+                          margin: EdgeInsets.all(10),
+                          child: Row(children: [
+                            Icon(Icons.chat_bubble_outline, size: 20, color: Colors.white),
+                            Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(FlutterI18n.translate(context, "common.place_view.comment"),
+                                    style: TextStyle(color: Colors.white))),
+                          ])))
+                ]),
                 Divider(color: Colors.white),
                 CustomInkWell(
                     eventName: 'click_on_go_to_meet_${_place['id']}',
@@ -432,24 +384,19 @@ class _PlaceViewViewState extends State<PlaceView>
                                     ));
                           }
                         : () {
-                            AppRouter.router.navigateTo(context, 'meet',
-                                replace: false,
-                                transition: TransitionType.inFromRight);
+                            AppRouter.router
+                                .navigateTo(context, 'meet', replace: false, transition: TransitionType.inFromRight);
                           },
                     child: Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.all(10),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.people, color: Colors.white),
-                              Padding(
-                                  padding: EdgeInsets.only(left: 10),
-                                  child: Text(
-                                      FlutterI18n.translate(context,
-                                          "common.place_view.meetTitle"),
-                                      style: TextStyle(color: Colors.white))),
-                            ]))),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Icon(Icons.people, color: Colors.white),
+                          Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Text(FlutterI18n.translate(context, "common.place_view.meetTitle"),
+                                  style: TextStyle(color: Colors.white))),
+                        ]))),
                 if (_comments.length > 0) Divider(color: Colors.white),
                 ..._comments.map((comment) {
                   return (Container(
@@ -464,19 +411,14 @@ class _PlaceViewViewState extends State<PlaceView>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                CircleAvatar(
-                                    radius: 15.0,
-                                    backgroundImage: NetworkImage(
-                                        comment['app_user']['picture'] ?? '')),
-                                Padding(
-                                    padding: EdgeInsets.only(top: 10),
-                                    child: Text(comment['app_user']['name'],
-                                        style: TextStyle(
-                                            fontSize: 10, color: Colors.white)))
-                              ]),
+                          Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                            CircleAvatar(
+                                radius: 15.0, backgroundImage: NetworkImage(comment['app_user']['picture'] ?? '')),
+                            Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Text(comment['app_user']['name'],
+                                    style: TextStyle(fontSize: 10, color: Colors.white)))
+                          ]),
                           VerticalDivider(
                             color: Colors.red,
                             thickness: 1,
@@ -490,30 +432,23 @@ class _PlaceViewViewState extends State<PlaceView>
                                     width: 210,
                                     margin: EdgeInsets.only(bottom: 10),
                                     child: Text(comment['title'],
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white)),
+                                        style:
+                                            TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                                   ),
                                   Container(
                                       width: 210,
                                       child: Text(comment['description'],
-                                          maxLines: 20,
-                                          style:
-                                              TextStyle(color: Colors.white)))
+                                          maxLines: 20, style: TextStyle(color: Colors.white)))
                                 ],
                               )),
                           if (comment['app_user']['_id'] == userId)
                             CustomInkWell(
-                                eventName:
-                                    'click_delete_comment_${_place['id']}',
+                                eventName: 'click_delete_comment_${_place['id']}',
                                 onTap: () async {
                                   final SharedPreferences prefs = await _prefs;
                                   final token = prefs.getString('googlePYMP');
-                                  await OppidumsCommentApi.deleteCommentById(
-                                      comment['_id'], token);
-                                  _comments.removeWhere(
-                                      (c) => c['_id'] == comment['_id']);
+                                  await OppidumsCommentApi.deleteCommentById(comment['_id'], token);
+                                  _comments.removeWhere((c) => c['_id'] == comment['_id']);
                                   setState(() {
                                     _comments = _comments;
                                   });

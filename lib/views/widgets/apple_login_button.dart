@@ -10,7 +10,6 @@ class AppleLoginButton extends StatelessWidget {
 
   void _handleSignIn(context) async {
     try {
-
       final credential = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
