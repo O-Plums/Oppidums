@@ -8,7 +8,6 @@ import 'package:oppidums/models/city_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-
 class TourismeView extends StatefulWidget {
   final bool showReminder;
 
@@ -30,8 +29,7 @@ class _TourismeViewState extends State<TourismeView> {
     }
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var places =
-        await OppidumsPlaceApi.getPlaceByType('tourism', cityModel.id);
+    var places = await OppidumsPlaceApi.getPlaceByType('tourism', cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
@@ -39,25 +37,24 @@ class _TourismeViewState extends State<TourismeView> {
       });
     }
   }
-  Future<String>  refetchPlace(context) async {
+
+  Future<String> refetchPlace(context) async {
     var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var places =
-        await OppidumsPlaceApi.getPlaceByType('tourism', cityModel.id);
+    var places = await OppidumsPlaceApi.getPlaceByType('tourism', cityModel.id);
     if (mounted) {
       setState(() {
         _places = places;
       });
       return 'success';
     }
-      return 'success';
-
+    return 'success';
   }
 
   @override
   void initState() {
     new Future.delayed(Duration.zero, () {
-       fetchPlace(context);
+      fetchPlace(context);
     });
     super.initState();
   }
@@ -70,7 +67,7 @@ class _TourismeViewState extends State<TourismeView> {
       )),
       RefreshIndicator(
           onRefresh: () {
-           return refetchPlace(context);
+            return refetchPlace(context);
           },
           child: SingleChildScrollView(
               child: Column(children: [
@@ -80,10 +77,7 @@ class _TourismeViewState extends State<TourismeView> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(top: 50),
                   child: Text(FlutterI18n.translate(context, "common.common_word.noData"),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 18))),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18))),
             ..._places.map((place) {
               return PlaceCard(
                   place: place,

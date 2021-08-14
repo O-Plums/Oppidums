@@ -16,18 +16,17 @@ class UserModel extends ChangeNotifier {
   String get picture => _picture;
   bool get isAuthed => _accessToken != null;
 
-
   void updateProfile(Map<String, dynamic> userData) {
     _id = userData['id'];
     notifyListeners();
   }
-  
+
   void auth(String accessToken) {
     _accessToken = accessToken;
     notifyListeners();
   }
 
-   populate(Map<String, dynamic> userData) async {
+  populate(Map<String, dynamic> userData) async {
     // final SharedPreferences prefs = await _prefs;
 
     _id = userData['_id'];
@@ -37,5 +36,4 @@ class UserModel extends ChangeNotifier {
 
     notifyListeners();
   }
-
 }

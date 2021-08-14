@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_select/smart_select.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 
 class SimpleSelect extends StatefulWidget {
   final String title;
@@ -9,14 +10,7 @@ class SimpleSelect extends StatefulWidget {
   final String defaultValue;
   final Function onChange;
 
-  SimpleSelect(
-      {Key key,
-      this.label,
-      this.valueIcon,
-      this.title,
-      this.list,
-      this.defaultValue,
-      this.onChange})
+  SimpleSelect({Key key, this.label, this.valueIcon, this.title, this.list, this.defaultValue, this.onChange})
       : super(key: key);
 
   @override
@@ -45,11 +39,11 @@ class _SimpleSelectState extends State<SimpleSelect> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.label != null)
-          (Text(widget.label, style: TextStyle(fontSize: 16, color: Colors.white))),
+        if (widget.label != null) (Text(widget.label, style: TextStyle(fontSize: 16, color: Colors.white))),
         SmartSelect.single(
             tileBuilder: (context, state) {
-              return InkWell(
+              return CustomInkWell(
+                eventName: 'select_click_in_meet',
                 onTap: state.showModal,
                 child: Container(
                   margin: EdgeInsets.only(top: 10),
@@ -62,8 +56,7 @@ class _SimpleSelectState extends State<SimpleSelect> {
                     children: [
                       widget.valueIcon != null ? widget.valueIcon : Container(),
                       Text(state.valueDisplay,
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white))
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white))
                     ],
                   ),
                 ),

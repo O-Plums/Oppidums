@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.1.5+12
+version: 1.1.9+15
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -29,33 +29,32 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   bordered_text: ^2.0.0
-  fluro: ^1.7.8
-  dio: ^3.0.10
-  dio_flutter_transformer: ^3.0.2
-  provider: ^4.3.3
-  jwt_decoder: ^1.0.3
+  fluro: ^2.0.3
+  dio: ^4.0.0
+  # dio_flutter_transformer: ^3.0.2
+  provider: ^5.0.0
+  jwt_decoder: ^2.0.1
   flutter_i18n: ^0.22.3
-  google_fonts: ^1.1.1
-  shared_preferences: ^0.5.12+4
-  url_launcher: ^5.7.10
-  lottie: ^0.7.0+1
+  google_fonts: ^2.1.0
+  shared_preferences: ^2.0.6
+  url_launcher: ^6.0.5
+  lottie: ^1.1.0
   smart_select: ^4.3.2
-  image_picker: ^0.6.7+15
-  app_review: ^2.0.1
-  sentry_flutter: ^4.0.1
-  carousel_slider: ^3.0.0
-  flutter_markdown: ^0.5.2
-  maps_launcher: ^1.2.2+2
+  sentry_flutter: ^5.1.0
+  carousel_slider: ^4.0.0
+  flutter_markdown: ^0.6.4
+  maps_launcher: ^2.0.1
   modal_bottom_sheet: ^2.0.0
-  google_sign_in: ^4.5.6
-  firebase_analytics: ^7.0.1
+  google_sign_in: ^5.0.7
+  firebase_analytics: ^8.2.0
   syncfusion_flutter_calendar: ^19.1.64
   material_segmented_control: ^3.1.2
-  assets_audio_player: ^2.0.15
+  assets_audio_player: ^3.0.3+6
   flutter_datetime_picker: ^1.5.1
-  uni_links: ^0.4.0
+  uni_links: ^0.5.1
   sign_in_with_apple: ^3.0.0
   share: ^2.0.4
+  amplitude_flutter: ^3.2.1
   
 dev_dependencies:
   flutter_test:

@@ -10,27 +10,24 @@ class AppleLoginButton extends StatelessWidget {
 
   void _handleSignIn(context) async {
     try {
-      print('Start never end');
-
       final credential = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
       );
-      print(credential);
       var token = await OppidumsUserApi.appleSignIn(credential);
       if (onLogin != null) {
         onLogin(token);
       }
     } catch (error) {
-            _showDialog(context, error);
+      _showDialog(context, error);
 
       return;
     }
   }
 
- void _showDialog(context, error) {
+  void _showDialog(context, error) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -47,6 +44,7 @@ class AppleLoginButton extends StatelessWidget {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(

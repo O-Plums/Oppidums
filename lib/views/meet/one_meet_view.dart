@@ -52,16 +52,13 @@ class _OneMeetViewState extends State<OneMeetView> {
     }
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
-    var meet = await OppidumsMeetApi.joinMeet(_meet['_id'], participens, token);
-    
+    var meet = await OppidumsMeetApi.joinMeet(_meet['_id'], userId, token);
+
     if (mounted) {
       setState(() {
         _meet = meet;
         _loadingButton = false;
-        _didjoin =
-            meet['participens'].indexWhere((e) => e['_id'] == userId) == -1
-                ? false
-                : true;
+        _didjoin = meet['participens'].indexWhere((e) => e['_id'] == userId) == -1 ? false : true;
       });
     }
   }
@@ -72,17 +69,14 @@ class _OneMeetViewState extends State<OneMeetView> {
         loading = true;
       });
     }
-  final SharedPreferences prefs = await _prefs;
+    final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
     var meet = await OppidumsMeetApi.getMeetById(widget.meetId, token);
     if (mounted) {
       setState(() {
         _meet = meet;
         loading = false;
-        _didjoin =
-            meet['participens'].indexWhere((e) => e['_id'] == userId) == -1
-                ? false
-                : true;
+        _didjoin = meet['participens'].indexWhere((e) => e['_id'] == userId) == -1 ? false : true;
       });
     }
   }
@@ -105,7 +99,6 @@ class _OneMeetViewState extends State<OneMeetView> {
   }
 
   Widget build(BuildContext context) {
-    print(_didjoin);
     return Scaffold(
         appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.meet_view.titlePageVisit")),
         bottomNavigationBar: AppBottomNavigationAction(
@@ -142,63 +135,47 @@ class _OneMeetViewState extends State<OneMeetView> {
                               tileMode: TileMode.clamp),
                         ),
                         padding: EdgeInsets.only(bottom: 10),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(_meet['place']['name'],
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      height: 3,
-                                      fontSize: 20)),
-                              CustomInkWell(
-                                  onTap: () {
-                                    MapsLauncher.launchQuery(
-                                        _meet['place']['address']);
-                                  },
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(_meet['place']['address'],
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                                fontStyle: FontStyle.italic,
-                                                fontSize: 14)),
-                                        Container(
-                                          alignment: Alignment.topLeft,
-                                          child: Icon(Icons.location_on,
-                                              size: 30,
-                                              color: Color(0xff8ec6f5)),
-                                        ),
-                                      ]))
-                            ]))),
+                        child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                          Text(_meet['place']['name'],
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white, height: 3, fontSize: 20)),
+                          CustomInkWell(
+                              eventName: 'open_map_of_meet_${_meet['id']}',
+                              onTap: () {
+                                MapsLauncher.launchQuery(_meet['place']['address']);
+                              },
+                              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                Text(_meet['place']['address'],
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 14)),
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Icon(Icons.location_on, size: 30, color: Color(0xff8ec6f5)),
+                                ),
+                              ]))
+                        ]))),
                 Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: Text(
-                      FlutterI18n.translate(context, "common.meet_view.creator") ,
+                      FlutterI18n.translate(context, "common.meet_view.creator"),
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: CircleAvatar(
-                                radius: 20.0,
-                                backgroundImage:
-                                    NetworkImage(_meet['owner']['picture'] ?? ''))),
-                        Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Text(_meet['owner']['name'],
-                                style: TextStyle(
-                                    fontSize: 14, color: Colors.white)))
-                      ])
+                  Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                    Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child:
+                            CircleAvatar(radius: 20.0, backgroundImage: NetworkImage(_meet['owner']['picture'] ?? ''))),
+                    Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(_meet['owner']['name'], style: TextStyle(fontSize: 14, color: Colors.white)))
+                  ])
                 ]),
                 Divider(color: Colors.grey),
                 Padding(
@@ -214,40 +191,36 @@ class _OneMeetViewState extends State<OneMeetView> {
                     child: MarkdownBody(
                       data: _meet['title'] ?? '',
                       extensionSet: md.ExtensionSet.gitHubWeb,
-                      styleSheet:
-                          MarkdownStyleSheet.fromTheme(Theme.of(context))
-                              .copyWith(
-                                  p: TextStyle(color: Colors.white),
-                                  checkbox: TextStyle(color: Colors.white),
-                                  blockquote: TextStyle(color: Colors.white),
-                                  tableBody: TextStyle(color: Colors.white),
-                                  h1: TextStyle(color: Colors.white),
-                                  h2: TextStyle(color: Colors.white),
-                                  h3: TextStyle(color: Colors.white),
-                                  h4: TextStyle(color: Colors.white),
-                                  h5: TextStyle(color: Colors.white),
-                                  h6: TextStyle(color: Colors.white),
-                                  listBullet: TextStyle(color: Colors.white)),
+                      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                          p: TextStyle(color: Colors.white),
+                          checkbox: TextStyle(color: Colors.white),
+                          blockquote: TextStyle(color: Colors.white),
+                          tableBody: TextStyle(color: Colors.white),
+                          h1: TextStyle(color: Colors.white),
+                          h2: TextStyle(color: Colors.white),
+                          h3: TextStyle(color: Colors.white),
+                          h4: TextStyle(color: Colors.white),
+                          h5: TextStyle(color: Colors.white),
+                          h6: TextStyle(color: Colors.white),
+                          listBullet: TextStyle(color: Colors.white)),
                     )),
                 Padding(
                     padding: EdgeInsets.all(10),
                     child: MarkdownBody(
                       data: _meet['description'] ?? '',
                       extensionSet: md.ExtensionSet.gitHubWeb,
-                      styleSheet:
-                          MarkdownStyleSheet.fromTheme(Theme.of(context))
-                              .copyWith(
-                                  p: TextStyle(color: Colors.white),
-                                  checkbox: TextStyle(color: Colors.white),
-                                  blockquote: TextStyle(color: Colors.white),
-                                  tableBody: TextStyle(color: Colors.white),
-                                  h1: TextStyle(color: Colors.white),
-                                  h2: TextStyle(color: Colors.white),
-                                  h3: TextStyle(color: Colors.white),
-                                  h4: TextStyle(color: Colors.white),
-                                  h5: TextStyle(color: Colors.white),
-                                  h6: TextStyle(color: Colors.white),
-                                  listBullet: TextStyle(color: Colors.white)),
+                      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                          p: TextStyle(color: Colors.white),
+                          checkbox: TextStyle(color: Colors.white),
+                          blockquote: TextStyle(color: Colors.white),
+                          tableBody: TextStyle(color: Colors.white),
+                          h1: TextStyle(color: Colors.white),
+                          h2: TextStyle(color: Colors.white),
+                          h3: TextStyle(color: Colors.white),
+                          h4: TextStyle(color: Colors.white),
+                          h5: TextStyle(color: Colors.white),
+                          h6: TextStyle(color: Colors.white),
+                          listBullet: TextStyle(color: Colors.white)),
                     )),
                 Divider(),
               ])

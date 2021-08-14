@@ -16,25 +16,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return PreferredSize(
         preferredSize: preferredSize,
         child: AppBar(
-            title: title != null
-                ? Text(title, 
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 15))
-                : OppidumsLogo(size: 45),
-            brightness: Brightness.dark, // status bar brightness
-            automaticallyImplyLeading: true,
-            leading: onBack == null
-                ? null
-                : IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: onBack,
-                  ),
-            centerTitle: true,
-            elevation: 1,
-            iconTheme: IconThemeData(color: Colors.white),
-            actions: actions,
-            backgroundColor: Color(0xff090f13),
-
-             ));
+          title: title != null
+              ? Text(title, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 15))
+              : OppidumsLogo(size: 45),
+          brightness: Brightness.dark, // status bar brightness
+          automaticallyImplyLeading: true,
+          leading: onBack == null
+              ? null
+              : IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: onBack,
+                ),
+          centerTitle: true,
+          elevation: 1,
+          iconTheme: IconThemeData(color: Colors.white),
+          actions: actions,
+          backgroundColor: Color(0xff090f13),
+        ));
   }
 }

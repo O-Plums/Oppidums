@@ -6,7 +6,6 @@ List shuffle(List items) {
   var random = new Random();
 
   for (var i = items.length - 1; i > 0; i--) {
-
     var n = random.nextInt(i + 1);
     var temp = items[i];
     items[i] = items[n];
@@ -19,8 +18,7 @@ List shuffle(List items) {
 class OppidumsPlaceApi {
   static Dio _client = createOppidumsDioClient();
 
-  static Future<List<dynamic>> getAllPlaceOfCity(
-     String cityId) async {
+  static Future<List<dynamic>> getAllPlaceOfCity(String cityId) async {
     var res = await _client.get(
       'places',
       queryParameters: {"city": cityId},
@@ -28,14 +26,12 @@ class OppidumsPlaceApi {
     return shuffle(res.data);
   }
 
-  static Future<List<dynamic>> getPlaceByType(
-      String type, String cityId) async {
-    
+  static Future<List<dynamic>> getPlaceByType(String type, String cityId) async {
     var res = await _client.get(
       'places',
       queryParameters: {"type": type, "city": cityId},
     );
-    
+
     return res.data;
   }
 
@@ -46,13 +42,13 @@ class OppidumsPlaceApi {
     return res.data;
   }
 
-   static Future<Map<String, dynamic>> updateApproval(String placeId, List<dynamic> approval, String accessToken) async {
-    var res = await _client.put('places/$placeId', data: {
-      "approval": approval,
-    },
-    options: Options(headers: {'x-access-token': accessToken}));
+  static Future<Map<String, dynamic>> updateApproval(String placeId, String userId, String accessToken) async {
+    var res = await _client.put('places/approve/$placeId',
+        data: {
+          "userId": userId,
+        },
+        options: Options(headers: {'x-access-token': accessToken}));
 
     return res.data;
   }
 }
-

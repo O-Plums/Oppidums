@@ -1,8 +1,8 @@
 {
   "appVersion": "1.0.0",
-  "apiUrl": "https://api.oppidums.com/",
-  "realmUrl": "https://eu-central-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/staging-cadmy/",
+  "apiUrl": "http://localhost:1337/",
   "apiVersion": "0.0.1",
+  "amplitude": "e4dc8bf37722ecd816d87c620993d1bc",
   "sentry": {
     "dns": "https://53edb4c2dd644e809460609d6392cb64@o881608.ingest.sentry.io/5836032"
   }

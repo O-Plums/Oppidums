@@ -34,7 +34,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
-   
     super.initState();
   }
 
@@ -45,8 +44,7 @@ class _HomeViewState extends State<HomeView> {
         body: Container(
           //  color: Colors.black,
 
-          child: AllPlaces(),//bottomBarPages[tabIndex],
-        
+          child: AllPlaces(), //bottomBarPages[tabIndex],
         ));
   }
 }

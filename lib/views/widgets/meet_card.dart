@@ -4,6 +4,7 @@ import 'package:oppidums/views/widgets/app_flat_button.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidums/net/meet_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:oppidums/views/widgets/app_inkwell.dart';
 
 class MeetCard extends StatelessWidget {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -21,7 +22,8 @@ class MeetCard extends StatelessWidget {
     return Container(
         height: 200,
         width: double.infinity,
-        child: InkWell(
+        child: CustomInkWell(
+          eventName: 'open_meet_card_${meet['id']}',
           onTap: onPressed,
           child: Container(
               decoration: BoxDecoration(
@@ -40,10 +42,8 @@ class MeetCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.black,
                     image: DecorationImage(
-                        colorFilter: new ColorFilter.mode(
-                            Colors.black.withOpacity(0.7), BlendMode.dstATop),
-                        image: NetworkImage(meet['place']['image']['url'] ??
-                            'assets/image_loading.gif'),
+                        colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.dstATop),
+                        image: NetworkImage(meet['place']['image']['url'] ?? 'assets/image_loading.gif'),
                         fit: BoxFit.cover),
                   ),
                   child: Column(
@@ -56,11 +56,12 @@ class MeetCard extends StatelessWidget {
                           width: double.infinity,
                           alignment: Alignment.topRight,
                           child: CustomFlatButton(
+                            eventName: 'meet_view.deleteVisit',
                             disabledColor: Colors.grey,
                             label: FlutterI18n.translate(context, "common.meet_view.deleteVisit"),
                             textColor: Colors.black,
                             color: Colors.red,
-                            onPressed: () async  {
+                            onPressed: () async {
                               final SharedPreferences prefs = await _prefs;
                               final token = prefs.getString('googlePYMP');
                               await OppidumsMeetApi.deleteMeetById(meet['_id'], token);
@@ -72,37 +73,27 @@ class MeetCard extends StatelessWidget {
                       Expanded(child: Container()),
                       Padding(
                         padding: EdgeInsets.all(10),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                          Text(meet['title'],
+                              textAlign: TextAlign.left,
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18)),
+                          Row(
                             children: [
-                              Text(meet['title'],
+                              Text(meet['participens'].length.toString() + ' ',
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 18)),
-                              Row(
-                                children: [
-                                  Text(
-                                      meet['participens'].length.toString() +
-                                          ' ',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff8ec6f5),
-                                          fontSize: 18)),
-                                  Icon(Icons.people, color: Color(0xff8ec6f5)),
-                                ],
-                              )
-                            ]),
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold, color: Color(0xff8ec6f5), fontSize: 18)),
+                              Icon(Icons.people, color: Color(0xff8ec6f5)),
+                            ],
+                          )
+                        ]),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: Text(meet['description'],
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 14)),
+                            style: TextStyle(color: Colors.white, fontSize: 14)),
                       ),
                       Divider()
                     ],

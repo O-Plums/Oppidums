@@ -46,14 +46,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
     final token = prefs.getString('googlePYMP');
     Map<String, dynamic> payload = JwtDecoder.decode(token);
     await OppidumsMeetApi.createMeet(
-      payload['_id'],
-      cityModel.id,
-      _placeSeleced,
-      _title,
-      _description,
-      _startDate,
-      token
-    );
+        payload['_id'], cityModel.id, _placeSeleced, _title, _description, _startDate, token);
     if (mounted) {
       setState(() {
         loadingButton = false;
@@ -120,30 +113,25 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
           Container(
             margin: EdgeInsets.only(top: 20),
           ),
-          if (loading) 
-           CircularProgressIndicator(),
-          if (!loading) 
-          Container(
-            child: SimpleSelect(
-              label: FlutterI18n.translate(context, "common.create_meeting.labelLieu"),
-              title: FlutterI18n.translate(context, "common.create_meeting.titleVisit"),
-              list: _places,
-              onChange: (value) => _handleChange('place', value),
+          if (loading) CircularProgressIndicator(),
+          if (!loading)
+            Container(
+              child: SimpleSelect(
+                label: FlutterI18n.translate(context, "common.create_meeting.labelLieu"),
+                title: FlutterI18n.translate(context, "common.create_meeting.titleVisit"),
+                list: _places,
+                onChange: (value) => _handleChange('place', value),
+              ),
             ),
-          ),
-
           Container(
               width: double.infinity,
               margin: EdgeInsets.only(top: 20),
               padding: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), border: Border.all(color: Colors.grey)),
               child: TextButton(
                   onPressed: () {
-                    DatePicker.showDateTimePicker(context,
-                        showTitleActions: true,
-                        minTime: DateTime.now(), onChanged: (date) {
+                    DatePicker.showDateTimePicker(context, showTitleActions: true, minTime: DateTime.now(),
+                        onChanged: (date) {
                       setState(() {
                         _startDate = date;
                       });
@@ -156,16 +144,13 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
                   child: Text(
                     _startDate == null
                         ? FlutterI18n.translate(context, "common.create_meeting.dateChoose")
-                        : (DateFormat('hh:mm -  dd-MM-yyyy')
-                            .format(_startDate)),
+                        : (DateFormat('hh:mm -  dd-MM-yyyy').format(_startDate)),
                     style: TextStyle(color: Colors.white),
                   ))),
           Container(
             margin: EdgeInsets.only(top: 20, bottom: 5),
             padding: EdgeInsets.only(left: 10, right: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Colors.grey)),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), border: Border.all(color: Colors.grey)),
             child: InputText(
               placeholder: FlutterI18n.translate(context, "common.create_meeting.placeholderTitle"),
               border: false,
@@ -175,9 +160,7 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
           Container(
             margin: EdgeInsets.only(top: 20, bottom: 5),
             padding: EdgeInsets.only(left: 10, right: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Colors.grey)),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), border: Border.all(color: Colors.grey)),
             child: InputText(
               keyboardType: TextInputType.multiline,
               maxLines: 5,
@@ -189,16 +172,14 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
           Container(
             margin: EdgeInsets.only(top: 20),
             child: CustomFlatButton(
+              eventName: 'create_meeting.labelSend',
               disabledColor: Colors.grey,
               label: FlutterI18n.translate(context, "common.create_meeting.labelSend"),
               loading: loadingButton,
               textColor: Colors.black,
               color: Colors.white,
               onPressed: () {
-                if (_title != '' &&
-                    _description != '' &&
-                    _startDate != null &&
-                    _placeSeleced != '') {
+                if (_title != '' && _description != '' && _startDate != null && _placeSeleced != '') {
                   // Navigator.pop(context);
                   _onValidate(context);
                 }

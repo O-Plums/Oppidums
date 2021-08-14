@@ -26,8 +26,7 @@ class GoogleLoginButton extends StatelessWidget {
       if (res != null) {
         var authInstance = await res.authentication;
 
-        Map<String, dynamic> userData =
-            await OppidumsUserApi.googleSignIn(authInstance.accessToken);
+        Map<String, dynamic> userData = await OppidumsUserApi.googleSignIn(authInstance.accessToken);
         onLogin(userData);
       }
     } catch (error) {
@@ -43,7 +42,7 @@ class GoogleLoginButton extends StatelessWidget {
           title: Text("Error GOOGLE"),
           content: Text("Error => $error"),
           actions: [
-            FlatButton(
+            TextButton(
               child: Text("OK"),
               onPressed: () => Navigator.of(context).pop(),
             ),
@@ -59,33 +58,28 @@ class GoogleLoginButton extends StatelessWidget {
       width: 300,
       height: 36,
       margin: EdgeInsets.only(top: 5, bottom: 5),
-      child:   CustomInkWell(
-              
-                      onTap: () async {
-                        _handleSignIn(context);
-                      },
-                      child:  Container(
-       decoration: BoxDecoration(
-  color:           Color(0xFF397AF3),
-                borderRadius: BorderRadius.circular(5)),
-      width: 300,
-    child: Padding(
-      padding: EdgeInsets.all(6),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-      
-        children: [
-          Image.asset('assets/google-logo.webp', width: 30), // <-- Use 'Image.asset(...)' here
-          // SizedBox(width: 12),
-          Text('Sign in with Google', style: TextStyle(color: Colors.white, fontSize: 18)),
-        ],
+      child: CustomInkWell(
+        eventName: 'google_login_button',
+        onTap: () async {
+          _handleSignIn(context);
+        },
+        child: Container(
+          decoration: BoxDecoration(color: Color(0xFF397AF3), borderRadius: BorderRadius.circular(5)),
+          width: 300,
+          child: Padding(
+            padding: EdgeInsets.all(6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset('assets/google-logo.webp', width: 30), // <-- Use 'Image.asset(...)' here
+                // SizedBox(width: 12),
+                Text('Sign in with Google', style: TextStyle(color: Colors.white, fontSize: 18)),
+              ],
+            ),
+          ),
+        ),
       ),
-    ),
-  ), 
-                          ),
     );
   }
 }
-
-  

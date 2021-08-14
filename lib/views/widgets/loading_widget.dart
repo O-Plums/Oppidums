@@ -8,12 +8,13 @@ class LoadingAnnimation extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //  width: double.infinity,
+        //  width: double.infinity,
         // height: double.infinity,
         alignment: Alignment.center,
         padding: EdgeInsets.all(30),
-        child: Lottie.asset('assets/lottie/city1.json',
-        // fit: BoxFit.fill,
+        child: Lottie.asset(
+          'assets/lottie/city1.json',
+          // fit: BoxFit.fill,
         ));
   }
 }
