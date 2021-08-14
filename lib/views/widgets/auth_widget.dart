@@ -49,7 +49,6 @@ class _AuthWidgetState extends State<AuthWidget> {
       }
     } catch (error) {
       prefs.remove('googlePYMP');
-      print(error);
       if (mounted) {
         setState(() {
           isLoading = false;

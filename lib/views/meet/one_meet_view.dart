@@ -99,7 +99,6 @@ class _OneMeetViewState extends State<OneMeetView> {
   }
 
   Widget build(BuildContext context) {
-    print(_didjoin);
     return Scaffold(
         appBar: CustomAppBar(title: FlutterI18n.translate(context, "common.meet_view.titlePageVisit")),
         bottomNavigationBar: AppBottomNavigationAction(

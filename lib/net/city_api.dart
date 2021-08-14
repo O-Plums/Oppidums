@@ -27,7 +27,6 @@ class OppidumsCityApi {
       // 'service/GetOnePlace/incoming_webhook/webhook0',
       queryParameters: {"city": citiesId},
     );
-    print(res.data);
     return res.data;
   }
 
@@ -40,7 +39,6 @@ class OppidumsCityApi {
         "email": email,
       },
     );
-    print(res.data);
     return res.data;
   }
 }

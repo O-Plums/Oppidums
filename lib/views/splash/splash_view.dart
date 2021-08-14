@@ -27,7 +27,6 @@ class _SplashViewState extends State<SplashView> {
   Future<void> initUniLinks(Uri uri) async {
     // _sub = getUriLinksStream().listen((Uri uri) async {
     var splitUri = uri.toString().split('//')[1].split('/');
-    print(splitUri);
 
     final SharedPreferences prefs = await _prefs;
     final city = await OppidumsCityApi.getCitieById(splitUri[1]);
@@ -62,7 +61,6 @@ class _SplashViewState extends State<SplashView> {
     var userModel = Provider.of<UserModel>(context, listen: false);
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
-    print(token);
     if (token != null) {
       Map<String, dynamic> userData = await OppidumsUserApi.populateUser(token);
       userModel.auth(userData['token']);

@@ -10,7 +10,6 @@ class AppleLoginButton extends StatelessWidget {
 
   void _handleSignIn(context) async {
     try {
-      print('Start never end');
 
       final credential = await SignInWithApple.getAppleIDCredential(
         scopes: [
@@ -18,7 +17,6 @@ class AppleLoginButton extends StatelessWidget {
           AppleIDAuthorizationScopes.fullName,
         ],
       );
-      print(credential);
       var token = await OppidumsUserApi.appleSignIn(credential);
       if (onLogin != null) {
         onLogin(token);
