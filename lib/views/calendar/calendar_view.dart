@@ -78,7 +78,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
             dateTextStyle: TextStyle(color: Colors.white),
           ),
           todayTextStyle: TextStyle(color: Colors.white),
-          todayHighlightColor: Color(0xff8ec6f5),
+          todayHighlightColor: Color(0xff4db9c2),
           view: CalendarView.month,
           // monthViewSettings: MonthViewSettings(showAgenda: true),
           dataSource: MeetingDataSource(_getDataSource()),

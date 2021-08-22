@@ -56,17 +56,23 @@ class _SplashViewState extends State<SplashView> {
     // });
   }
 
-  //TODO populate user ? and need to add amplitude
   void _checkLocalStorage(context) async {
     var userModel = Provider.of<UserModel>(context, listen: false);
     final SharedPreferences prefs = await _prefs;
     final token = prefs.getString('googlePYMP');
+
     if (token != null) {
-      Map<String, dynamic> userData = await OppidumsUserApi.populateUser(token);
-      userModel.auth(userData['token']);
-      prefs.setString('googlePYMP', userData['token']);
-      await userModel.populate(userData);
-      OppidumsAnalytics.analytics.setUserId(userModel.id);
+      try {
+        Map<String, dynamic> userData = await OppidumsUserApi.populateUser(token);
+        if (userData['token'] != '') {
+          userModel.auth(userData['token']);
+          prefs.setString('googlePYMP', userData['token']);
+          await userModel.populate(userData);
+          OppidumsAnalytics.analytics.setUserId(userModel.id);
+        }
+      } catch (e) {
+        print(e);
+      }
     }
   }
 

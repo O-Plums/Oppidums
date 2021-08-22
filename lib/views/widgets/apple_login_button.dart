@@ -32,7 +32,7 @@ class AppleLoginButton extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Error GOOGLE"),
+          title: Text("Error IOS"),
           content: Text("Error => $error"),
           actions: [
             FlatButton(

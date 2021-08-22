@@ -32,25 +32,29 @@ class _MeetView extends State<MeetView> {
   List<dynamic> _ownerMeets = [];
 
   void fetchMeet(context) async {
-    if (mounted) {
-      setState(() {
-        loading = true;
-      });
-    }
+    try {
+      if (mounted) {
+        setState(() {
+          loading = true;
+        });
+      }
 
-    final SharedPreferences prefs = await _prefs;
-    final token = prefs.getString('googlePYMP');
-    Map<String, dynamic> payload = JwtDecoder.decode(token);
+      final SharedPreferences prefs = await _prefs;
+      final token = prefs.getString('googlePYMP');
+      Map<String, dynamic> payload = JwtDecoder.decode(token);
 
-    var cityModel = Provider.of<CityModel>(context, listen: false);
-    var meets = await OppidumsMeetApi.getMeetCity(cityModel.id);
-    var ownerMeets = await OppidumsMeetApi.getOwnerMeet(payload['_id'], token);
-    if (mounted) {
-      setState(() {
-        _ownerMeets = ownerMeets;
-        _meets = meets;
-        loading = false;
-      });
+      var cityModel = Provider.of<CityModel>(context, listen: false);
+      var meets = await OppidumsMeetApi.getMeetCity(cityModel.id);
+      var ownerMeets = await OppidumsMeetApi.getOwnerMeet(payload['_id'], token);
+      if (mounted) {
+        setState(() {
+          _ownerMeets = ownerMeets;
+          _meets = meets;
+          loading = false;
+        });
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -97,7 +101,7 @@ class _MeetView extends State<MeetView> {
                 },
                 selectionIndex: _currentSelection,
                 borderColor: Colors.grey,
-                selectedColor: Color(0xff8ec6f5),
+                selectedColor: Color(0xff4db9c2),
                 unselectedColor: Colors.white,
                 borderRadius: 11.0,
                 disabledChildren: [3],

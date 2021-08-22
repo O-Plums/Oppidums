@@ -95,8 +95,8 @@ class _PlaceCard extends State<PlaceCard> {
                                         Text(widget.place['approval']?.length.toString() ?? '0',
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
-                                                fontWeight: FontWeight.bold, color: Color(0xff8ec6f5), fontSize: 16)),
-                                        Icon(Icons.favorite_border_outlined, color: Color(0xff8ec6f5)),
+                                                fontWeight: FontWeight.bold, color: Color(0xff4db9c2), fontSize: 16)),
+                                        Icon(Icons.favorite_border_outlined, color: Color(0xff4db9c2)),
                                       ],
                                     ),
                                   ]),

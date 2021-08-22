@@ -9,6 +9,7 @@ import 'package:oppidums/views/widgets/auth_widget.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class CustomAppDrawer extends StatefulWidget {
   final String dateToGet;
@@ -24,11 +25,25 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
   String picture;
   bool isSubscribe = false;
   bool isLogin = false;
+  String version = '0.0.0';
+
+// String buildNumber = packageInfo.buildNumber;
 
   Map<String, dynamic> _citie = null;
 
+  void _getVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    print(packageInfo);
+    if (mounted) {
+      setState(() {
+        version = packageInfo.version;
+      });
+    }
+  }
+
   void _checkLocalStorage(context) async {
     final SharedPreferences prefs = await _prefs;
+
     final token = prefs.getString('googlePYMP');
 
     if (token != null) {
@@ -47,6 +62,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
     super.initState();
     new Future.delayed(Duration.zero, () async {
       _checkLocalStorage(context);
+      _getVersion();
 
       if (mounted) {
         var cityModel = Provider.of<CityModel>(context, listen: false);
@@ -121,7 +137,7 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                     AppRouter.router
                         .navigateTo(context, 'calendar', replace: false, transition: TransitionType.inFromRight);
                   },
-                  leading: Icon(Icons.calendar_today, color: Color(0xff8ec6f5)),
+                  leading: Icon(Icons.calendar_today, color: Color(0xff4db9c2)),
                   title: Text(FlutterI18n.translate(context, "common.calendar.titleCalendar"),
                       style: TextStyle(color: Colors.white))),
               ListTile(
@@ -141,15 +157,14 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                           .navigateTo(context, 'meet', replace: false, transition: TransitionType.inFromRight);
                     }
                   },
-                  leading: Icon(Icons.people, color: Color(0xff8ec6f5)),
+                  leading: Icon(Icons.people, color: Color(0xff4db9c2)),
                   title: Text(FlutterI18n.translate(context, "common.meet_view.titlePageVisit"),
                       style: TextStyle(color: Colors.white))),
-
               ListTile(
                   onTap: () {
                     AppRouter.router.navigateTo(context, 'city', replace: true, transition: TransitionType.inFromLeft);
                   },
-                  leading: Icon(Icons.swap_calls, color: Color(0xff8ec6f5)),
+                  leading: Icon(Icons.swap_calls, color: Color(0xff4db9c2)),
                   title: Text(FlutterI18n.translate(context, "common.app_drawer.changeCity"),
                       style: TextStyle(color: Colors.white))),
               Expanded(child: Container()),
@@ -161,17 +176,16 @@ class _CustomAppDrawerState extends State<CustomAppDrawer> {
                       prefs.remove('googlePYMP');
                       _checkLocalStorage(context);
                     },
-                    leading: Icon(Icons.exit_to_app, color: Color(0xff8ec6f5)),
+                    leading: Icon(Icons.exit_to_app, color: Color(0xff4db9c2)),
                     title: Text(FlutterI18n.translate(context, "common.app_drawer.logOut"),
                         style: TextStyle(color: Colors.white))),
-              // ListTile(
-              //   onTap: () async {
-              //     final SharedPreferences prefs = await _prefs;
-              //     prefs.setString('googlePYMP', null);
-              //     _checkLocalStorage(context);
-              //   },
-              //   leading: Icon(Icons.code, color: Color(0xff8ec6f5)),
-              //   title:Text('Fork me on Git_hub', style: TextStyle(color: Colors.white))),
+              Padding(
+                  padding: EdgeInsets.only(left: 15, bottom: 15, right: 15),
+                  child: (Text(
+                    'Version: ${version}',
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    textAlign: TextAlign.left,
+                  )))
             ])));
   }
 }

@@ -55,6 +55,7 @@ dependencies:
   sign_in_with_apple: ^3.0.0
   share: ^2.0.4
   amplitude_flutter: ^3.2.1
+  package_info_plus: ^1.0.5
   
 dev_dependencies:
   flutter_test:

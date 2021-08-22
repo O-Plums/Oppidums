@@ -112,7 +112,7 @@ class _CityInfoViewState extends State<CityInfoView> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Icon(Icons.location_on, size: 30, color: Color(0xff8ec6f5)),
+                                        Icon(Icons.location_on, size: 30, color: Color(0xff4db9c2)),
                                         Text(FlutterI18n.translate(context, "common.place_view.maps"),
                                             style: TextStyle(color: Colors.white, fontSize: 10)),
                                       ]),

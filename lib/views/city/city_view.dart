@@ -130,25 +130,33 @@ class _CityViewState extends State<CityView> {
   }
 
   void fetchCities() async {
-    var data = await OppidumsCityApi.getAllCity(searchName);
+    try {
+      var data = await OppidumsCityApi.getAllCity(searchName);
 
-    if (mounted) {
-      setState(() {
-        _allCity = data;
-      });
+      if (mounted) {
+        setState(() {
+          _allCity = data;
+        });
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
   Future<String> refetchCities() async {
-    var data = await OppidumsCityApi.getAllCity(searchName);
+    try {
+      var data = await OppidumsCityApi.getAllCity(searchName);
 
-    if (mounted) {
-      setState(() {
-        _allCity = data;
-      });
+      if (mounted) {
+        setState(() {
+          _allCity = data;
+        });
+        return 'success';
+      }
       return 'success';
+    } catch (e) {
+      print(e);
     }
-    return 'success';
   }
 
   @override
@@ -170,7 +178,7 @@ class _CityViewState extends State<CityView> {
               style: TextStyle(color: Colors.white)),
           actions: [
             TextButton(
-              child: Text("OK", style: TextStyle(color: Color(0xff8ec6f5))),
+              child: Text("OK", style: TextStyle(color: Color(0xff4db9c2))),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ],

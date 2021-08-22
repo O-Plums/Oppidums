@@ -82,7 +82,7 @@ class _CommentWidget extends State<CommentWidget> {
               CustomFlatButton(
                 eventName: 'place.send_comment',
                 label: FlutterI18n.translate(context, "common.add_city_widget.buttonSend"),
-                color: Color(0xff8ec6f5),
+                color: Color(0xff4db9c2),
                 onPressed: () async {
                   final SharedPreferences prefs = await _prefs;
 
@@ -90,9 +90,13 @@ class _CommentWidget extends State<CommentWidget> {
 
                   Map<String, dynamic> payload = JwtDecoder.decode(token);
                   Navigator.pop(context);
-                  var newComment = await OppidumsCommentApi.createComment(
-                      token, _title, _description, widget.placeId, payload['_id']);
-                  widget.onValidate(newComment);
+                  try {
+                    var newComment = await OppidumsCommentApi.createComment(
+                        token, _title, _description, widget.placeId, payload['_id']);
+                    widget.onValidate(newComment);
+                  } catch (e) {
+                    print(e);
+                  }
                 },
                 width: 300,
               ),

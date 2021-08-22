@@ -8,7 +8,8 @@
     "placeholderComment" :"Commentaire",
     "tourism": "Tourisme",
     "history": "Histoire",
-    "cult": "Culturel"
+    "cult": "Culturel",
+    "all": "Tout"
   },
   "calendar": {
     "titleCalendar" : "Calendrier"
