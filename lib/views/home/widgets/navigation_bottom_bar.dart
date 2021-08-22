@@ -34,7 +34,7 @@ class _NavigationBottomBarState extends State<NavigationBottomBar> {
           label: FlutterI18n.translate(context, "common.navigation_bottom_bar.labelCulture"),
         ),
       ],
-      selectedItemColor: Color(0xff8ec6f5),
+      selectedItemColor: Color(0xff4db9c2),
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,

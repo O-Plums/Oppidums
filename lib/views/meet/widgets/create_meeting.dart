@@ -34,25 +34,29 @@ class _CreatingMeetingView extends State<CreatingMeetingView> {
   String _placeSeleced;
 
   void _onValidate(context) async {
-    if (mounted) {
-      setState(() {
-        loadingButton = true;
-      });
-    }
+    try {
+      if (mounted) {
+        setState(() {
+          loadingButton = true;
+        });
+      }
 
-    var cityModel = Provider.of<CityModel>(context, listen: false);
+      var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    final SharedPreferences prefs = await _prefs;
-    final token = prefs.getString('googlePYMP');
-    Map<String, dynamic> payload = JwtDecoder.decode(token);
-    await OppidumsMeetApi.createMeet(
-        payload['_id'], cityModel.id, _placeSeleced, _title, _description, _startDate, token);
-    if (mounted) {
-      setState(() {
-        loadingButton = false;
-      });
+      final SharedPreferences prefs = await _prefs;
+      final token = prefs.getString('googlePYMP');
+      Map<String, dynamic> payload = JwtDecoder.decode(token);
+      await OppidumsMeetApi.createMeet(
+          payload['_id'], cityModel.id, _placeSeleced, _title, _description, _startDate, token);
+      if (mounted) {
+        setState(() {
+          loadingButton = false;
+        });
+      }
+      widget.onCreate();
+    } catch (e) {
+      print(e);
     }
-    widget.onCreate();
   }
 
   void fetchPlace(context) async {

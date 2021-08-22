@@ -27,7 +27,7 @@ class AppBottomNavigationAction extends StatelessWidget implements PreferredSize
         eventName: 'bottom_navigation_action',
         loading: loading,
         width: 200,
-        loadingColor: Color(0xff8ec6f5),
+        loadingColor: Color(0xff4db9c2),
         color: Colors.white,
         textColor: Colors.black,
         onPressed: onPressed,

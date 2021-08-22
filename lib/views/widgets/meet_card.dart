@@ -62,10 +62,14 @@ class MeetCard extends StatelessWidget {
                             textColor: Colors.black,
                             color: Colors.red,
                             onPressed: () async {
-                              final SharedPreferences prefs = await _prefs;
-                              final token = prefs.getString('googlePYMP');
-                              await OppidumsMeetApi.deleteMeetById(meet['_id'], token);
-                              fetchMeet();
+                              try {
+                                final SharedPreferences prefs = await _prefs;
+                                final token = prefs.getString('googlePYMP');
+                                await OppidumsMeetApi.deleteMeetById(meet['_id'], token);
+                                fetchMeet();
+                              } catch (e) {
+                                print(e);
+                              }
                             },
                             width: 100,
                           ),
@@ -82,8 +86,8 @@ class MeetCard extends StatelessWidget {
                               Text(meet['participens'].length.toString() + ' ',
                                   textAlign: TextAlign.left,
                                   style:
-                                      TextStyle(fontWeight: FontWeight.bold, color: Color(0xff8ec6f5), fontSize: 18)),
-                              Icon(Icons.people, color: Color(0xff8ec6f5)),
+                                      TextStyle(fontWeight: FontWeight.bold, color: Color(0xff4db9c2), fontSize: 18)),
+                              Icon(Icons.people, color: Color(0xff4db9c2)),
                             ],
                           )
                         ]),

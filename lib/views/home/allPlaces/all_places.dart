@@ -8,6 +8,7 @@ import 'package:oppidums/models/city_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:oppidums/views/widgets/app_bottom_navigation_action.dart';
+import 'package:oppidums/views/widgets/filter_widget.dart';
 
 class AllPlaces extends StatefulWidget {
   final bool showReminder;
@@ -15,27 +16,79 @@ class AllPlaces extends StatefulWidget {
   AllPlaces({Key key, this.showReminder = false}) : super(key: key);
 
   @override
-  _TourismeViewState createState() => _TourismeViewState();
+  _AllPlacesViewState createState() => _AllPlacesViewState();
 }
 
-class _TourismeViewState extends State<AllPlaces> {
+class _AllPlacesViewState extends State<AllPlaces> {
   bool loading = false;
+  int _selectedFilterIndex = 0;
   List<dynamic> _places = [];
+  List<Map<String, dynamic>> _filters = [
+    {'label': 'common.common_word.all'},
+    {'label': 'common.common_word.tourism'},
+    {'label': 'common.common_word.history'},
+    {'label': 'common.common_word.cult'},
+  ];
 
   void fetchPlace(context) async {
-    if (mounted) {
-      setState(() {
-        loading = true;
-      });
-    }
-    var cityModel = Provider.of<CityModel>(context, listen: false);
+    try {
+      if (mounted) {
+        setState(() {
+          loading = true;
+        });
+      }
+      var cityModel = Provider.of<CityModel>(context, listen: false);
 
-    var places = await OppidumsPlaceApi.getAllPlaceOfCity(cityModel.id);
-    if (mounted) {
-      setState(() {
-        _places = places;
-        loading = false;
-      });
+      var places = await OppidumsPlaceApi.getAllPlaceOfCity(cityModel.id);
+      if (mounted) {
+        setState(() {
+          _places = places;
+          loading = false;
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _handleFilter(int index, context) async {
+    try {
+      String type = '';
+      if (index == _selectedFilterIndex) {
+        return;
+      }
+      if (mounted) {
+        setState(() {
+          loading = true;
+          _places = [];
+        });
+      }
+
+      if (index == 0) {
+        await fetchPlace(context);
+        return;
+      }
+      if (index == 1) {
+        type = 'tourism';
+      }
+      if (index == 2) {
+        type = 'history';
+      }
+      if (index == 3) {
+        type = 'cult';
+      }
+      var cityModel = Provider.of<CityModel>(context, listen: false);
+      var places = await OppidumsPlaceApi.getPlaceByType(type, cityModel.id);
+
+      if (mounted) {
+        setState(() {
+          _places = places;
+          _selectedFilterIndex = index;
+          loading = false;
+        });
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -72,6 +125,11 @@ class _TourismeViewState extends State<AllPlaces> {
           },
           child: SingleChildScrollView(
               child: Column(children: [
+            WidgetFilters(
+                filters: _filters,
+                onFilterSelected: (int index) {
+                  _handleFilter(index, context);
+                }),
             if (loading == true) LoadingAnnimation(),
             if (_places.length == 0 && loading == false)
               Container(

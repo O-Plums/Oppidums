@@ -125,20 +125,24 @@ class _PlaceViewViewState extends State<PlaceView> with TickerProviderStateMixin
   }
 
   Future<void> fetchPlace(context) async {
-    if (mounted) {
-      setState(() {
-        loading = true;
-      });
-    }
-    var place = await OppidumsPlaceApi.getPlaceById(widget.placeId);
-    var comments = await OppidumsCommentApi.getCommentByPlace(widget.placeId);
-    if (mounted) {
-      setState(() {
-        _place = place;
-        numberOfApproval = place['approval']?.length ?? 0;
-        loading = false;
-        _comments = comments;
-      });
+    try {
+      if (mounted) {
+        setState(() {
+          loading = true;
+        });
+      }
+      var place = await OppidumsPlaceApi.getPlaceById(widget.placeId);
+      var comments = await OppidumsCommentApi.getCommentByPlace(widget.placeId);
+      if (mounted) {
+        setState(() {
+          _place = place;
+          numberOfApproval = place['approval']?.length ?? 0;
+          loading = false;
+          _comments = comments;
+        });
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -223,7 +227,7 @@ class _PlaceViewViewState extends State<PlaceView> with TickerProviderStateMixin
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Icon(Icons.location_on, size: 30, color: Color(0xff8ec6f5)),
+                                        Icon(Icons.location_on, size: 30, color: Color(0xff4db9c2)),
                                         Text(FlutterI18n.translate(context, "common.place_view.maps"),
                                             style: TextStyle(color: Colors.white, fontSize: 10)),
                                       ]),
@@ -244,7 +248,7 @@ class _PlaceViewViewState extends State<PlaceView> with TickerProviderStateMixin
                                 padding: EdgeInsets.all(5),
                                 child: Icon(
                                   !isStarted ? Icons.play_circle_fill : Icons.pause_circle_filled,
-                                  color: Color(0xff8ec6f5),
+                                  color: Color(0xff4db9c2),
                                 )),
                             Container(
                                 child: Lottie.asset(
@@ -445,13 +449,17 @@ class _PlaceViewViewState extends State<PlaceView> with TickerProviderStateMixin
                             CustomInkWell(
                                 eventName: 'click_delete_comment_${_place['id']}',
                                 onTap: () async {
-                                  final SharedPreferences prefs = await _prefs;
-                                  final token = prefs.getString('googlePYMP');
-                                  await OppidumsCommentApi.deleteCommentById(comment['_id'], token);
-                                  _comments.removeWhere((c) => c['_id'] == comment['_id']);
-                                  setState(() {
-                                    _comments = _comments;
-                                  });
+                                  try {
+                                    final SharedPreferences prefs = await _prefs;
+                                    final token = prefs.getString('googlePYMP');
+                                    await OppidumsCommentApi.deleteCommentById(comment['_id'], token);
+                                    _comments.removeWhere((c) => c['_id'] == comment['_id']);
+                                    setState(() {
+                                      _comments = _comments;
+                                    });
+                                  } catch (e) {
+                                    print(e);
+                                  }
                                 },
                                 child: Icon(
                                   Icons.delete,

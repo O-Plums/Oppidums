@@ -64,20 +64,24 @@ class _OneMeetViewState extends State<OneMeetView> {
   }
 
   void fetchOneMeet(context) async {
-    if (mounted) {
-      setState(() {
-        loading = true;
-      });
-    }
-    final SharedPreferences prefs = await _prefs;
-    final token = prefs.getString('googlePYMP');
-    var meet = await OppidumsMeetApi.getMeetById(widget.meetId, token);
-    if (mounted) {
-      setState(() {
-        _meet = meet;
-        loading = false;
-        _didjoin = meet['participens'].indexWhere((e) => e['_id'] == userId) == -1 ? false : true;
-      });
+    try {
+      if (mounted) {
+        setState(() {
+          loading = true;
+        });
+      }
+      final SharedPreferences prefs = await _prefs;
+      final token = prefs.getString('googlePYMP');
+      var meet = await OppidumsMeetApi.getMeetById(widget.meetId, token);
+      if (mounted) {
+        setState(() {
+          _meet = meet;
+          loading = false;
+          _didjoin = meet['participens'].indexWhere((e) => e['_id'] == userId) == -1 ? false : true;
+        });
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -155,7 +159,7 @@ class _OneMeetViewState extends State<OneMeetView> {
                                         fontSize: 14)),
                                 Container(
                                   alignment: Alignment.topLeft,
-                                  child: Icon(Icons.location_on, size: 30, color: Color(0xff8ec6f5)),
+                                  child: Icon(Icons.location_on, size: 30, color: Color(0xff4db9c2)),
                                 ),
                               ]))
                         ]))),
